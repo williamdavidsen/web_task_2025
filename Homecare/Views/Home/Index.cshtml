@@ -1,0 +1,140 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+}
+
+<div class="hc-hero">
+
+    <!-- HERO CAROUSEL -->
+    <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="1"></button>
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1" aria-label="2"></button>
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2" aria-label="3"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <img src="~/images/hero-client.jpg" alt="Book & manage" />
+                <div class="carousel-caption text-start">
+                    <h1 class="hc-title text-white">Randevunu kolayca oluştur, yönet.</h1>
+                    <p class="hc-sub text-white-50">Evde bakım randevularını saniyeler içinde planla, değiştir ya da
+                        iptal et.</p>
+                    <a class="btn btn-primary btn-lg me-2" asp-controller="Client" asp-action="Dashboard"
+                        asp-route-clientId="10">Hemen Başla</a>
+                    <a class="btn btn-outline-light btn-lg" asp-controller="AvailableSlot" asp-action="Table">Uygun
+                        Günlere Göz At</a>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <img src="~/images/hero-nurse.jpg" alt="Personnel fast planning" />
+                <div class="carousel-caption text-start">
+                    <h2 class="hc-title text-white">Hemşireler için hızlı planlama.</h2>
+                    <p class="hc-sub text-white-50">Bir gün seç; sistem otomatik 3 slot açsın: sabah, öğle, akşam.</p>
+                    <a class="btn btn-light btn-lg text-primary fw-semibold" asp-controller="Personnel"
+                        asp-action="Dashboard" asp-route-personnelId="2">Personel Paneli</a>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <img src="~/images/hero-admin.jpg" alt="Admin control" />
+                <div class="carousel-caption text-start">
+                    <h2 class="hc-title text-white">Yöneticiler için uçtan uca kontrol.</h2>
+                    <p class="hc-sub text-white-50">Slotlar, randevular ve kullanıcılar tek panelde.</p>
+                    <a class="btn btn-primary btn-lg" asp-controller="Admin" asp-action="Dashboard">Admin Dashboard</a>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Önceki</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Sonraki</span>
+        </button>
+    </div>
+</div>
+
+<!-- ROLES -->
+<section class="py-4">
+    <div class="text-center mb-4">
+        <h2 class="hc-title">Hangi Rol ile Devam Etmek İstersiniz?</h2>
+        <p class="hc-sub">İhtiyacınıza göre deneyimi kişiselleştirin.</p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Client -->
+        <div class="col-12 col-lg-4">
+            <div class="hc-role-card h-100 d-flex flex-column">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="hc-role-icon"><i class="bi bi-person-heart"></i></span>
+                    <h5 class="mb-0">Hasta / Yaşlı</h5>
+                </div>
+                <p class="text-muted">
+                    Randevularını oluştur, görüntüle ve yönet. İhtiyacın olan hizmetleri seç.
+                </p>
+                <div class="mt-auto d-grid gap-2">
+                    <a class="btn btn-primary" asp-controller="Client" asp-action="Dashboard"
+                        asp-route-clientId="10">Hasta Olarak Devam Et</a>
+                    <a class="btn btn-outline-secondary" asp-controller="Client" asp-action="Create"
+                        asp-route-clientId="10">Yeni Randevu Oluştur</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personnel -->
+        <div class="col-12 col-lg-4">
+            <div class="hc-role-card h-100 d-flex flex-column">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="hc-role-icon"><i class="bi bi-person-workspace"></i></span>
+                    <h5 class="mb-0">Hemşire / Personel</h5>
+                </div>
+                <p class="text-muted">Müsait günlerini işaretle; sistem sabah–öğle–akşam 3 slot açsın.</p>
+                <div class="mt-auto d-grid gap-2">
+                    <a class="btn btn-primary" asp-controller="Personnel" asp-action="Dashboard"
+                        asp-route-personnelId="2">Personel Paneline Git</a>
+                    <a class="btn btn-outline-secondary" asp-controller="Personnel" asp-action="CreateDay"
+                        asp-route-personnelId="2">Gün Oluştur (3 Slot)</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin -->
+        <div class="col-12 col-lg-4">
+            <div class="hc-role-card h-100 d-flex flex-column">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="hc-role-icon"><i class="bi bi-shield-lock"></i></span>
+                    <h5 class="mb-0">Admin</h5>
+                </div>
+                <p class="text-muted">Slotlar ve randevular üzerinde tam yetki. Sistemi tek ekrandan izle.</p>
+                <div class="mt-auto d-grid gap-2">
+                    <a class="btn btn-primary" asp-controller="Admin" asp-action="Dashboard">Admin Dashboard</a>
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-outline-secondary flex-fill" asp-controller="AvailableSlot"
+                            asp-action="Table">Slotlar</a>
+                        <a class="btn btn-outline-secondary flex-fill" asp-controller="Appointment"
+                            asp-action="Table">Randevular</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        // Carousel hız/ayarı (isteğe bağlı)
+        const hc = document.getElementById('homeCarousel');
+        if (hc) new bootstrap.Carousel(hc, { interval: 5000, pause: 'hover', wrap: true });
+    </script>
+}

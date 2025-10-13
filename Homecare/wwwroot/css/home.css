@@ -1,0 +1,180 @@
+:root {
+    --hc-primary: #0d6efd;
+    --hc-dark: #0f172a;
+    --hc-muted: #64748b;
+    --hc-surface: #f8fafc;
+    --hc-shadow: 0 10px 20px rgba(0, 0, 0, .08);
+
+    /* Carousel yükseklikleri */
+    --c-h-xs: 240px;
+    --c-h-sm: 300px;
+    --c-h-md: 360px;
+    --c-h-lg: 420px;
+}
+
+/* HERO */
+.hc-hero {
+    padding: 28px 0 24px;
+}
+
+.hc-title {
+    font-weight: 700;
+    letter-spacing: .2px;
+    margin-bottom: 6px;
+    font-size: clamp(1.4rem, 2.2vw + .6rem, 2.2rem);
+}
+
+.hc-sub {
+    color: var(--hc-muted);
+    margin-bottom: 22px;
+    font-size: clamp(.95rem, .6vw + .8rem, 1.05rem);
+}
+
+/* ROLE CARD */
+.hc-role-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: var(--hc-shadow);
+    padding: 24px;
+}
+
+.hc-role-icon {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(13, 110, 253, .1);
+    color: var(--hc-primary);
+    margin-right: 12px;
+}
+
+/* FOOTER */
+.hc-foot {
+    background: var(--hc-dark);
+    color: #cbd5e1;
+
+    padding: 36px 0 24px;
+    font-size: 15px;
+}
+
+.hc-foot.mt-auto {
+    margin-top: auto;
+}
+
+.hc-foot h5 {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.hc-foot a {
+    color: #cbd5e1;
+    text-decoration: none;
+}
+
+.hc-foot a:hover {
+    color: #fff;
+}
+
+/* CAROUSEL */
+#homeCarousel .carousel-inner {
+    border-radius: 16px;
+    box-shadow: var(--hc-shadow);
+}
+
+#homeCarousel img {
+    width: 100%;
+    height: var(--c-h-lg);
+    object-fit: cover;
+}
+
+#homeCarousel .carousel-indicators [data-bs-target] {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #c7d2fe;
+}
+
+#homeCarousel .carousel-indicators .active {
+    background: var(--hc-primary);
+}
+
+#homeCarousel .carousel-caption {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, .35);
+}
+
+#homeCarousel .carousel-control-prev,
+#homeCarousel .carousel-control-next {
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .2));
+}
+
+/* REDUCED MOTION (erişilebilirlik) */
+@media (prefers-reduced-motion: reduce) {
+    .carousel-item {
+        transition: none !important;
+    }
+}
+
+/* BREAKPOINTS */
+@media (max-width: 575.98px) {
+
+    /* xs */
+    .hc-hero {
+        padding-top: 18px;
+    }
+
+    #homeCarousel img {
+        height: var(--c-h-xs);
+    }
+
+    .hc-role-card {
+        padding: 18px;
+    }
+
+    .hc-foot {
+        margin-top: 36px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+    /* sm */
+    #homeCarousel img {
+        height: var(--c-h-sm);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+    /* md */
+    #homeCarousel img {
+        height: var(--c-h-md);
+    }
+}
+
+@media (min-width: 992px) {
+
+    /* lg+ */
+    #homeCarousel img {
+        height: var(--c-h-lg);
+    }
+}
+
+/* Login card tweaks */
+.hc-login-card .form-control {
+    border-radius: 12px;
+}
+
+.hc-login-card .btn {
+    border-radius: 12px;
+}
+
+.hc-login-card .small {
+    color: var(--hc-muted);
+}
+
+.hc-login-card .form-floating>label {
+    color: #6b7280;
+}

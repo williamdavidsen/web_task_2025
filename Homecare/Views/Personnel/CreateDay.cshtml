@@ -1,0 +1,193 @@
+@{
+    ViewData["Title"] = "Edit Working Days";
+    var personnelId = (int)ViewBag.PersonnelId;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/availability.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        /* kilitli gün görünümü */
+        .day.locked {
+            background: #ffe5e5;
+            border: 1px solid #f3bcbc;
+            color: #a40000;
+            position: relative;
+        }
+
+        .day.locked::after {
+            content: "\f023";
+            /* lock icon - bootstrap icons yoksa unicode kullanma */
+            font-family: "bootstrap-icons";
+            position: absolute;
+            right: .35rem;
+            bottom: .25rem;
+            font-size: .9rem;
+        }
+
+        .legend-lock {
+            background: #ffe5e5;
+            border: 1px solid #f3bcbc;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: .35rem;
+        }
+    </style>
+}
+<partial name="~/Views/Shared/_OwnerBar.cshtml" />
+
+<div class="container py-3">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h2 class="h4 mb-0">@ViewData["Title"]</h2>
+        <a class="btn btn-outline-secondary" asp-action="Dashboard" asp-route-personnelId="@personnelId">
+            Back to Dashboard
+        </a>
+    </div>
+
+    <form asp-action="CreateDay" method="post" class="cal-card">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="personnelId" value="@personnelId" />
+        <input type="hidden" id="days" name="days" />
+
+        <div class="cal-top">
+            <button type="button" id="btnPrev" class="cal-nav"><i class="bi bi-chevron-left"></i></button>
+            <div class="cal-title" id="bigTitle">Month Year</div>
+            <button type="button" id="btnNext" class="cal-nav"><i class="bi bi-chevron-right"></i></button>
+        </div>
+
+        <div class="two-month">
+            <div class="month">
+                <h5 id="m1Title">Month 1</h5>
+                <div class="month-grid" id="m1Grid"></div>
+            </div>
+            <div class="month">
+                <h5 id="m2Title">Month 2</h5>
+                <div class="month-grid" id="m2Grid"></div>
+            </div>
+        </div>
+
+        <div class="px-3 text-muted mt-2 mb-3" style="font-size:.9rem">
+            <span class="legend-dot legend-yes"></span> Selected (will work) &nbsp;·&nbsp;
+            <span class="legend-lock"></span> Locked (has appointments; cannot remove)
+        </div>
+
+        <div class="action-bar">
+            <button type="button" class="btn btn-outline-secondary" id="btnClear">Clear</button>
+            <button type="submit" class="btn btn-primary">Save Availability</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        // Server’dan gelen ön-seçili ve kilitli günler:
+        const PRE_SELECTED = new Set(@Html.Raw(ViewBag.SelectedDaysJson ?? "[]"));
+        const LOCKED_DAYS = new Set(@Html.Raw(ViewBag.LockedDaysJson ?? "[]"));
+
+        const daysInput = document.getElementById('days');
+        const selected = new Set(PRE_SELECTED); // çalışma günleri
+
+        const m1Title = document.getElementById('m1Title');
+        const m2Title = document.getElementById('m2Title');
+        const m1Grid = document.getElementById('m1Grid');
+        const m2Grid = document.getElementById('m2Grid');
+        const bigTitle = document.getElementById('bigTitle');
+
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+
+        const DOW = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+        const today = new Date(); today.setHours(0, 0, 0, 0);
+        let base = new Date(today.getFullYear(), today.getMonth(), 1);
+
+        const pad = n => n < 10 ? '0' + n : '' + n;
+        const ymd = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+        const addMonths = (d, n) => new Date(d.getFullYear(), d.getMonth() + n, 1);
+        const monthTitle = d => d.toLocaleDateString(undefined, { month: 'long', year: 'numeric' }).replace(/^./, c => c.toUpperCase());
+
+        function updateHidden() {
+            daysInput.value = Array.from(selected).join(',');
+        }
+
+        function dayButton(dayDate) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'day';
+            btn.textContent = dayDate.getDate();
+
+            const key = ymd(dayDate);
+
+            if (dayDate < today) { btn.classList.add('disabled'); btn.disabled = true; return btn; }
+
+            if (selected.has(key)) btn.classList.add('selected');
+            if (LOCKED_DAYS.has(key)) btn.classList.add('locked');
+
+            btn.addEventListener('click', () => {
+                if (LOCKED_DAYS.has(key) && selected.has(key)) {
+                    alert('Bu gün için randevu(lar) var, kaldırılamaz. Lütfen yönetim ile iletişime geçiniz.');
+                    return;
+                }
+                if (selected.has(key)) {
+                    selected.delete(key);
+                    btn.classList.remove('selected');
+                } else {
+                    selected.add(key);
+                    btn.classList.add('selected');
+                }
+                updateHidden();
+            });
+
+            return btn;
+        }
+
+        function renderOneMonth(rootGrid, monthDate, titleEl) {
+            rootGrid.innerHTML = '';
+            titleEl.textContent = monthTitle(monthDate);
+
+            DOW.forEach(n => {
+                const div = document.createElement('div');
+                div.className = 'day-name';
+                div.textContent = n;
+                rootGrid.appendChild(div);
+            });
+
+            const y = monthDate.getFullYear();
+            const m = monthDate.getMonth();
+            const first = new Date(y, m, 1);
+            const last = new Date(y, m + 1, 0);
+
+            let blanks = first.getDay(); // 0=Sun
+            for (let i = 0; i < blanks; i++) {
+                const b = document.createElement('div');
+                b.className = 'day blank';
+                rootGrid.appendChild(b);
+            }
+
+            for (let d = 1; d <= last.getDate(); d++) {
+                const dayDate = new Date(y, m, d);
+                rootGrid.appendChild(dayButton(dayDate));
+            }
+        }
+
+        function render() {
+            renderOneMonth(m1Grid, base, m1Title);
+            const next = addMonths(base, 1);
+            renderOneMonth(m2Grid, next, m2Title);
+
+            bigTitle.textContent = `${monthTitle(base)} — ${monthTitle(next)}`;
+            updateHidden();
+        }
+
+        btnPrev.addEventListener('click', () => { base = addMonths(base, -1); render(); });
+        btnNext.addEventListener('click', () => { base = addMonths(base, 1); render(); });
+        document.getElementById('btnClear').addEventListener('click', () => {
+            // kilitli günler seçili kalır; diğerleri temizlenir
+            Array.from(selected).forEach(k => { if (!LOCKED_DAYS.has(k)) selected.delete(k); });
+            render();
+        });
+
+        render();
+    </script>
+}

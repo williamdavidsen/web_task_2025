@@ -1,0 +1,49 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\css\\home.css",
+      "PackagePath": "staticwebassets\\css\\home.css"
+    },
+    {
+      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\care1.jpg",
+      "PackagePath": "staticwebassets\\images\\care1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\care2.jpg",
+      "PackagePath": "staticwebassets\\images\\care2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\care3.jpg",
+      "PackagePath": "staticwebassets\\images\\care3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\js\\jquery.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.min.js"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Homecare.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Homecare.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.Homecare.props",
+      "PackagePath": "build\\Homecare.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.Homecare.props",
+      "PackagePath": "buildMultiTargeting\\Homecare.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.Homecare.props",
+      "PackagePath": "buildTransitive\\Homecare.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,230 @@
+@using Homecare.Models
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model Homecare.ViewModels.AdminDashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+
+    // Paging inputs from controller
+    var upPage  = (int)(ViewBag.UpPage   ?? 1);
+    var upTotal = (int)(ViewBag.UpTotal  ?? 1);
+    var frPage  = (int)(ViewBag.FrPage   ?? 1);
+    var frTotal = (int)(ViewBag.FrTotal  ?? 1);
+    var size    = (int)(ViewBag.PageSize ?? 10);
+
+    // Totals (cards)
+    var totalClients    = (int)(ViewBag.TotalClients    ?? 0);
+    var totalPersonnels = (int)(ViewBag.TotalPersonnels ?? 0);
+    var totalAppts      = (int)(ViewBag.TotalAppts      ?? 0);
+
+    // Dropdowns
+    var clientsDD    = ViewBag.ClientsDD    as SelectList;
+    var personnelsDD = ViewBag.PersonnelsDD as SelectList;
+
+    // Slice current page (lists come from Model)
+    var upcoming = (Model?.UpcomingAll ?? new List<Appointment>())
+                   .Skip((upPage - 1) * size).Take(size).ToList();
+
+    var free = (Model?.FreeAll ?? new List<AvailableSlot>())
+               .Skip((frPage - 1) * size).Take(size).ToList();
+
+    // Keep original helper labels
+    string DayLabel(DateOnly d) => d.ToString("yyyy-MM-dd");
+    string TimeLabel(TimeOnly s, TimeOnly e) => $"{s:HH\\:mm}-{e:HH\\:mm}";
+}
+
+<partial name="~/Views/Shared/_OwnerBar.cshtml" />
+
+<div class="container py-3">
+    <h2 class="h4 mb-3">Admin Dashboard</h2>
+
+    <partial name="~/Views/Shared/_Message.cshtml" />
+
+    <!-- Summary cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Total Clients</div>
+                    <div class="h4 fw-bold">@totalClients</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Total Personnel</div>
+                    <div class="h4 fw-bold">@totalPersonnels</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Total Appointments</div>
+                    <div class="h4 fw-bold">@totalAppts</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick jump -->
+    <div class="row g-3 mb-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h5 class="card-title mb-0">Go to Client</h5>
+                        <a class="btn btn-sm btn-outline-primary"
+                           asp-controller="Client" asp-action="Create"
+                           asp-route-clientId="@(clientsDD?.FirstOrDefault()?.Value ?? "0")">
+                            Create Appointment (Client)
+                        </a>
+                    </div>
+                    <form method="get" asp-controller="Client" asp-action="Dashboard" class="d-flex gap-2">
+                        <select name="clientId" class="form-select" asp-items="clientsDD"></select>
+                        <button class="btn btn-primary" type="submit">Open</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h5 class="card-title mb-0">Go to Personnel</h5>
+                        <a class="btn btn-sm btn-outline-primary"
+                           asp-controller="Personnel" asp-action="CreateDay"
+                           asp-route-personnelId="@(personnelsDD?.FirstOrDefault()?.Value ?? "0")">
+                            Create Day (Personnel)
+                        </a>
+                    </div>
+                    <form method="get" asp-controller="Personnel" asp-action="Dashboard" class="d-flex gap-2">
+                        <select name="personnelId" class="form-select" asp-items="personnelsDD"></select>
+                        <button class="btn btn-primary" type="submit">Open</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lists -->
+    <div class="row g-4">
+        <!-- Upcoming -->
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-0">
+                    <div class="p-3 pb-2">
+                        <h5 class="card-title mb-0">Upcoming Appointments</h5>
+                        <div class="text-muted small">Page @upPage / @upTotal</div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Time</th>
+                                    <th>Personnel</th>
+                                    <th>Client</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (upcoming.Any())
+                                {
+                                    foreach (var a in upcoming)
+                                    {
+                                        <tr>
+                                            <td>@DayLabel(a.AvailableSlot!.Day)</td>
+                                            <td>@TimeLabel(a.AvailableSlot!.StartTime, a.AvailableSlot!.EndTime)</td>
+                                            <td>@a.AvailableSlot?.Personnel?.Name</td>
+                                            <td>@a.Client?.Name</td>
+                                            <td><span class="badge text-bg-secondary">@a.Status</span></td>
+                                            <td class="text-end">
+                                                <a class="btn btn-sm btn-outline-secondary"
+                                                   asp-controller="Appointment" asp-action="Details"
+                                                   asp-route-id="@a.AppointmentId">Open</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr><td colspan="6" class="text-muted">No upcoming appointments.</td></tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Simple pager -->
+                    <nav class="p-2">
+                        <ul class="pagination mb-0">
+                            <li class="page-item @(upPage==1 ? "disabled" : null)">
+                                <a class="page-link" asp-action="Dashboard" asp-route-up="@(upPage-1)" asp-route-fr="@frPage">Prev</a>
+                            </li>
+                            <li class="page-item disabled"><span class="page-link">@upPage / @upTotal</span></li>
+                            <li class="page-item @(upPage==upTotal ? "disabled" : null)">
+                                <a class="page-link" asp-action="Dashboard" asp-route-up="@(upPage+1)" asp-route-fr="@frPage">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Free slots -->
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-0">
+                    <div class="p-3 pb-2">
+                        <h5 class="card-title mb-0">Free Slots</h5>
+                        <div class="text-muted small">Page @frPage / @frTotal</div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Time</th>
+                                    <th>Personnel</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (free.Any())
+                                {
+                                    foreach (var s in free)
+                                    {
+                                        <tr>
+                                            <td>@DayLabel(s.Day)</td>
+                                            <td>@TimeLabel(s.StartTime, s.EndTime)</td>
+                                            <td>@s.Personnel?.Name</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr><td colspan="3" class="text-muted">No free slots in range.</td></tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Simple pager -->
+                    <nav class="p-2">
+                        <ul class="pagination mb-0">
+                            <li class="page-item @(frPage==1 ? "disabled" : null)">
+                                <a class="page-link" asp-action="Dashboard" asp-route-up="@upPage" asp-route-fr="@(frPage-1)">Prev</a>
+                            </li>
+                            <li class="page-item disabled"><span class="page-link">@frPage / @frTotal</span></li>
+                            <li class="page-item @(frPage==frTotal ? "disabled" : null)">
+                                <a class="page-link" asp-action="Dashboard" asp-route-up="@upPage" asp-route-fr="@(frPage+1)">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

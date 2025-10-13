@@ -1,0 +1,10 @@
+@model Homecare.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+<h1 class="text-danger">Something went wrong.</h1>
+@if (Model.ShowRequestId)
+{
+    <p class="text-muted">Request ID: <code>@Model.RequestId</code></p>
+}
+<a asp-controller="Appointment" asp-action="Table" class="btn btn-primary">Go to Appointments</a>

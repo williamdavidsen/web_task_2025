@@ -1,0 +1,168 @@
+@using Homecare.Models
+@{
+    ViewData["Title"] = "Appointments (Personnel)";
+
+    int personnelId = ViewBag.PersonnelId is int v ? v : 0;
+
+    var upcoming = ViewBag.Upcoming as IEnumerable<Appointment> ?? Enumerable.Empty<Appointment>();
+    var past = ViewBag.Past as IEnumerable<Appointment> ?? Enumerable.Empty<Appointment>();
+
+    string DayLabel(Appointment a)
+    => a?.AvailableSlot?.Day.ToString("dddd, dd MMM yyyy") ?? "—";
+
+    string TimeLabel(Appointment a)
+    => (a?.AvailableSlot is null)
+    ? "—"
+    : $"{a.AvailableSlot.StartTime:HH\\:mm}–{a.AvailableSlot.EndTime:HH\\:mm}";
+
+    string ClientName(Appointment a)
+    => a?.Client?.Name ?? "—";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/client.css" asp-append-version="true" />
+    <style>
+        .clickable-card {
+            cursor: pointer;
+            transition: .15s ease-in-out;
+        }
+
+        .clickable-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 .75rem 1.25rem rgba(0, 0, 0, .08);
+        }
+
+        .page-bar {
+            background: rgba(248, 250, 252, .9);
+            backdrop-filter: blur(6px);
+            border: 1px solid #e9ecef;
+        }
+
+        .chip {
+            font-size: .75rem;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .cd-card .btn {
+            border-radius: .6rem;
+        }
+    </style>
+}
+<partial name="~/Views/Shared/_OwnerBar.cshtml" />
+
+<div class="container py-3">
+    <!-- ÜST BAR -->
+    <div class="page-bar rounded-4 px-3 py-3 d-flex align-items-center justify-content-between mb-4">
+        <div class="d-flex align-items-center gap-2">
+            <svg width="28" height="28" viewBox="0 0 48 48" class="text-primary">
+                <path
+                    d="M13.826 17.426c2.894.691 6.398 1.095 10.174 1.095s7.28-.404 10.174-1.095C36.914 16.772 39.997 15.233 41.356 14.165L24.849 40.639c-.392.628-1.306.628-1.698 0L6.644 14.165c1.36 1.068 4.442 2.607 7.182 3.261Z"
+                    fill="currentColor" />
+            </svg>
+            <h1 class="h5 mb-0 fw-bold">Appointments</h1>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <a class="btn btn-primary" asp-action="CreateDay" asp-route-personnelId="@personnelId">
+                <i class="bi bi-calendar-check"></i> Edit Working Days
+            </a>
+        </div>
+    </div>
+
+    <partial name="~/Views/Shared/_Message.cshtml" />
+
+    <!-- GELECEK -->
+    <h5 class="mb-3">Upcoming</h5>
+    @if (upcoming.Any())
+    {
+        foreach (var a in upcoming)
+        {
+            <div class="card cd-card mb-3 js-link-card clickable-card" data-href="@Url.Action("Details","Appointment",
+                                                                                                new { id = a.AppointmentId, backTo = "personnel", ownerId = personnelId })">
+        <div class="row g-4 align-items-start">
+            <div class="col-md-8 d-flex flex-column">
+                <div class="chip text-primary fw-semibold mb-1">Upcoming</div>
+                <h5 class="mb-1">@ClientName(a)</h5>
+                <div class="text-muted">@DayLabel(a) · @TimeLabel(a)</div>
+
+                @if (a.Tasks != null && a.Tasks.Any())
+                        {
+                            <div class="mt-2 small text-secondary">
+                                Tasks:
+                                @string.Join(", ",
+                                a.Tasks.Select(t => t.CareTask?.Description)
+                                .Where(s => !string.IsNullOrWhiteSpace(s))!)
+                </div>
+                                }
+
+                        <div class="mt-auto pt-2">
+                            <span class="badge text-bg-secondary">@a.Status</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="~/images/dash-upcoming.jpg" class="img-fluid cd-thumb" alt="Upcoming">
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="cd-empty text-center p-5 mb-4">
+            <img src="~/images/dash-upcoming.jpg" class="img-fluid rounded mb-3" style="max-height:220px" alt="">
+            <p class="lead mb-2">No upcoming appointments.</p>
+        </div>
+    }
+
+    <!-- GEÇMİŞ -->
+    <h5 class="mt-4 mb-3">Past</h5>
+    @if (past.Any())
+    {
+        var n = 0;
+        foreach (var a in past)
+        {
+            var img = (++n % 2 == 0)
+            ? Url.Content("~/images/dash-past-1.jpg")
+            : Url.Content("~/images/dash-past-2.jpg");
+
+            <div class="card cd-card opacity-75 mb-3 js-link-card clickable-card" data-href="@Url.Action("Details","Appointment",
+                                                                                                           new { id = a.AppointmentId, backTo = "personnel", ownerId = personnelId })">
+        <div class="row g-4 align-items-start">
+            <div class="col-md-8 d-flex flex-column">
+                <div class="chip text-secondary mb-1">Completed</div>
+                <h5 class="mb-1">@ClientName(a)</h5>
+                <div class="text-muted">@DayLabel(a) · @TimeLabel(a)</div>
+
+                @if (a.Tasks != null && a.Tasks.Any())
+                        {
+                            <div class="mt-2 small text-secondary">
+                                Tasks:
+                                @string.Join(", ",
+                                a.Tasks.Select(t => t.CareTask?.Description)
+                                .Where(s => !string.IsNullOrWhiteSpace(s))!)
+                </div>
+                                }
+                    </div>
+                    <div class="col-md-4">
+                        <img src="@img" class="img-fluid cd-thumb" alt="Past appointment">
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-muted">No past appointments.</div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.js-link-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const href = card.getAttribute('data-href');
+                if (href) window.location.href = href;
+            });
+        });
+    </script>
+}

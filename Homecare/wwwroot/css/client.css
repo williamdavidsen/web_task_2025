@@ -1,0 +1,28 @@
+:root {
+    --cd-shadow: 0 10px 20px rgba(0, 0, 0, .06);
+}
+
+.cd-card {
+    border: 1px solid #e9ecef;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: var(--cd-shadow);
+    background: #fff;
+}
+
+.cd-card.opacity-75 {
+    opacity: .8;
+}
+
+.cd-thumb {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.cd-empty {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 16px;
+}

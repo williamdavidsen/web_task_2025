@@ -1,0 +1,55 @@
+@model IEnumerable<Appointment>
+@{
+    ViewData["Title"] = "Appointments";
+}
+<h2 class="mb-3">@ViewData["Title"]</h2>
+<partial name="~/Views/Shared/_Message.cshtml" />
+
+<div class="d-flex justify-content-end mb-3">
+    <a class="btn btn-success" asp-action="Create"><i class="bi bi-plus-circle"></i> Create Appointment</a>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover table-sm mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Client</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Personnel</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model)
+                {
+                    <tr>
+                        <td>@a.AppointmentId</td>
+                        <td>@a.Client?.Name</td>
+                        <td>@a.AvailableSlot?.Day.ToString("yyyy-MM-dd")</td>
+                        <td>@a.AvailableSlot?.StartTime - @a.AvailableSlot?.EndTime</td>
+                        <td>@a.AvailableSlot?.Personnel?.Name</td>
+                        <td><span class="badge text-bg-secondary">@a.Status</span></td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-primary" asp-action="Details"
+                                asp-route-id="@a.AppointmentId">Details</a>
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Edit"
+                                asp-route-id="@a.AppointmentId">Edit</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete"
+                                asp-route-id="@a.AppointmentId">Delete</a>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="7" class="text-muted">No records.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

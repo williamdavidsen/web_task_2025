@@ -1,0 +1,58 @@
+@model Homecare.Models.Appointment
+@{
+    ViewData["Title"] = "Appointment Details";
+
+    // ?backTo=client|personnel & ?ownerId=123
+    var backToRaw = (string?)Context.Request.Query["backTo"];
+    var ownerIdRaw = (string?)Context.Request.Query["ownerId"];
+    var backTo = (backToRaw ?? "").ToLowerInvariant();
+
+    int ownerId = 0;
+    int.TryParse(ownerIdRaw, out ownerId);
+}
+
+<h2 class="mb-3">@ViewData["Title"]</h2>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-4">Client</dt>
+            <dd class="col-8">@Model.Client?.Name (@Model.Client?.Email)</dd>
+
+            <dt class="col-4">Day</dt>
+            <dd class="col-8">@Model.AvailableSlot?.Day.ToString("yyyy-MM-dd")</dd>
+
+            <dt class="col-4">Time</dt>
+            <dd class="col-8">@Model.AvailableSlot?.StartTime - @Model.AvailableSlot?.EndTime</dd>
+
+            <dt class="col-4">Personnel</dt>
+            <dd class="col-8">@Model.AvailableSlot?.Personnel?.Name</dd>
+
+            <dt class="col-4">Status</dt>
+            <dd class="col-8">@Model.Status</dd>
+
+            <dt class="col-4">Notes</dt>
+            <dd class="col-8">@Model.Description</dd>
+        </dl>
+
+        <div class="d-flex gap-2">
+            @* Back nereye? *@
+            @if (backTo == "client" && ownerId > 0)
+            {
+                <a class="btn btn-secondary" asp-controller="Client" asp-action="Dashboard"
+                    asp-route-clientId="@ownerId">Back</a>
+            }
+            else if (backTo == "personnel" && ownerId > 0)
+            {
+                <a class="btn btn-secondary" asp-controller="Personnel" asp-action="Dashboard"
+                    asp-route-personnelId="@ownerId">Back</a>
+            }
+            else
+            {
+                <a class="btn btn-secondary" asp-controller="Appointment" asp-action="Table">Back</a>
+            }
+
+            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.AppointmentId">Edit</a>
+        </div>
+    </div>
+</div>

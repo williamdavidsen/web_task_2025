@@ -1,0 +1,53 @@
+@model IEnumerable<AvailableSlot>
+@{
+    ViewData["Title"] = "Available Slots";
+}
+<h2 class="mb-3">@ViewData["Title"]</h2>
+<partial name="~/Views/Shared/_Message.cshtml" />
+<div class="d-flex justify-content-end mb-3">
+    <a class="btn btn-success" asp-action="Create"><i class="bi bi-plus-circle"></i> Create Slot</a>
+</div>
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover table-sm mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Personnel</th>
+                    <th>Day</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Booked</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.AvailableSlotId</td>
+                        <td>@s.Personnel?.Name</td>
+                        <td>@s.Day.ToString("yyyy-MM-dd")</td>
+                        <td>@s.StartTime</td>
+                        <td>@s.EndTime</td>
+                        <td>@(s.Appointment == null ? "—" : "Yes")</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-primary" asp-action="Details"
+                                asp-route-id="@s.AvailableSlotId">Details</a>
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Edit"
+                                asp-route-id="@s.AvailableSlotId">Edit</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete"
+                                asp-route-id="@s.AvailableSlotId">Delete</a>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="7" class="text-muted">No records.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

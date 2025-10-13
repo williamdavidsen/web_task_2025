@@ -1,0 +1,110 @@
+/* KART */
+.cal-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 12px 30px rgba(16, 24, 40, .06);
+  border: 1px solid #eef2f6;
+}
+
+/* BAŞLIK ve NAV */
+.cal-top {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  gap: .5rem;
+  padding: .75rem 1rem;
+  border-bottom: 1px solid #eef2f6;
+}
+.cal-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.day.selected { background:#e7f1ff; border:1px solid #cde1ff; color:#0d6efd; }
+.day.locked   { background:#ffe5e5; border:1px solid #f3bcbc; color:#a40000; position:relative; }
+
+.cal-nav {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #e7eef8;
+  background: #f8fafc;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.cal-nav:hover { background: #eef2ff; }
+
+/* İKİ AY KUTUSU */
+.two-month {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 1rem 1rem 1.25rem;
+}
+.month {
+  min-width: 280px;
+}
+
+/* AY BAŞLIĞI */
+.month h5 {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: .25rem 0 .5rem;
+  text-align: center;
+  color: #0f172a;
+}
+
+/* GRID */
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: .5rem;
+}
+.day-name {
+  font-size: .8rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-align: center;
+}
+
+/* GÜN BUTONLARI */
+.day {
+  border: 0;
+  height: 44px;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #0f172a;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.day:hover { background: #eef2ff; }
+.day.blank {
+  background: transparent;
+  border: 0;
+  pointer-events: none;
+}
+.day.disabled {
+  background: transparent;
+  color: #9aa3af;
+  border: 1px dashed #e5e7eb;
+  cursor: not-allowed;
+}
+.day.selected {
+  background: #e0efff;
+  color: #0d6efd;
+  border: 1px solid #cfe2ff;
+  box-shadow: inset 0 0 0 9999px rgba(13,110,253,.08);
+}
+
+/* ALT BUTONLAR */
+.action-bar {
+  display: flex;
+  gap: .5rem;
+  justify-content: flex-end;
+  padding: .5rem 1rem 1rem;
+}
