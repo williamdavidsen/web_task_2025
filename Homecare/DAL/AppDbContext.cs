@@ -1,17 +1,23 @@
 using Homecare.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Homecare.Models
-{
-    public class AppDbContext : DbContext
+namespace Homecare.DAL
+{ // student note: Single EF Core context for BOTH Identity and domain tables
+    public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<User> Users => Set<User>();
-        public DbSet<AvailableSlot> AvailableSlots => Set<AvailableSlot>();
-        public DbSet<Appointment> Appointments => Set<Appointment>();
-        public DbSet<CareTask> CareTasks => Set<CareTask>();
-        public DbSet<TaskList> TaskLists => Set<TaskList>();
+        // --- Domain tables ---
+        public DbSet<Appointment> Appointments { get; set; } = default!;
+        public DbSet<AvailableSlot> AvailableSlots { get; set; } = default!;
+        public DbSet<CareTask> CareTasks { get; set; } = default!;
+        public DbSet<TaskList> TaskLists { get; set; } = default!;
+
+        // IMPORTANT: keep Identity's Users (IdentityUser) untouched.
+        // Use a distinct name for the domain "User" entity to avoid shadowing.
+        public DbSet<User> DomainUsers { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder b)
         {

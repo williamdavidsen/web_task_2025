@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\css\\availability.css",
+      "PackagePath": "staticwebassets\\css\\availability.css"
+    },
+    {
       "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\css\\client.css",
       "PackagePath": "staticwebassets\\css\\client.css"
     },

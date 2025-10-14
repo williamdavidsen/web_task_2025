@@ -1,3 +1,4 @@
+// DAL/Repositories/UserRepository.cs
 using Homecare.DAL.Interfaces;
 using Homecare.Models;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,10 @@ namespace Homecare.DAL.Repositories
         {
             try
             {
-                return await _db.Users.AsNoTracking().FirstOrDefaultAsync(u => u.UserId == id);
+                // student note: DOMAIN users (not Identity)
+                return await _db.DomainUsers
+                                .AsNoTracking()
+                                .FirstOrDefaultAsync(u => u.UserId == id);
             }
             catch (Exception ex)
             {
@@ -33,11 +37,11 @@ namespace Homecare.DAL.Repositories
         {
             try
             {
-                return await _db.Users
-                    .Where(u => u.Role == role)
-                    .OrderBy(u => u.Name)
-                    .AsNoTracking()
-                    .ToListAsync();
+                return await _db.DomainUsers
+                                .Where(u => u.Role == role)
+                                .OrderBy(u => u.Name)
+                                .AsNoTracking()
+                                .ToListAsync();
             }
             catch (Exception ex)
             {

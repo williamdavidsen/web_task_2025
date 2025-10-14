@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Homecare")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+451502d5699f25f43bef45eadafaa1a382dc00e2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Homecare")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Homecare")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

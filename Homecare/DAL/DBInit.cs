@@ -1,8 +1,10 @@
+// DAL/DBInit.cs
 using Homecare.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Homecare.Models
+namespace Homecare.DAL
 {
+    // student note: Development seeding for DOMAIN data (not Identity)
     public static class DBInit
     {
         public static void Seed(WebApplication app)
@@ -12,15 +14,17 @@ namespace Homecare.Models
 
             db.Database.EnsureCreated();
 
-            SeedUsers(db);
-            SeedCareTasks(db);
+            SeedUsers(db);       // domain users
+            SeedCareTasks(db);   // domain tasks
 
             var yesterday = DateOnly.FromDateTime(DateTime.Today.AddDays(-1));
             var tomorrow = DateOnly.FromDateTime(DateTime.Today.AddDays(1));
 
-            // Tüm hemşireler için dün ve yarın 3'er slot (09–11, 12–14, 16–18)
-            var nurseIds = db.Users.Where(u => u.Role == UserRole.Personnel)
-                                   .Select(u => u.UserId).ToList();
+            // For each nurse (domain users with Role = Personnel) create slots
+            var nurseIds = db.DomainUsers
+                             .Where(u => u.Role == UserRole.Personnel)
+                             .Select(u => u.UserId)
+                             .ToList();
 
             foreach (var day in new[] { yesterday, tomorrow })
             {
@@ -33,10 +37,8 @@ namespace Homecare.Models
             }
 
             // ------------------------------
-            // ÖRNEK RANDEVULAR
+            // Sample appointments
             // ------------------------------
-
-            // 1) Dün (Past / Completed)
             UpsertAppointmentBySlot(
                 db, Slot(db, 2, yesterday, 9),
                 clientId: 10,
@@ -61,7 +63,6 @@ namespace Homecare.Models
                 taskIds: new[] { 4 }
             );
 
-            // 2) Yarın (Upcoming / Scheduled)
             UpsertAppointmentBySlot(
                 db, Slot(db, 2, tomorrow, 9),
                 clientId: 10,
@@ -89,22 +90,17 @@ namespace Homecare.Models
             db.SaveChanges();
         }
 
-        // --------------------------------------------------------------------
-        // Yardımcılar
-        // --------------------------------------------------------------------
+        // ----------------- helpers -----------------
 
         private static TimeOnly H(int hour) => new(hour, 0);
 
-        /// <summary>Slot varsa döndürür; yoksa oluşturup geri verir.</summary>
         private static AvailableSlot EnsureSlot(AppDbContext db, int nurseId, DateOnly day, int startHour, int endHour)
         {
             var start = H(startHour);
             var end = H(endHour);
 
-            var slot = db.AvailableSlots
-                         .FirstOrDefault(s => s.PersonnelId == nurseId &&
-                                              s.Day == day &&
-                                              s.StartTime == start);
+            var slot = db.AvailableSlots.FirstOrDefault(s =>
+                s.PersonnelId == nurseId && s.Day == day && s.StartTime == start);
 
             if (slot == null)
             {
@@ -127,23 +123,16 @@ namespace Homecare.Models
             return slot;
         }
 
-        /// <summary>İstenen slot yoksa hata fırlatır (seed sırasında sorunları hemen görürsünüz).</summary>
         private static AvailableSlot Slot(AppDbContext db, int nurseId, DateOnly day, int startHour)
         {
             var start = H(startHour);
             var slot = db.AvailableSlots.FirstOrDefault(s =>
-                s.PersonnelId == nurseId &&
-                s.Day == day &&
-                s.StartTime == start);
+                s.PersonnelId == nurseId && s.Day == day && s.StartTime == start);
 
             return slot ?? throw new InvalidOperationException(
-                $"Seed: Slot bulunamadı. Nurse:{nurseId}, Day:{day}, Start:{start}");
+                $"Seed: Slot not found. Nurse:{nurseId}, Day:{day}, Start:{start}");
         }
 
-        /// <summary>
-        /// Aynı slot için randevu varsa günceller, yoksa oluşturur.
-        /// (Appointments.AvailableSlotId UNIQUE hatasını engeller)
-        /// </summary>
         private static Appointment UpsertAppointmentBySlot(
             AppDbContext db,
             AvailableSlot slot,
@@ -167,7 +156,7 @@ namespace Homecare.Models
                     CreatedAt = DateTime.UtcNow
                 };
                 db.Appointments.Add(appt);
-                db.SaveChanges(); // Id için
+                db.SaveChanges(); // get generated id
             }
             else
             {
@@ -177,7 +166,7 @@ namespace Homecare.Models
                 db.SaveChanges();
             }
 
-            // TaskList’i tazele
+            // refresh TaskList
             var existing = db.TaskLists.Where(t => t.AppointmentId == appt.AppointmentId).ToList();
             if (existing.Count > 0)
             {
@@ -200,9 +189,10 @@ namespace Homecare.Models
 
         private static void SeedUsers(AppDbContext db)
         {
-            if (db.Users.Any()) return;
+            // student note: check DOMAIN users table (not Identity AspNetUsers)
+            if (db.DomainUsers.Any()) return;
 
-            db.Users.AddRange(
+            db.DomainUsers.AddRange(
                 new User { UserId = 1, Name = "Admin One", Email = "admin@hc.test", PasswordHash = "Admin!23", Role = UserRole.Admin },
                 new User { UserId = 2, Name = "Nurse A", Email = "nurse.a@hc.test", PasswordHash = "P@ss", Role = UserRole.Personnel },
                 new User { UserId = 3, Name = "Nurse B", Email = "nurse.b@hc.test", PasswordHash = "P@ss", Role = UserRole.Personnel },
