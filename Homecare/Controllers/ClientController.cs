@@ -4,10 +4,11 @@ using Homecare.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Homecare.Controllers
 {
-    [Route("Client")]
     public class ClientController : Controller
     {
         private readonly IAppointmentRepository _apptRepo;
@@ -48,7 +49,8 @@ namespace Homecare.Controllers
 
         // ----------------- DASHBOARD -----------------
         // /Client/Dashboard  veya  /Client/Dashboard/10
-        [HttpGet("Dashboard/{clientId:int?}")]
+        [HttpGet]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> Dashboard(int? clientId)
         {
             try
@@ -86,7 +88,8 @@ namespace Homecare.Controllers
 
         // ----------------- CREATE (GET) -----------------
         // /Client/Create/10   (day querystring ile gelebilir)
-        [HttpGet("Create/{clientId:int}")]
+        [HttpGet]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> Create(int clientId, string? day = null)
         {
             try
@@ -153,7 +156,8 @@ namespace Homecare.Controllers
 
         // ----------------- CREATE (POST) -----------------
         // /Client/Create/{clientId}  → POST
-        [HttpPost("Create/{clientId:int}"), ValidateAntiForgeryToken]
+        [HttpPost]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> Create(int clientId, AppointmentCreateViewModel vm)
         {
             try
@@ -222,7 +226,8 @@ namespace Homecare.Controllers
 
         // ----------------- AJAX: seçilen günün boş slotlarını getir -----------------
         // /Client/SlotsForDay?day=2025-10-21
-        [HttpGet("SlotsForDay")]
+        [HttpGet]
+        [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> SlotsForDay(string day)
         {
             try

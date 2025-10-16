@@ -1,0 +1,8 @@
+2025-10-16 11:25:51.049 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-10-16 11:25:58.432 +02:00 [INF] [AppointmentRepository] Deleted appointment #10
+2025-10-16 11:26:24.281 +02:00 [INF] [AppointmentRepository] Updated appointment #6
+2025-10-16 11:26:24.295 +02:00 [INF] [AppointmentRepository] Replaced tasks for appointment #6
+2025-10-16 11:26:27.206 +02:00 [INF] User logged out.
+2025-10-16 11:26:42.574 +02:00 [INF] User logged in.
+2025-10-16 11:27:16.686 +02:00 [INF] User logged out.
+2025-10-16 11:27:31.621 +02:00 [INF] User logged in.

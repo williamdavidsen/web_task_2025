@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Appointments";
 
-    // ViewBag.ClientId güvenli okuma
     int clientId = ViewBag.ClientId is int v ? v : 0;
 
     var upcoming = ViewBag.Upcoming as IEnumerable<Appointment> ?? Enumerable.Empty<Appointment>();
@@ -22,38 +21,12 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/client.css" asp-append-version="true" />
-    <style>
-        .clickable-card {
-            cursor: pointer;
-            transition: .15s ease-in-out;
-        }
-
-        .clickable-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 .75rem 1.25rem rgba(0, 0, 0, .08);
-        }
-
-        .page-bar {
-            background: rgba(248, 250, 252, .9);
-            backdrop-filter: blur(6px);
-            border: 1px solid #e9ecef
-        }
-
-        .chip {
-            font-size: .75rem;
-            letter-spacing: .04em;
-            text-transform: uppercase
-        }
-
-        .cd-card .btn {
-            border-radius: .6rem
-        }
-    </style>
 }
+
 <partial name="~/Views/Shared/_OwnerBar.cshtml" />
 
 <div class="container py-3">
-    <!-- ÜST BAR -->
+    <!-- Top bar -->
     <div class="page-bar rounded-4 px-3 py-3 d-flex align-items-center justify-content-between mb-4">
         <div class="d-flex align-items-center gap-2">
             <svg width="28" height="28" viewBox="0 0 48 48" class="text-primary">
@@ -72,21 +45,21 @@
 
     <partial name="~/Views/Shared/_Message.cshtml" />
 
-    <!-- GELECEK -->
+    <!-- Upcoming -->
     <h5 class="mb-3">Upcoming</h5>
     @if (upcoming.Any())
     {
         foreach (var a in upcoming)
         {
-            <div class="card cd-card mb-3 js-link-card clickable-card" data-href="@Url.Action("Details","Appointment",
-                                                                                                new { id = a.AppointmentId, backTo = "client", ownerId = clientId })">
-        <div class="row g-4 align-items-start">
-            <div class="col-md-8 d-flex flex-column">
-                <div class="chip text-primary fw-semibold mb-1">Upcoming</div>
-                <h5 class="mb-1">@Personnel(a)</h5>
-                <div class="text-muted">@DayLabel(a) · @TimeLabel(a)</div>
+            <div class="card cd-card mb-3 js-link-card clickable-card"
+                data-href="@Url.Action("Details", "Appointment", new { id = a.AppointmentId, backTo = "client", ownerId = clientId })">
+                <div class="row g-4 align-items-start">
+                    <div class="col-md-8 d-flex flex-column">
+                        <div class="chip text-primary fw-semibold mb-1">Upcoming</div>
+                        <h5 class="mb-1">@Personnel(a)</h5>
+                        <div class="text-muted">@DayLabel(a) · @TimeLabel(a)</div>
 
-                @if (a.Tasks != null && a.Tasks.Any())
+                        @if (a.Tasks != null && a.Tasks.Any())
                         {
                             <div class="mt-2 small text-secondary">
                                 Tasks:
@@ -97,13 +70,15 @@
                                 }
 
                         <div class="mt-auto pt-2 d-flex flex-wrap gap-2">
+                            <!-- Client-owned actions -->
                             <a class="btn btn-outline-primary btn-sm prevent-card-nav" asp-controller="Appointment"
                                 asp-action="Edit" asp-route-id="@a.AppointmentId">
                                 <i class="bi bi-pencil-square me-1"></i> Update
                             </a>
 
-                            <form asp-controller="Appointment" asp-action="Delete" asp-route-id="@a.AppointmentId" method="post"
-                                onsubmit="return confirm('Delete this appointment?');" class="d-inline prevent-card-nav">
+                            <form class="d-inline prevent-card-nav" asp-controller="Appointment" asp-action="Delete"
+                                asp-route-id="@a.AppointmentId" method="post"
+                                onsubmit="return confirm('Delete this appointment?');">
                                 @Html.AntiForgeryToken()
                                 <button class="btn btn-outline-danger btn-sm" type="submit">
                                     <i class="bi bi-trash me-1"></i> Delete
@@ -127,7 +102,7 @@
         </div>
     }
 
-    <!-- GEÇMİŞ -->
+    <!-- Past -->
     <h5 class="mt-4 mb-3">Past</h5>
     @if (past.Any())
     {
@@ -138,15 +113,15 @@
             ? Url.Content("~/images/dash-past-1.jpg")
             : Url.Content("~/images/dash-past-2.jpg");
 
-            <div class="card cd-card opacity-75 mb-3 js-link-card clickable-card" data-href="@Url.Action("Details","Appointment",
-                                                                                                           new { id = a.AppointmentId, backTo = "client", ownerId = clientId })">
-        <div class="row g-4 align-items-start">
-            <div class="col-md-8 d-flex flex-column">
-                <div class="chip text-secondary mb-1">Completed</div>
-                <h5 class="mb-1">@Personnel(a)</h5>
-                <div class="text-muted">@DayLabel(a) · @TimeLabel(a)</div>
+            <div class="card cd-card opacity-75 mb-3 js-link-card clickable-card"
+                data-href="@Url.Action("Details", "Appointment", new { id = a.AppointmentId, backTo = "client", ownerId = clientId })">
+                <div class="row g-4 align-items-start">
+                    <div class="col-md-8 d-flex flex-column">
+                        <div class="chip text-secondary mb-1">Completed</div>
+                        <h5 class="mb-1">@Personnel(a)</h5>
+                        <div class="text-muted">@DayLabel(a) · @TimeLabel(a)</div>
 
-                @if (a.Tasks != null && a.Tasks.Any())
+                        @if (a.Tasks != null && a.Tasks.Any())
                         {
                             <div class="mt-2 small text-secondary">
                                 Tasks:
@@ -171,12 +146,14 @@
 
 @section Scripts {
     <script>
+        // navigate when clicking the whole card
         document.querySelectorAll('.js-link-card').forEach(card => {
             card.addEventListener('click', () => {
                 const href = card.getAttribute('data-href');
                 if (href) window.location.href = href;
             });
         });
+        // keep buttons/forms inside card from triggering card navigation
         document.querySelectorAll('.prevent-card-nav').forEach(el => {
             el.addEventListener('click', e => e.stopPropagation(), { capture: true });
         });

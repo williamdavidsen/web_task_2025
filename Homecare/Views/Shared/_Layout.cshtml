@@ -1,3 +1,4 @@
+@* Views/Shared/_Layout.cshtml *@
 <!doctype html>
 <html lang="en">
 
@@ -6,43 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - Homecare</title>
 
-    <!-- Bootstrap & Icons -->
+    <!-- Bootstrap & Icons (CDN only) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-    @await RenderSectionAsync("Styles", required: false) <!-- Styles section'ını render et -->
+    <!-- Your bundles -->
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    @* add if you also use home.css: <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" /> *@
 
-    <style>
-        html,
-        body {
-            height: 100%;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        main {
-            flex: 1 0 auto;
-        }
-
-        footer {
-            flex-shrink: 0;
-        }
-    </style>
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 
-<body>
+<body class="hc-sticky">
     <header class="border-bottom">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand fw-semibold" asp-controller="Home" asp-action="Index">
                     <i class="bi bi-heart-pulse-fill text-primary"></i> Homecare
                 </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"
                     aria-controls="nav" aria-expanded="false" aria-label="Toggle nav">
                     <span class="navbar-toggler-icon"></span>
@@ -50,36 +33,43 @@
 
                 <div class="collapse navbar-collapse" id="nav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" asp-controller="AvailableSlot"
-                                asp-action="Table">Slots</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Appointment"
-                                asp-action="Table">Appointments</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house"></i> Home
+                            </a>
+                        </li>
+
+                        @* Role-aware shortcuts *@
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Admin" asp-action="Dashboard">
+                                    <i class="bi bi-speedometer2"></i> Admin
+                                </a>
+                            </li>
+                        }
+                        else if (User.Identity?.IsAuthenticated ?? false)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="AfterLogin">
+                                    <i class="bi bi-speedometer2"></i> Dashboard
+                                </a>
+                            </li>
+                        }
                     </ul>
 
-                    <!-- Hızlı rol linkleri (LOGIN YOKKEN TEST İÇİN) -->
-                    <div class="d-flex gap-2">
-                        <a class="btn btn-outline-primary btn-sm" asp-controller="Client" asp-action="Dashboard"
-                            asp-route-clientId="10">
-                            <i class="bi bi-person"></i> Client (Ali)
-                        </a>
-                        <a class="btn btn-outline-primary btn-sm" asp-controller="Personnel" asp-action="Dashboard"
-                            asp-route-personnelId="2">
-                            <i class="bi bi-person-workspace"></i> Personnel (Nurse A)
-                        </a>
-                        <a class="btn btn-primary btn-sm" asp-controller="Admin" asp-action="Dashboard">
-                            <i class="bi bi-speedometer2"></i> Admin
-                        </a>
-                    </div>
+                    <!-- Auth area -->
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
 
-    <main class="container my-4">
+    <main class="container my-4 flex-fill">
         @RenderBody()
     </main>
 
-    <footer class="bg-dark text-white-50 py-3">
+    <footer class="bg-dark text-white-50 py-3 mt-auto">
         <div class="container small d-flex justify-content-between">
             <div>© @DateTime.Now.Year Homecare</div>
             <div><a class="link-light link-underline-opacity-0" asp-controller="Home" asp-action="Index">Home</a></div>

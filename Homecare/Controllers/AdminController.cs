@@ -3,9 +3,13 @@ using Homecare.Models;
 using Homecare.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization; // needed for [Authorize]
 
 namespace Homecare.Controllers
 {
+    // Only admins should reach anything here.
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly IUserRepository _userRepo;
@@ -25,12 +29,13 @@ namespace Homecare.Controllers
             _logger = logger;
         }
 
-        // /Admin/Dashboard
+        // GET: /Admin/Dashboard
+        // Admin overview: counts + quick jump + paged upcoming/free slots.
         public async Task<IActionResult> Dashboard(int up = 1, int fr = 1)
         {
             try
             {
-                const int pageSize = 10; // the view slices by this size
+                const int pageSize = 10; // the view slices using this size
                 ViewBag.OwnerName = User?.Identity?.Name ?? "Administrator";
                 ViewBag.OwnerRole = "Admin";
 
@@ -67,14 +72,14 @@ namespace Homecare.Controllers
                 }
                 freeAll = freeAll.OrderBy(s => s.Day).ThenBy(s => s.StartTime).ToList();
 
-                // 5) Simple paging metadata (the view needs these numbers)
+                // 5) Simple paging metadata for the view
                 ViewBag.UpPage = Math.Max(1, up);
                 ViewBag.UpTotal = Math.Max(1, (int)Math.Ceiling(upcomingAll.Count / (double)pageSize));
                 ViewBag.FrPage = Math.Max(1, fr);
                 ViewBag.FrTotal = Math.Max(1, (int)Math.Ceiling(freeAll.Count / (double)pageSize));
                 ViewBag.PageSize = pageSize;
 
-                // 6) Return VM with full collections; the view will slice.
+                // 6) Ship VM
                 var vm = new AdminDashboardViewModel
                 {
                     UpcomingAll = upcomingAll,
@@ -87,7 +92,7 @@ namespace Homecare.Controllers
                 _logger.LogError(ex, "[AdminController] Dashboard failed");
                 TempData["Error"] = "Dashboard could not be loaded.";
 
-                // Keep view simple with empty data
+                // Keep the view usable (empty data but no crash)
                 ViewBag.TotalClients = 0;
                 ViewBag.TotalPersonnels = 0;
                 ViewBag.TotalAppts = 0;

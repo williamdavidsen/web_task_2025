@@ -10,51 +10,56 @@ var builder = WebApplication.CreateBuilder(args);
 
 // MVC + Razor Pages (Identity UI uses Razor Pages)
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages(); // student note: Identity scaffolding uses Razor Pages
+builder.Services.AddRazorPages();
 
-// -------------------- Single DbContext via appsettings.json --------------------
-// student note: one context for both domain and Identity tables
+// Single DbContext (domain + Identity)
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("HomecareDbConnection")));
 
-// Identity uses AppDbContext now
+// Identity + Roles (dev-friendly password rules)
 builder.Services
-    .AddDefaultIdentity<IdentityUser>(options =>
+    .AddDefaultIdentity<IdentityUser>(opt =>
     {
-        // student note: easier sign-in during development; enable confirmation in production
-        options.SignIn.RequireConfirmedAccount = false;
-    })
-    .AddEntityFrameworkStores<AppDbContext>(); // <- keep this semicolon!
-// -----------------------------------------------------------------------------
+        opt.SignIn.RequireConfirmedAccount = false;
+        opt.Password.RequireLowercase = false;
 
-// Repositories
+        opt.Password.RequireNonAlphanumeric = false;
+        opt.Password.RequireUppercase = false;
+        opt.Password.RequireDigit = false;
+        opt.Password.RequiredLength = 3;
+    })
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.AddSession();
+
+// Repositories (DI)
 builder.Services.AddScoped<IAvailableSlotRepository, AvailableSlotRepository>();
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICareTaskRepository, CareTaskRepository>();
 
-// -------------------- Serilog (filter noisy EF Core SQL) ----------------------
+// Serilog (filter EF Core SQL noise)
 var logger = new LoggerConfiguration()
-    .MinimumLevel.Information() // student note: good signal/noise during development
+    .MinimumLevel.Information()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
     .Filter.ByExcluding(e =>
         e.Properties.TryGetValue("SourceContext", out _)
         && e.Level == LogEventLevel.Information
-        && e.MessageTemplate.Text.Contains("Executed DbCommand")) // cut EF Core spam
+        && e.MessageTemplate.Text.Contains("Executed DbCommand"))
     .WriteTo.File($"Logs/app_{DateTime.Now:yyyyMMdd_HHmmss}.log")
     .CreateLogger();
 
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
-// -----------------------------------------------------------------------------
 
 var app = builder.Build();
 
-// Error handling + seeding
+// Dev: detailed errors + seed sample data
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    DBInit.Seed(app); // student note: creates DB if missing + inserts demo data
+    DBInit.Seed(app);
 }
 else
 {
@@ -65,10 +70,13 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseAuthentication(); // student note: required for login
+// Auth pipeline
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 
+// Endpoints
 app.MapDefaultControllerRoute();
-app.MapRazorPages(); // student note: Identity endpoints
+app.MapRazorPages(); // Identity endpoints
 
 app.Run();

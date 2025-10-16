@@ -12,6 +12,25 @@
     --c-h-lg: 420px;
 }
 
+html,
+body {
+    height: 100%;
+}
+
+body.hc-sticky {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+main.flex-fill {
+    flex: 1 0 auto;
+}
+
+footer.mt-auto {
+    flex-shrink: 0;
+}
+
 /* HERO */
 .hc-hero {
     padding: 28px 0 24px;

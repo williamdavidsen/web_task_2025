@@ -1,10 +1,11 @@
 using Homecare.DAL.Interfaces;
 using Homecare.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Homecare.Controllers
 {
+    [Authorize(Roles = "Personnel,Admin")] // lock the whole controller
     public class PersonnelController : Controller
     {
         private readonly IAppointmentRepository _apptRepo;
@@ -24,26 +25,62 @@ namespace Homecare.Controllers
             _logger = logger;
         }
 
+        // map current Identity email -> domain personnel id
+        private async Task<int?> CurrentPersonnelIdAsync()
+        {
+            var email = User?.Identity?.Name ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(email)) return null;
+
+            var personnels = await _userRepo.GetByRoleAsync(UserRole.Personnel);
+            var me = personnels.FirstOrDefault(p =>
+                string.Equals(p.Email, email, StringComparison.OrdinalIgnoreCase));
+            return me?.UserId;
+        }
+
+        private async Task SetOwnerForPersonnelAsync(int personnelId)
+        {
+            var u = await _userRepo.GetAsync(personnelId);
+            ViewBag.OwnerName = u?.Name ?? $"Personnel #{personnelId}";
+            ViewBag.OwnerRole = "Personnel";
+        }
+
         // /Personnel/Dashboard?personnelId=2
         public async Task<IActionResult> Dashboard(int? personnelId)
         {
             try
             {
-                int id = personnelId ?? (await _userRepo.GetByRoleAsync(UserRole.Personnel)).First().UserId;
+                // Admin: can target anyone (fallback to first)
+                // Personnel: can open only self
+                int id;
+                if (User.IsInRole("Admin"))
+                {
+                    id = personnelId
+                         ?? (await _userRepo.GetByRoleAsync(UserRole.Personnel)).First().UserId;
+                }
+                else
+                {
+                    var myId = await CurrentPersonnelIdAsync();
+                    if (!myId.HasValue) return Forbid();
+                    if (personnelId.HasValue && personnelId.Value != myId.Value) return Forbid();
+                    id = myId.Value;
+                }
+
                 await SetOwnerForPersonnelAsync(id);
 
                 var list = await _apptRepo.GetByPersonnelAsync(id);
                 var now = DateTime.Now;
 
-                var upcoming = list.Where(a => a.AvailableSlot!.Day.ToDateTime(a.AvailableSlot!.EndTime) >= now)
-                                   .OrderBy(a => a.AvailableSlot!.Day)
-                                   .ThenBy(a => a.AvailableSlot!.StartTime)
-                                   .ToList();
+                var upcoming = list
+                    .Where(a => a.AvailableSlot!.Day.ToDateTime(a.AvailableSlot!.EndTime) >= now)
+                    .OrderBy(a => a.AvailableSlot!.Day)
+                    .ThenBy(a => a.AvailableSlot!.StartTime)
+                    .ToList();
 
-                var past = list.Where(a => a.AvailableSlot!.Day.ToDateTime(a.AvailableSlot!.EndTime) < now)
-                               .OrderByDescending(a => a.AvailableSlot!.Day)
-                               .ThenByDescending(a => a.AvailableSlot!.StartTime)
-                               .ToList();
+                var past = list
+                    .Where(a => a.AvailableSlot!.Day.ToDateTime(a.AvailableSlot!.EndTime) < now)
+                    .OrderByDescending(a => a.AvailableSlot!.Day)
+                    .ThenByDescending(a => a.AvailableSlot!.StartTime)
+                    .ToList();
 
                 ViewBag.PersonnelId = id;
                 ViewBag.Upcoming = upcoming;
@@ -54,28 +91,32 @@ namespace Homecare.Controllers
             {
                 _logger.LogError(ex, "[PersonnelController] Dashboard failed (personnelId: {Pid})", personnelId);
                 TempData["Error"] = "Could not load personnel dashboard.";
-                return RedirectToAction("Table", "Appointment");
+                return RedirectToAction("Index", "Home");
             }
         }
 
-        private async Task SetOwnerForPersonnelAsync(int personnelId)
-        {
-            var u = await _userRepo.GetAsync(personnelId);
-            ViewBag.OwnerName = u?.Name ?? $"Personnel #{personnelId}";
-            ViewBag.OwnerRole = "Personnel";
-        }
-
-        // select day
+        // GET: show 2-month calendar to pick working days
         [HttpGet]
         public async Task<IActionResult> CreateDay(int personnelId)
         {
             try
             {
+                // same access rule as Dashboard
+                if (User.IsInRole("Admin"))
+                {
+                    // ok with any id
+                }
+                else
+                {
+                    var myId = await CurrentPersonnelIdAsync();
+                    if (!myId.HasValue || myId.Value != personnelId) return Forbid();
+                }
+
                 await SetOwnerForPersonnelAsync(personnelId);
                 ViewBag.PersonnelId = personnelId;
 
                 var from = DateOnly.FromDateTime(DateTime.Today);
-                var to = from.AddDays(42); // 6 hafta
+                var to = from.AddDays(42);
 
                 var selectedDays = await _slotRepo.GetWorkDaysAsync(personnelId, from, to);
                 var lockedDays = await _slotRepo.GetLockedDaysAsync(personnelId, from, to);
@@ -86,7 +127,7 @@ namespace Homecare.Controllers
                 ViewBag.LockedDaysJson = System.Text.Json.JsonSerializer.Serialize(
                     lockedDays.Select(d => d.ToString("yyyy-MM-dd")));
 
-                return View(); // CreateDay.cshtml
+                return View(); // Views/Personnel/CreateDay.cshtml
             }
             catch (Exception ex)
             {
@@ -96,12 +137,19 @@ namespace Homecare.Controllers
             }
         }
 
-        // ----- CREATE DAY (POST) 
+        // POST: save working days (adds/removes preset 3 slots per selected day)
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateDay(int personnelId, string? days)
         {
             try
             {
+                // same access rule as GET
+                if (!User.IsInRole("Admin"))
+                {
+                    var myId = await CurrentPersonnelIdAsync();
+                    if (!myId.HasValue || myId.Value != personnelId) return Forbid();
+                }
+
                 var from = DateOnly.FromDateTime(DateTime.Today);
                 var to = from.AddDays(42);
 
@@ -109,9 +157,9 @@ namespace Homecare.Controllers
                                     ?? Enumerable.Empty<DateOnly>()).ToHashSet();
 
                 var lockedDays = (await _slotRepo.GetLockedDaysAsync(personnelId, from, to)
-                                    ?? Enumerable.Empty<DateOnly>()).ToHashSet();
+                                  ?? Enumerable.Empty<DateOnly>()).ToHashSet();
 
-                // Formdan gelen CSV
+                // parse CSV from hidden field
                 var chosen = new HashSet<DateOnly>();
                 if (!string.IsNullOrWhiteSpace(days))
                 {
@@ -125,10 +173,10 @@ namespace Homecare.Controllers
                 var blocked = toRemove.Where(d => lockedDays.Contains(d)).ToList();
                 var removable = toRemove.Where(d => !lockedDays.Contains(d)).ToList();
 
-                // 3 preset slot
+                // fixed 3 slots template
                 var presets = new (TimeOnly Start, TimeOnly End)[]
                 {
-                    (new TimeOnly(9,  0), new TimeOnly(11, 0)),
+                    (new TimeOnly(9, 0),  new TimeOnly(11, 0)),
                     (new TimeOnly(12, 0), new TimeOnly(14, 0)),
                     (new TimeOnly(16, 0), new TimeOnly(18, 0)),
                 };
@@ -156,11 +204,10 @@ namespace Homecare.Controllers
                         var slots = await _slotRepo.GetSlotsForPersonnelOnDayAsync(personnelId, day)
                                     ?? Enumerable.Empty<AvailableSlot>();
 
-                        // güvenlik: randevulu slot varsa bu günü de bloke et
+                        // do not remove a day if any slot is booked
                         if (slots.Any(s => s.Appointment != null))
                         {
-                            if (!blocked.Contains(day))
-                                blocked.Add(day);
+                            if (!blocked.Contains(day)) blocked.Add(day);
                             continue;
                         }
 

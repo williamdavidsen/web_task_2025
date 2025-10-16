@@ -1,12 +1,13 @@
 using Homecare.DAL.Interfaces;
 using Homecare.Models;
 using Homecare.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
 
 namespace Homecare.Controllers
 {
+    // Admin-only list/create/edit/delete. Details is allowed for Admin and the owning Client.
     public class AppointmentController : Controller
     {
         private readonly IAppointmentRepository _apptRepo;
@@ -29,6 +30,9 @@ namespace Homecare.Controllers
             _logger = logger;
         }
 
+        // ADMIN: list all appointments
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public async Task<IActionResult> Table()
         {
             try
@@ -38,40 +42,51 @@ namespace Homecare.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "[AppointmentController] Table failed");
+                _logger.LogError(ex, "[Appointment] Table failed");
                 TempData["Error"] = "Could not load appointments.";
                 return View(Enumerable.Empty<Appointment>());
             }
         }
 
+        // ADMIN or owning CLIENT: details
+        [Authorize(Roles = "Admin,Client")]
+        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             try
             {
                 var a = await _apptRepo.GetAsync(id);
-                if (a == null)
+                if (a == null) return NotFound();
+
+                // If the caller is a Client, enforce ownership by email->domain mapping
+                if (User.IsInRole("Client"))
                 {
-                    _logger.LogWarning("[AppointmentController] Details: appointment #{Id} not found", id);
-                    return NotFound();
+                    var email = User.Identity?.Name ?? string.Empty;
+                    var me = (await _userRepo.GetByRoleAsync(UserRole.Client))
+                             .FirstOrDefault(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+                    if (me == null || a.ClientId != me.UserId) return Forbid();
                 }
 
-                // Back butonu için geldiği yer bilgisi (opsiyonel)
                 ViewBag.ReturnTo = Request.Headers["Referer"].ToString();
                 return View(a);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "[AppointmentController] Details({Id}) failed", id);
+                _logger.LogError(ex, "[Appointment] Details({Id}) failed", id);
                 return StatusCode(500);
             }
         }
 
+        // ADMIN: create (GET)
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             try
             {
-                ViewBag.Clients = new SelectList(await _userRepo.GetByRoleAsync(UserRole.Client), "UserId", "Name");
+                ViewBag.Clients = new SelectList(
+                    await _userRepo.GetByRoleAsync(UserRole.Client), "UserId", "Name");
+
                 var freeDays = await _slotRepo.GetFreeDaysAsync();
                 var firstDay = freeDays.FirstOrDefault();
                 var freeSlots = (firstDay == default)
@@ -79,20 +94,25 @@ namespace Homecare.Controllers
                     : await _slotRepo.GetFreeSlotsByDayAsync(firstDay);
 
                 ViewBag.FreeSlots = new SelectList(
-                    freeSlots.Select(s => new { s.AvailableSlotId, Label = $"{s.Day:yyyy-MM-dd} {s.StartTime}-{s.EndTime} ({s.Personnel?.Name})" }),
-                    "AvailableSlotId", "Label"
-                );
+                    freeSlots.Select(s => new
+                    {
+                        s.AvailableSlotId,
+                        Label = $"{s.Day:yyyy-MM-dd} {s.StartTime}-{s.EndTime} ({s.Personnel?.Name})"
+                    }),
+                    "AvailableSlotId", "Label");
 
                 return View(new Appointment { Status = AppointmentStatus.Scheduled });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "[AppointmentController] Create(GET) failed");
+                _logger.LogError(ex, "[Appointment] Create(GET) failed");
                 TempData["Error"] = "Create page could not be loaded.";
                 return RedirectToAction(nameof(Table));
             }
         }
 
+        // ADMIN: create (POST)
+        [Authorize(Roles = "Admin")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Appointment model)
         {
@@ -103,8 +123,9 @@ namespace Homecare.Controllers
 
                 if (!ModelState.IsValid)
                 {
-                    _logger.LogWarning("[AppointmentController] Create(POST) invalid model");
-                    ViewBag.Clients = new SelectList(await _userRepo.GetByRoleAsync(UserRole.Client), "UserId", "Name", model.ClientId);
+                    ViewBag.Clients = new SelectList(
+                        await _userRepo.GetByRoleAsync(UserRole.Client), "UserId", "Name", model.ClientId);
+                    _logger.LogWarning("[Appointment] Create(POST) invalid model");
                     return View(model);
                 }
 
@@ -114,12 +135,14 @@ namespace Homecare.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "[AppointmentController] Create(POST) failed");
+                _logger.LogError(ex, "[Appointment] Create(POST) failed");
                 TempData["Error"] = "Could not create appointment.";
                 return RedirectToAction(nameof(Table));
             }
         }
 
+        // ADMIN: edit (GET)
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -128,20 +151,16 @@ namespace Homecare.Controllers
                 var a = await _apptRepo.GetAsync(id);
                 if (a == null) return NotFound();
 
-                // Takvim için boş günler
                 var freeDays = await _slotRepo.GetFreeDaysAsync();
                 ViewBag.FreeDays = freeDays.Select(d => d.ToString("yyyy-MM-dd")).ToList();
 
-                // Mevcut tekli görev (varsa)
                 int? selectedTaskId = a.Tasks?.Select(t => t.CareTaskId).FirstOrDefault();
-
-                // Dropdown için seçenekler
                 var tasks = await _taskRepo.GetAllAsync();
                 var selectList = tasks.Select(t => new SelectListItem
                 {
                     Value = t.CareTaskId.ToString(),
                     Text = t.Description,
-                    Selected = selectedTaskId.HasValue && selectedTaskId.Value == t.CareTaskId
+                    Selected = selectedTaskId == t.CareTaskId
                 }).ToList();
 
                 var vm = new AppointmentEditViewModel
@@ -151,57 +170,91 @@ namespace Homecare.Controllers
                     TaskSelectList = selectList
                 };
 
-                return View(vm); // <-- ViewModel
+                return View(vm);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "[AppointmentController] Edit(GET {Id}) failed", id);
+                _logger.LogError(ex, "[Appointment] Edit(GET {Id}) failed", id);
                 TempData["Error"] = "Could not load edit page.";
                 return RedirectToAction(nameof(Table));
             }
         }
 
-        // --- EDIT (POST) -> ViewModel al ---
+        // ADMIN: edit (POST)
+        [Authorize(Roles = "Admin")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AppointmentEditViewModel vm)
         {
             try
             {
-                var model = vm.Appointment;
+                var m = vm.Appointment;
 
-                // Seçilen slot başka biri tarafından alındı mı?
-                if (await _apptRepo.SlotIsBookedAsync(model.AvailableSlotId, model.AppointmentId))
-                {
-                    ModelState.AddModelError(nameof(vm.Appointment.AvailableSlotId),
-                        "This slot is already booked.");
-                }
+                // If slot changed, ensure it is still free
+                if (await _apptRepo.SlotIsBookedAsync(m.AvailableSlotId, m.AppointmentId))
+                    ModelState.AddModelError(nameof(vm.Appointment.AvailableSlotId), "This slot is already booked.");
 
                 if (!ModelState.IsValid)
                 {
-                    _logger.LogWarning("[AppointmentController] Edit(POST #{Id}) invalid model", model.AppointmentId);
+                    _logger.LogWarning("[Appointment] Edit(POST #{Id}) invalid model", m.AppointmentId);
                     return await RefillEditFormVM(vm);
                 }
 
-                await _apptRepo.UpdateAsync(model);
-
-                // Tek seçimli "Requested Task"ı güncelle
-                if (vm.SelectedTaskId.HasValue)
-                    await _apptRepo.ReplaceTasksAsync(model.AppointmentId, new[] { vm.SelectedTaskId.Value });
-                else
-                    await _apptRepo.ReplaceTasksAsync(model.AppointmentId, Array.Empty<int>());
+                await _apptRepo.UpdateAsync(m);
+                await _apptRepo.ReplaceTasksAsync(
+                    m.AppointmentId,
+                    vm.SelectedTaskId.HasValue ? new[] { vm.SelectedTaskId.Value } : Array.Empty<int>());
 
                 TempData["Message"] = "Appointment updated.";
-                return RedirectToAction("Dashboard", "Client", new { clientId = model.ClientId });
+                return RedirectToAction(nameof(Table));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "[AppointmentController] Edit(POST #{Id}) failed", vm.Appointment?.AppointmentId);
+                _logger.LogError(ex, "[Appointment] Edit(POST #{Id}) failed", vm.Appointment?.AppointmentId);
                 TempData["Error"] = "Could not update appointment.";
                 return RedirectToAction(nameof(Table));
             }
         }
 
-        // Hata durumunda formu yeniden doldur
+        // ADMIN: delete (GET)
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var a = await _apptRepo.GetAsync(id);
+                if (a == null) return NotFound();
+                return View(a);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "[Appointment] Delete(GET {Id}) failed", id);
+                TempData["Error"] = "Could not load delete page.";
+                return RedirectToAction(nameof(Table));
+            }
+        }
+
+        // ADMIN: delete (POST)
+        [Authorize(Roles = "Admin")]
+        [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                var a = await _apptRepo.GetAsync(id);
+                if (a == null) return NotFound();
+                await _apptRepo.DeleteAsync(a);
+                TempData["Message"] = "Appointment deleted.";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "[Appointment] DeleteConfirmed({Id}) failed", id);
+                TempData["Error"] = "Could not delete appointment.";
+            }
+            return RedirectToAction(nameof(Table));
+        }
+
+        // helper to re-fill edit form
         private async Task<IActionResult> RefillEditFormVM(AppointmentEditViewModel vm)
         {
             var freeDays = await _slotRepo.GetFreeDaysAsync();
@@ -216,40 +269,6 @@ namespace Homecare.Controllers
             }).ToList();
 
             return View("Edit", vm);
-        }
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
-        {
-            try
-            {
-                var a = await _apptRepo.GetAsync(id);
-                if (a == null) return NotFound();
-                return View(a);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "[AppointmentController] Delete(GET {Id}) failed", id);
-                TempData["Error"] = "Could not load delete page.";
-                return RedirectToAction(nameof(Table));
-            }
-        }
-
-        [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            try
-            {
-                var a = await _apptRepo.GetAsync(id);
-                if (a == null) return NotFound();
-                await _apptRepo.DeleteAsync(a);
-                TempData["Message"] = "Appointment deleted.";
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "[AppointmentController] DeleteConfirmed({Id}) failed", id);
-                TempData["Error"] = "Could not delete appointment.";
-            }
-            return RedirectToAction(nameof(Table));
         }
     }
 }
