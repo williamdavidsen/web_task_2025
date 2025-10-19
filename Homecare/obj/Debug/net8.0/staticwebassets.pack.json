@@ -37,6 +37,10 @@
       "PackagePath": "staticwebassets\\images\\dash-upcoming.jpg"
     },
     {
+      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\heart-pulse.svg",
+      "PackagePath": "staticwebassets\\images\\heart-pulse.svg"
+    },
+    {
       "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\hero-admin.jpg",
       "PackagePath": "staticwebassets\\images\\hero-admin.jpg"
     },

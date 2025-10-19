@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SrMHd1HIEntTFpVa31p7PY0XzyaqWgllL6KEivYHBS0=",
+  "Hash": "GYG63QuzDAcDnUiRrArECeJKy2y9Dsd7SyBZiIljaGo=",
   "Source": "Homecare",
   "BasePath": "_content/Homecare",
   "Mode": "Default",
@@ -1464,6 +1464,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\dash-upcoming.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\heart-pulse.svg",
+      "SourceId": "Homecare",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\",
+      "BasePath": "_content/Homecare",
+      "RelativePath": "images/heart-pulse#[.{fingerprint}]?.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "g9b7dwrvs4",
+      "Integrity": "PK5MC9xtkiDhEKmZX8Flf5H7f7lf240lyoyShyp7rl8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\heart-pulse.svg"
     },
     {
       "Identity": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\hero-admin.jpg",
@@ -4527,6 +4548,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-oIdX6MfHisvJ3YlLSHbmbT37hGbDkTO8uG0tX/LYhaM="
+        }
+      ]
+    },
+    {
+      "Route": "images/heart-pulse.g9b7dwrvs4.svg",
+      "AssetFile": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\heart-pulse.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "806"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PK5MC9xtkiDhEKmZX8Flf5H7f7lf240lyoyShyp7rl8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Oct 2025 18:30:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g9b7dwrvs4"
+        },
+        {
+          "Name": "label",
+          "Value": "images/heart-pulse.svg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PK5MC9xtkiDhEKmZX8Flf5H7f7lf240lyoyShyp7rl8="
+        }
+      ]
+    },
+    {
+      "Route": "images/heart-pulse.svg",
+      "AssetFile": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\heart-pulse.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "806"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PK5MC9xtkiDhEKmZX8Flf5H7f7lf240lyoyShyp7rl8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Oct 2025 18:30:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PK5MC9xtkiDhEKmZX8Flf5H7f7lf240lyoyShyp7rl8="
         }
       ]
     },

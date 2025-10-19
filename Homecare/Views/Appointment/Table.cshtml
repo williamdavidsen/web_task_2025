@@ -1,12 +1,25 @@
+@* Views/Appointment/Table.cshtml (örnek konum) *@
+@* Eğer _ViewImports.cshtml içinde @using Homecare.Models varsa: *@
 @model IEnumerable<Appointment>
+@* Eğer yoksa bu satırı kullan:
+@model IEnumerable<Homecare.Models.Appointment>
+*@
+
 @{
     ViewData["Title"] = "Appointments";
+    // clientId güvenli okuma (Client -> Create linki için)
+    int clientId = ViewBag.ClientId is int v ? v : 0;
 }
+
 <h2 class="mb-3">@ViewData["Title"]</h2>
+
 <partial name="~/Views/Shared/_Message.cshtml" />
 
 <div class="d-flex justify-content-end mb-3">
-    <a class="btn btn-success" asp-action="Create"><i class="bi bi-plus-circle"></i> Create Appointment</a>
+    <!-- İstediğin gibi: Client controller'ın Create action'ına gider -->
+    <a class="btn btn-primary" asp-controller="Client" asp-action="Create" asp-route-clientId="@clientId">
+        <i class="bi bi-plus-circle me-1"></i> Create Appointment
+    </a>
 </div>
 
 <div class="card">
@@ -24,26 +37,41 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var a in Model)
+                @if (Model != null && Model.Any())
                 {
-                    <tr>
-                        <td>@a.AppointmentId</td>
-                        <td>@a.Client?.Name</td>
-                        <td>@a.AvailableSlot?.Day.ToString("yyyy-MM-dd")</td>
-                        <td>@a.AvailableSlot?.StartTime - @a.AvailableSlot?.EndTime</td>
-                        <td>@a.AvailableSlot?.Personnel?.Name</td>
-                        <td><span class="badge text-bg-secondary">@a.Status</span></td>
-                        <td class="text-end">
-                            <a class="btn btn-sm btn-outline-primary" asp-action="Details"
-                                asp-route-id="@a.AppointmentId">Details</a>
-                            <a class="btn btn-sm btn-outline-secondary" asp-action="Edit"
-                                asp-route-id="@a.AppointmentId">Edit</a>
-                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete"
-                                asp-route-id="@a.AppointmentId">Delete</a>
-                        </td>
-                    </tr>
+                    foreach (var a in Model)
+                    {
+                        <tr>
+                            <td>@a.AppointmentId</td>
+                            <td>@a.Client?.Name</td>
+                            <td>@a.AvailableSlot?.Day.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                @a.AvailableSlot?.StartTime.ToString("HH\\:mm")
+                                -
+                                @a.AvailableSlot?.EndTime.ToString("HH\\:mm")
+                            </td>
+                            <td>@a.AvailableSlot?.Personnel?.Name</td>
+                            <td><span class="badge text-bg-secondary">@a.Status</span></td>
+                            <td class="text-end">
+                                <!-- Details tüm rollere uygun yönlendirilebilir -->
+                                <a class="btn btn-sm btn-outline-primary" asp-controller="Appointment" asp-action="Details"
+                                    asp-route-id="@a.AppointmentId">
+                                    Details
+                                </a>
+                                <!-- Edit/Delete yetkilerine göre (Admin/Client) -->
+                                <a class="btn btn-sm btn-outline-secondary" asp-controller="Appointment" asp-action="Edit"
+                                    asp-route-id="@a.AppointmentId">
+                                    Edit
+                                </a>
+                                <a class="btn btn-sm btn-outline-danger" asp-controller="Appointment" asp-action="Delete"
+                                    asp-route-id="@a.AppointmentId">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
                 }
-                @if (!Model.Any())
+                else
                 {
                     <tr>
                         <td colspan="7" class="text-muted">No records.</td>

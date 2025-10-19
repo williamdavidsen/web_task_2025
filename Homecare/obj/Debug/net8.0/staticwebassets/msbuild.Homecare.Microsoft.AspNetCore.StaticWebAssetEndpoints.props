@@ -108,6 +108,18 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-oIdX6MfHisvJ3YlLSHbmbT37hGbDkTO8uG0tX/LYhaM="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"43135"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022oIdX6MfHisvJ3YlLSHbmbT37hGbDkTO8uG0tX/LYhaM=\u0022"},{"Name":"Last-Modified","Value":"Thu, 16 Oct 2025 07:44:50 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Homecare/images/heart-pulse.g9b7dwrvs4.svg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\heart-pulse.svg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"g9b7dwrvs4"},{"Name":"integrity","Value":"sha256-PK5MC9xtkiDhEKmZX8Flf5H7f7lf240lyoyShyp7rl8="},{"Name":"label","Value":"_content/Homecare/images/heart-pulse.svg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"806"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u0022PK5MC9xtkiDhEKmZX8Flf5H7f7lf240lyoyShyp7rl8=\u0022"},{"Name":"Last-Modified","Value":"Sun, 19 Oct 2025 18:30:51 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Homecare/images/heart-pulse.svg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\heart-pulse.svg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-PK5MC9xtkiDhEKmZX8Flf5H7f7lf240lyoyShyp7rl8="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"806"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u0022PK5MC9xtkiDhEKmZX8Flf5H7f7lf240lyoyShyp7rl8=\u0022"},{"Name":"Last-Modified","Value":"Sun, 19 Oct 2025 18:30:51 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Homecare/images/hero-admin.jpg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\hero-admin.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
