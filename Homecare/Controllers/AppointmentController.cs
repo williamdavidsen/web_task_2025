@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Homecare.Controllers
 {
-    // Admin-only list/create/edit/delete. Details is allowed for Admin and the owning Client.
+    // Admin: full CRUD
+    // Client: can view/edit/delete ONLY own appointments
     public class AppointmentController : Controller
     {
         private readonly IAppointmentRepository _apptRepo;
@@ -30,7 +31,19 @@ namespace Homecare.Controllers
             _logger = logger;
         }
 
-        // ADMIN: list all appointments
+        // Small helper: map Identity email -> domain ClientId
+        private async Task<int?> CurrentClientIdAsync()
+        {
+            var email = User.Identity?.Name ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(email)) return null;
+
+            var me = (await _userRepo.GetByRoleAsync(UserRole.Client))
+                .FirstOrDefault(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+            return me?.UserId;
+        }
+
+        // ================== LIST / CREATE (Admin only) ==================
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Table()
@@ -48,36 +61,6 @@ namespace Homecare.Controllers
             }
         }
 
-        // ADMIN or owning CLIENT: details
-        [Authorize(Roles = "Admin,Client")]
-        [HttpGet]
-        public async Task<IActionResult> Details(int id)
-        {
-            try
-            {
-                var a = await _apptRepo.GetAsync(id);
-                if (a == null) return NotFound();
-
-                // If the caller is a Client, enforce ownership by email->domain mapping
-                if (User.IsInRole("Client"))
-                {
-                    var email = User.Identity?.Name ?? string.Empty;
-                    var me = (await _userRepo.GetByRoleAsync(UserRole.Client))
-                             .FirstOrDefault(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
-                    if (me == null || a.ClientId != me.UserId) return Forbid();
-                }
-
-                ViewBag.ReturnTo = Request.Headers["Referer"].ToString();
-                return View(a);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "[Appointment] Details({Id}) failed", id);
-                return StatusCode(500);
-            }
-        }
-
-        // ADMIN: create (GET)
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -111,7 +94,6 @@ namespace Homecare.Controllers
             }
         }
 
-        // ADMIN: create (POST)
         [Authorize(Roles = "Admin")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Appointment model)
@@ -141,8 +123,37 @@ namespace Homecare.Controllers
             }
         }
 
-        // ADMIN: edit (GET)
-        [Authorize(Roles = "Admin")]
+        // ================== DETAILS (Admin or owning Client) ==================
+
+        [Authorize(Roles = "Admin,Client")]
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            try
+            {
+                var a = await _apptRepo.GetAsync(id);
+                if (a == null) return NotFound();
+
+                // If Client, enforce ownership
+                if (User.IsInRole("Client"))
+                {
+                    var myId = await CurrentClientIdAsync();
+                    if (myId == null || a.ClientId != myId.Value) return Forbid();
+                }
+
+                ViewBag.ReturnTo = Request.Headers["Referer"].ToString();
+                return View(a);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "[Appointment] Details({Id}) failed", id);
+                return StatusCode(500);
+            }
+        }
+
+        // ================== EDIT (Admin or owning Client) ==================
+
+        [Authorize(Roles = "Admin,Client")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -151,10 +162,20 @@ namespace Homecare.Controllers
                 var a = await _apptRepo.GetAsync(id);
                 if (a == null) return NotFound();
 
+                // If Client, must own it
+                if (User.IsInRole("Client"))
+                {
+                    var myId = await CurrentClientIdAsync();
+                    if (myId == null || a.ClientId != myId.Value) return Forbid();
+                }
+
+                // Calendar free days
                 var freeDays = await _slotRepo.GetFreeDaysAsync();
                 ViewBag.FreeDays = freeDays.Select(d => d.ToString("yyyy-MM-dd")).ToList();
 
+                // Single-selected task (if any)
                 int? selectedTaskId = a.Tasks?.Select(t => t.CareTaskId).FirstOrDefault();
+
                 var tasks = await _taskRepo.GetAllAsync();
                 var selectList = tasks.Select(t => new SelectListItem
                 {
@@ -180,8 +201,7 @@ namespace Homecare.Controllers
             }
         }
 
-        // ADMIN: edit (POST)
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Client")]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AppointmentEditViewModel vm)
         {
@@ -189,7 +209,15 @@ namespace Homecare.Controllers
             {
                 var m = vm.Appointment;
 
-                // If slot changed, ensure it is still free
+                // If Client, enforce ownership and prevent tampering with ClientId
+                if (User.IsInRole("Client"))
+                {
+                    var myId = await CurrentClientIdAsync();
+                    if (myId == null || m.ClientId != myId.Value) return Forbid();
+                    m.ClientId = myId.Value; // harden against form tampering
+                }
+
+                // Slot must be free (except current appt)
                 if (await _apptRepo.SlotIsBookedAsync(m.AvailableSlotId, m.AppointmentId))
                     ModelState.AddModelError(nameof(vm.Appointment.AvailableSlotId), "This slot is already booked.");
 
@@ -205,18 +233,26 @@ namespace Homecare.Controllers
                     vm.SelectedTaskId.HasValue ? new[] { vm.SelectedTaskId.Value } : Array.Empty<int>());
 
                 TempData["Message"] = "Appointment updated.";
+
+                // Redirect according to role
+                if (User.IsInRole("Client"))
+                    return RedirectToAction("Dashboard", "Client", new { clientId = m.ClientId });
+
                 return RedirectToAction(nameof(Table));
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "[Appointment] Edit(POST #{Id}) failed", vm.Appointment?.AppointmentId);
                 TempData["Error"] = "Could not update appointment.";
-                return RedirectToAction(nameof(Table));
+                return User.IsInRole("Client")
+                    ? RedirectToAction("Dashboard", "Client", new { clientId = vm.Appointment?.ClientId })
+                    : RedirectToAction(nameof(Table));
             }
         }
 
-        // ADMIN: delete (GET)
-        [Authorize(Roles = "Admin")]
+        // ================== DELETE (Admin or owning Client) ==================
+
+        [Authorize(Roles = "Admin,Client")]
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -224,6 +260,13 @@ namespace Homecare.Controllers
             {
                 var a = await _apptRepo.GetAsync(id);
                 if (a == null) return NotFound();
+
+                if (User.IsInRole("Client"))
+                {
+                    var myId = await CurrentClientIdAsync();
+                    if (myId == null || a.ClientId != myId.Value) return Forbid();
+                }
+
                 return View(a);
             }
             catch (Exception ex)
@@ -234,8 +277,7 @@ namespace Homecare.Controllers
             }
         }
 
-        // ADMIN: delete (POST)
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Client")]
         [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -243,18 +285,30 @@ namespace Homecare.Controllers
             {
                 var a = await _apptRepo.GetAsync(id);
                 if (a == null) return NotFound();
+
+                if (User.IsInRole("Client"))
+                {
+                    var myId = await CurrentClientIdAsync();
+                    if (myId == null || a.ClientId != myId.Value) return Forbid();
+                }
+
                 await _apptRepo.DeleteAsync(a);
                 TempData["Message"] = "Appointment deleted.";
+
+                if (User.IsInRole("Client"))
+                    return RedirectToAction("Dashboard", "Client", new { clientId = a.ClientId });
+
+                return RedirectToAction(nameof(Table));
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "[Appointment] DeleteConfirmed({Id}) failed", id);
                 TempData["Error"] = "Could not delete appointment.";
+                return RedirectToAction(nameof(Table));
             }
-            return RedirectToAction(nameof(Table));
         }
 
-        // helper to re-fill edit form
+        // Refill ViewModel on validation errors
         private async Task<IActionResult> RefillEditFormVM(AppointmentEditViewModel vm)
         {
             var freeDays = await _slotRepo.GetFreeDaysAsync();

@@ -16,60 +16,43 @@ namespace Homecare.Controllers
             _logger = logger;
         }
 
-        // Entry point: show only login when anonymous, otherwise jump to role landing
+        // Public landing page – no login required
+        [AllowAnonymous]
         public IActionResult Index()
         {
-            if (!User.Identity?.IsAuthenticated ?? true)
-            {
-                // Identity Razor Page
-                return RedirectToPage("/Account/Login", new { area = "Identity" });
-            }
-
-            return RedirectToAction(nameof(AfterLogin));
+            // just render Views/Home/Index.cshtml
+            return View();
         }
 
-        // Decide where to send the user after a successful login
+        // After successful login, route user to the right dashboard
         [Authorize]
         public async Task<IActionResult> AfterLogin()
         {
             try
             {
-                // Admin goes to global dashboard
                 if (User.IsInRole("Admin"))
                     return RedirectToAction("Dashboard", "Admin");
 
                 var email = User.Identity?.Name ?? string.Empty;
 
-                // Client: map Identity email -> domain client id
                 if (User.IsInRole("Client"))
                 {
-                    var clients = await _userRepo.GetByRoleAsync(UserRole.Client);
-                    var me = clients.FirstOrDefault(c =>
-                        string.Equals(c.Email, email, StringComparison.OrdinalIgnoreCase));
-
-                    if (me != null)
-                        return RedirectToAction("Dashboard", "Client", new { clientId = me.UserId });
-
-                    // fallback if mapping fails
+                    var me = (await _userRepo.GetByRoleAsync(UserRole.Client))
+                        .FirstOrDefault(c => string.Equals(c.Email, email, StringComparison.OrdinalIgnoreCase));
+                    if (me != null) return RedirectToAction("Dashboard", "Client", new { clientId = me.UserId });
                     TempData["Error"] = "Client profile not found.";
                     return RedirectToPage("/Account/Logout", new { area = "Identity" });
                 }
 
-                // Personnel: map Identity email -> domain personnel id
                 if (User.IsInRole("Personnel"))
                 {
-                    var personnels = await _userRepo.GetByRoleAsync(UserRole.Personnel);
-                    var me = personnels.FirstOrDefault(p =>
-                        string.Equals(p.Email, email, StringComparison.OrdinalIgnoreCase));
-
-                    if (me != null)
-                        return RedirectToAction("Dashboard", "Personnel", new { personnelId = me.UserId });
-
+                    var me = (await _userRepo.GetByRoleAsync(UserRole.Personnel))
+                        .FirstOrDefault(p => string.Equals(p.Email, email, StringComparison.OrdinalIgnoreCase));
+                    if (me != null) return RedirectToAction("Dashboard", "Personnel", new { personnelId = me.UserId });
                     TempData["Error"] = "Personnel profile not found.";
                     return RedirectToPage("/Account/Logout", new { area = "Identity" });
                 }
 
-                // Unknown role → safest is login
                 TempData["Error"] = "Unauthorized role.";
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
@@ -80,5 +63,8 @@ namespace Homecare.Controllers
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
         }
+
+        [AllowAnonymous]
+        public IActionResult Ping() => Content("pong");
     }
 }

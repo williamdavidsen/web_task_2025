@@ -1,0 +1,273 @@
+2025-10-17 20:06:13.279 +02:00 [INF] User profile is available. Using 'C:\Users\cosku\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-17 20:06:13.657 +02:00 [INF] Now listening on: http://localhost:5003
+2025-10-17 20:06:13.659 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-17 20:06:13.660 +02:00 [INF] Hosting environment: Development
+2025-10-17 20:06:13.660 +02:00 [INF] Content root path: C:\Users\cosku\Desktop\Oslomet Emner\ITPE3200-1 24H Webapplikasjoner\HomeCare\webprogrammering2025\Homecare
+2025-10-17 20:06:13.881 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-17 20:06:13.934 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-17 20:06:13.943 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-17 20:06:13.962 +02:00 [INF] Executing RedirectToPageResult, redirecting to /Account/Login.
+2025-10-17 20:06:13.966 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 19.6136ms
+2025-10-17 20:06:13.966 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-17 20:06:13.973 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 302 0 null 94.0639ms
+2025-10-17 20:06:13.977 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Identity/Account/Login - null null
+2025-10-17 20:06:13.980 +02:00 [INF] Executing endpoint '/Account/Login'
+2025-10-17 20:06:14.001 +02:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-10-17 20:06:14.012 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2025-10-17 20:06:14.017 +02:00 [INF] AuthenticationScheme: Identity.External signed out.
+2025-10-17 20:06:14.019 +02:00 [INF] Executed handler method OnGetAsync, returned result .
+2025-10-17 20:06:14.021 +02:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-10-17 20:06:14.021 +02:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-17 20:06:14.109 +02:00 [INF] Executed page /Account/Login in 108.4226ms
+2025-10-17 20:06:14.109 +02:00 [INF] Executed endpoint '/Account/Login'
+2025-10-17 20:06:14.110 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Identity/Account/Login - 200 null text/html; charset=utf-8 133.1896ms
+2025-10-17 20:06:14.128 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=FgIInssjFMsdm0wfH5DHmYA7UW-XQqmiTsozSmxcBkU - null null
+2025-10-17 20:06:14.129 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:06:14.130 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-17 20:06:14.130 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-17 20:06:14.130 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 1.4108ms
+2025-10-17 20:06:14.133 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 3.32ms
+2025-10-17 20:06:14.133 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 3.3198ms
+2025-10-17 20:06:14.133 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-17 20:06:14.134 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-17 20:06:14.135 +02:00 [INF] The file /css/home.css was not modified
+2025-10-17 20:06:14.135 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=FgIInssjFMsdm0wfH5DHmYA7UW-XQqmiTsozSmxcBkU - 304 null text/css 6.9137ms
+2025-10-17 20:06:14.424 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/favicon.ico - null null
+2025-10-17 20:06:14.425 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/favicon.ico - 404 0 null 1.662ms
+2025-10-17 20:06:14.426 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/favicon.ico, Response status code: 404
+2025-10-17 20:06:52.341 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5003/Identity/Account/Login - application/x-www-form-urlencoded 258
+2025-10-17 20:06:52.347 +02:00 [INF] Executing endpoint '/Account/Login'
+2025-10-17 20:06:52.349 +02:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-10-17 20:06:52.387 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.LoginModel.OnPostAsync - ModelState is "Valid"
+2025-10-17 20:06:52.560 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2025-10-17 20:06:52.561 +02:00 [INF] User logged in.
+2025-10-17 20:06:52.562 +02:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.LocalRedirectResult.
+2025-10-17 20:06:52.564 +02:00 [INF] Executing LocalRedirectResult, redirecting to /.
+2025-10-17 20:06:52.564 +02:00 [INF] Executed page /Account/Login in 215.4887ms
+2025-10-17 20:06:52.564 +02:00 [INF] Executed endpoint '/Account/Login'
+2025-10-17 20:06:52.567 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5003/Identity/Account/Login - 302 0 null 226.4838ms
+2025-10-17 20:06:52.568 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-17 20:06:52.573 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-17 20:06:52.573 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-17 20:06:52.574 +02:00 [INF] Executing RedirectResult, redirecting to /Home/AfterLogin.
+2025-10-17 20:06:52.574 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 0.9286ms
+2025-10-17 20:06:52.574 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-17 20:06:52.574 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 302 0 null 5.7539ms
+2025-10-17 20:06:52.579 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Home/AfterLogin - null null
+2025-10-17 20:06:52.591 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.AfterLogin (Homecare)'
+2025-10-17 20:06:52.598 +02:00 [INF] Route matched with {action = "AfterLogin", controller = "Home", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AfterLogin() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-17 20:06:52.663 +02:00 [INF] Executing RedirectResult, redirecting to /Client/Dashboard?clientId=10.
+2025-10-17 20:06:52.664 +02:00 [INF] Executed action Homecare.Controllers.HomeController.AfterLogin (Homecare) in 65.5797ms
+2025-10-17 20:06:52.664 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.AfterLogin (Homecare)'
+2025-10-17 20:06:52.664 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Home/AfterLogin - 302 0 null 85.4401ms
+2025-10-17 20:06:52.666 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Client/Dashboard?clientId=10 - null null
+2025-10-17 20:06:52.669 +02:00 [INF] Executing endpoint 'Homecare.Controllers.ClientController.Dashboard (Homecare)'
+2025-10-17 20:06:52.680 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Client", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard(System.Nullable`1[System.Int32]) on controller Homecare.Controllers.ClientController (Homecare).
+2025-10-17 20:06:52.817 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2025-10-17 20:06:52.884 +02:00 [INF] Executed ViewResult - view Dashboard executed in 73.9489ms.
+2025-10-17 20:06:52.884 +02:00 [INF] Executed action Homecare.Controllers.ClientController.Dashboard (Homecare) in 203.858ms
+2025-10-17 20:06:52.884 +02:00 [INF] Executed endpoint 'Homecare.Controllers.ClientController.Dashboard (Homecare)'
+2025-10-17 20:06:52.885 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Client/Dashboard?clientId=10 - 200 null text/html; charset=utf-8 218.1279ms
+2025-10-17 20:06:52.917 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/client.css?v=HwB-gqoYkKhbPGay26VZS5HigR62ki6MhhYpnw-m5JU - null null
+2025-10-17 20:06:52.917 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/dash-upcoming.jpg - null null
+2025-10-17 20:06:52.917 +02:00 [INF] The file /css/client.css was not modified
+2025-10-17 20:06:52.918 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/dash-past-2.jpg - null null
+2025-10-17 20:06:52.918 +02:00 [INF] The file /images/dash-upcoming.jpg was not modified
+2025-10-17 20:06:52.918 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/client.css?v=HwB-gqoYkKhbPGay26VZS5HigR62ki6MhhYpnw-m5JU - 304 null text/css 0.9547ms
+2025-10-17 20:06:52.918 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/dash-upcoming.jpg - 304 null image/jpeg 0.5088ms
+2025-10-17 20:06:52.918 +02:00 [INF] The file /images/dash-past-2.jpg was not modified
+2025-10-17 20:06:52.918 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/dash-past-2.jpg - 304 null image/jpeg 0.4891ms
+2025-10-17 20:06:52.924 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:06:52.925 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/dash-past-1.jpg - null null
+2025-10-17 20:06:52.925 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.4245ms
+2025-10-17 20:06:52.958 +02:00 [INF] Sending file. Request path: '/images/dash-past-1.jpg'. Physical path: 'C:\Users\cosku\Desktop\Oslomet Emner\ITPE3200-1 24H Webapplikasjoner\HomeCare\webprogrammering2025\Homecare\wwwroot\images\dash-past-1.jpg'
+2025-10-17 20:06:52.959 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/dash-past-1.jpg - 200 39385 image/jpeg 34.6386ms
+2025-10-17 20:07:03.653 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Appointment/Details/16?backTo=client&ownerId=10 - null null
+2025-10-17 20:07:03.656 +02:00 [INF] Executing endpoint 'Homecare.Controllers.AppointmentController.Details (Homecare)'
+2025-10-17 20:07:03.660 +02:00 [INF] Route matched with {action = "Details", controller = "Appointment", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Details(Int32) on controller Homecare.Controllers.AppointmentController (Homecare).
+2025-10-17 20:07:03.700 +02:00 [INF] Executing ViewResult, running view Details.
+2025-10-17 20:07:03.715 +02:00 [INF] Executed ViewResult - view Details executed in 16.3132ms.
+2025-10-17 20:07:03.715 +02:00 [INF] Executed action Homecare.Controllers.AppointmentController.Details (Homecare) in 54.0699ms
+2025-10-17 20:07:03.715 +02:00 [INF] Executed endpoint 'Homecare.Controllers.AppointmentController.Details (Homecare)'
+2025-10-17 20:07:03.715 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Appointment/Details/16?backTo=client&ownerId=10 - 200 null text/html; charset=utf-8 62.2009ms
+2025-10-17 20:07:03.741 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:07:03.741 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.3774ms
+2025-10-17 20:07:07.171 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Appointment/Edit/16 - null null
+2025-10-17 20:07:07.176 +02:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2025-10-17 20:07:07.178 +02:00 [INF] AuthenticationScheme: Identity.Application was forbidden.
+2025-10-17 20:07:07.179 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Appointment/Edit/16 - 302 0 null 7.7008ms
+2025-10-17 20:07:07.183 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Identity/Account/AccessDenied?ReturnUrl=%2FAppointment%2FEdit%2F16 - null null
+2025-10-17 20:07:07.185 +02:00 [INF] Executing endpoint '/Account/AccessDenied'
+2025-10-17 20:07:07.197 +02:00 [INF] Route matched with {page = "/Account/AccessDenied", area = "Identity", action = "", controller = ""}. Executing page /Account/AccessDenied
+2025-10-17 20:07:07.198 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.AccessDeniedModel.OnGet - ModelState is "Valid"
+2025-10-17 20:07:07.198 +02:00 [INF] Executed handler method OnGet, returned result .
+2025-10-17 20:07:07.198 +02:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-10-17 20:07:07.198 +02:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-17 20:07:07.202 +02:00 [INF] Executed page /Account/AccessDenied in 4.6634ms
+2025-10-17 20:07:07.202 +02:00 [INF] Executed endpoint '/Account/AccessDenied'
+2025-10-17 20:07:07.202 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Identity/Account/AccessDenied?ReturnUrl=%2FAppointment%2FEdit%2F16 - 200 null text/html; charset=utf-8 19.3622ms
+2025-10-17 20:07:07.223 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:07:07.223 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.3038ms
+2025-10-17 20:07:09.053 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Appointment/Details/16?backTo=client&ownerId=10 - null null
+2025-10-17 20:07:09.054 +02:00 [INF] Executing endpoint 'Homecare.Controllers.AppointmentController.Details (Homecare)'
+2025-10-17 20:07:09.055 +02:00 [INF] Route matched with {action = "Details", controller = "Appointment", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Details(Int32) on controller Homecare.Controllers.AppointmentController (Homecare).
+2025-10-17 20:07:09.061 +02:00 [INF] Executing ViewResult, running view Details.
+2025-10-17 20:07:09.062 +02:00 [INF] Executed ViewResult - view Details executed in 1.5723ms.
+2025-10-17 20:07:09.062 +02:00 [INF] Executed action Homecare.Controllers.AppointmentController.Details (Homecare) in 7.7066ms
+2025-10-17 20:07:09.062 +02:00 [INF] Executed endpoint 'Homecare.Controllers.AppointmentController.Details (Homecare)'
+2025-10-17 20:07:09.062 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Appointment/Details/16?backTo=client&ownerId=10 - 200 null text/html; charset=utf-8 9.739ms
+2025-10-17 20:07:09.087 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:07:09.087 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.4036ms
+2025-10-17 20:07:10.390 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Client/Dashboard?clientId=10 - null null
+2025-10-17 20:07:10.392 +02:00 [INF] Executing endpoint 'Homecare.Controllers.ClientController.Dashboard (Homecare)'
+2025-10-17 20:07:10.392 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Client", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard(System.Nullable`1[System.Int32]) on controller Homecare.Controllers.ClientController (Homecare).
+2025-10-17 20:07:10.394 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2025-10-17 20:07:10.396 +02:00 [INF] Executed ViewResult - view Dashboard executed in 2.1066ms.
+2025-10-17 20:07:10.396 +02:00 [INF] Executed action Homecare.Controllers.ClientController.Dashboard (Homecare) in 4.721ms
+2025-10-17 20:07:10.396 +02:00 [INF] Executed endpoint 'Homecare.Controllers.ClientController.Dashboard (Homecare)'
+2025-10-17 20:07:10.397 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Client/Dashboard?clientId=10 - 200 null text/html; charset=utf-8 6.7818ms
+2025-10-17 20:07:10.421 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:07:10.422 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.3923ms
+2025-10-17 20:07:12.421 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Client/Create?clientId=10 - null null
+2025-10-17 20:07:12.421 +02:00 [INF] Executing endpoint 'Homecare.Controllers.ClientController.Create (Homecare)'
+2025-10-17 20:07:12.425 +02:00 [INF] Route matched with {action = "Create", controller = "Client", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(Int32, System.String) on controller Homecare.Controllers.ClientController (Homecare).
+2025-10-17 20:07:12.507 +02:00 [INF] Executing ViewResult, running view Create.
+2025-10-17 20:07:12.575 +02:00 [INF] Executed ViewResult - view Create executed in 69.4204ms.
+2025-10-17 20:07:12.575 +02:00 [INF] Executed action Homecare.Controllers.ClientController.Create (Homecare) in 150.3059ms
+2025-10-17 20:07:12.575 +02:00 [INF] Executed endpoint 'Homecare.Controllers.ClientController.Create (Homecare)'
+2025-10-17 20:07:12.575 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Client/Create?clientId=10 - 200 null text/html; charset=utf-8 154.6921ms
+2025-10-17 20:07:12.600 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:07:12.601 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.5638ms
+2025-10-17 20:07:13.769 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Client/SlotsForDay?day=2025-10-17 - null null
+2025-10-17 20:07:13.771 +02:00 [INF] Executing endpoint 'Homecare.Controllers.ClientController.SlotsForDay (Homecare)'
+2025-10-17 20:07:13.774 +02:00 [INF] Route matched with {action = "SlotsForDay", controller = "Client", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SlotsForDay(System.String) on controller Homecare.Controllers.ClientController (Homecare).
+2025-10-17 20:07:13.803 +02:00 [INF] Executing JsonResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[Homecare.Models.AvailableSlot, Homecare, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType13`2[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Homecare, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-17 20:07:13.812 +02:00 [INF] Executed action Homecare.Controllers.ClientController.SlotsForDay (Homecare) in 38.7017ms
+2025-10-17 20:07:13.813 +02:00 [INF] Executed endpoint 'Homecare.Controllers.ClientController.SlotsForDay (Homecare)'
+2025-10-17 20:07:13.813 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Client/SlotsForDay?day=2025-10-17 - 200 null application/json; charset=utf-8 43.3442ms
+2025-10-17 20:07:17.944 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5003/Client/Create?clientId=10 - application/x-www-form-urlencoded 322
+2025-10-17 20:07:17.948 +02:00 [INF] Executing endpoint 'Homecare.Controllers.ClientController.Create (Homecare)'
+2025-10-17 20:07:17.958 +02:00 [INF] Route matched with {action = "Create", controller = "Client", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(Int32, Homecare.ViewModels.AppointmentCreateViewModel) on controller Homecare.Controllers.ClientController (Homecare).
+2025-10-17 20:07:18.004 +02:00 [INF] [AppointmentRepository] Added appointment #19 for client #10
+2025-10-17 20:07:18.004 +02:00 [INF] Executing RedirectResult, redirecting to /Client/Dashboard?clientId=10.
+2025-10-17 20:07:18.006 +02:00 [INF] Executed action Homecare.Controllers.ClientController.Create (Homecare) in 47.5403ms
+2025-10-17 20:07:18.006 +02:00 [INF] Executed endpoint 'Homecare.Controllers.ClientController.Create (Homecare)'
+2025-10-17 20:07:18.006 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5003/Client/Create?clientId=10 - 302 0 null 62.1641ms
+2025-10-17 20:07:18.011 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Client/Dashboard?clientId=10 - null null
+2025-10-17 20:07:18.012 +02:00 [INF] Executing endpoint 'Homecare.Controllers.ClientController.Dashboard (Homecare)'
+2025-10-17 20:07:18.012 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Client", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard(System.Nullable`1[System.Int32]) on controller Homecare.Controllers.ClientController (Homecare).
+2025-10-17 20:07:18.018 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2025-10-17 20:07:18.024 +02:00 [INF] Executed ViewResult - view Dashboard executed in 6.0333ms.
+2025-10-17 20:07:18.024 +02:00 [INF] Executed action Homecare.Controllers.ClientController.Dashboard (Homecare) in 11.9005ms
+2025-10-17 20:07:18.024 +02:00 [INF] Executed endpoint 'Homecare.Controllers.ClientController.Dashboard (Homecare)'
+2025-10-17 20:07:18.025 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Client/Dashboard?clientId=10 - 200 null text/html; charset=utf-8 13.9786ms
+2025-10-17 20:07:18.061 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:07:18.061 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.3584ms
+2025-10-17 20:07:21.279 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5003/Appointment/Delete/9 - application/x-www-form-urlencoded 225
+2025-10-17 20:07:21.281 +02:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2025-10-17 20:07:21.282 +02:00 [INF] AuthenticationScheme: Identity.Application was forbidden.
+2025-10-17 20:07:21.282 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5003/Appointment/Delete/9 - 302 0 null 3.0106ms
+2025-10-17 20:07:21.289 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Identity/Account/AccessDenied?ReturnUrl=%2FAppointment%2FDelete%2F9 - null null
+2025-10-17 20:07:21.290 +02:00 [INF] Executing endpoint '/Account/AccessDenied'
+2025-10-17 20:07:21.290 +02:00 [INF] Route matched with {page = "/Account/AccessDenied", area = "Identity", action = "", controller = ""}. Executing page /Account/AccessDenied
+2025-10-17 20:07:21.291 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.AccessDeniedModel.OnGet - ModelState is "Valid"
+2025-10-17 20:07:21.291 +02:00 [INF] Executed handler method OnGet, returned result .
+2025-10-17 20:07:21.291 +02:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-10-17 20:07:21.291 +02:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-17 20:07:21.293 +02:00 [INF] Executed page /Account/AccessDenied in 2.5548ms
+2025-10-17 20:07:21.293 +02:00 [INF] Executed endpoint '/Account/AccessDenied'
+2025-10-17 20:07:21.293 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Identity/Account/AccessDenied?ReturnUrl=%2FAppointment%2FDelete%2F9 - 200 null text/html; charset=utf-8 3.9139ms
+2025-10-17 20:07:21.307 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:07:21.307 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.297ms
+2025-10-17 20:07:23.658 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Client/Dashboard?clientId=10 - null null
+2025-10-17 20:07:23.659 +02:00 [INF] Executing endpoint 'Homecare.Controllers.ClientController.Dashboard (Homecare)'
+2025-10-17 20:07:23.659 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Client", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard(System.Nullable`1[System.Int32]) on controller Homecare.Controllers.ClientController (Homecare).
+2025-10-17 20:07:23.662 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2025-10-17 20:07:23.664 +02:00 [INF] Executed ViewResult - view Dashboard executed in 1.927ms.
+2025-10-17 20:07:23.664 +02:00 [INF] Executed action Homecare.Controllers.ClientController.Dashboard (Homecare) in 5.2869ms
+2025-10-17 20:07:23.665 +02:00 [INF] Executed endpoint 'Homecare.Controllers.ClientController.Dashboard (Homecare)'
+2025-10-17 20:07:23.665 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Client/Dashboard?clientId=10 - 200 null text/html; charset=utf-8 7.0151ms
+2025-10-17 20:07:23.707 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:07:23.708 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.2869ms
+2025-10-17 20:14:29.185 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Client/Create?clientId=10 - null null
+2025-10-17 20:14:29.186 +02:00 [INF] Executing endpoint 'Homecare.Controllers.ClientController.Create (Homecare)'
+2025-10-17 20:14:29.186 +02:00 [INF] Route matched with {action = "Create", controller = "Client", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(Int32, System.String) on controller Homecare.Controllers.ClientController (Homecare).
+2025-10-17 20:14:29.194 +02:00 [INF] Executing ViewResult, running view Create.
+2025-10-17 20:14:29.198 +02:00 [INF] Executed ViewResult - view Create executed in 3.5487ms.
+2025-10-17 20:14:29.198 +02:00 [INF] Executed action Homecare.Controllers.ClientController.Create (Homecare) in 11.2304ms
+2025-10-17 20:14:29.198 +02:00 [INF] Executed endpoint 'Homecare.Controllers.ClientController.Create (Homecare)'
+2025-10-17 20:14:29.198 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Client/Create?clientId=10 - 200 null text/html; charset=utf-8 13.1579ms
+2025-10-17 20:14:29.232 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:14:29.232 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.2816ms
+2025-10-17 20:14:31.726 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Client/Create?clientId=10 - null null
+2025-10-17 20:14:31.728 +02:00 [INF] Executing endpoint 'Homecare.Controllers.ClientController.Create (Homecare)'
+2025-10-17 20:14:31.728 +02:00 [INF] Route matched with {action = "Create", controller = "Client", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(Int32, System.String) on controller Homecare.Controllers.ClientController (Homecare).
+2025-10-17 20:14:31.732 +02:00 [INF] Executing ViewResult, running view Create.
+2025-10-17 20:14:31.739 +02:00 [INF] Executed ViewResult - view Create executed in 6.3744ms.
+2025-10-17 20:14:31.740 +02:00 [INF] Executed action Homecare.Controllers.ClientController.Create (Homecare) in 11.5959ms
+2025-10-17 20:14:31.740 +02:00 [INF] Executed endpoint 'Homecare.Controllers.ClientController.Create (Homecare)'
+2025-10-17 20:14:31.740 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Client/Create?clientId=10 - 200 null text/html; charset=utf-8 13.899ms
+2025-10-17 20:14:31.777 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:14:31.778 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.2683ms
+2025-10-17 20:16:33.670 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Client/Dashboard?clientId=10 - null null
+2025-10-17 20:16:33.672 +02:00 [INF] Executing endpoint 'Homecare.Controllers.ClientController.Dashboard (Homecare)'
+2025-10-17 20:16:33.672 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Client", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard(System.Nullable`1[System.Int32]) on controller Homecare.Controllers.ClientController (Homecare).
+2025-10-17 20:16:33.675 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2025-10-17 20:16:33.676 +02:00 [INF] Executed ViewResult - view Dashboard executed in 1.8258ms.
+2025-10-17 20:16:33.677 +02:00 [INF] Executed action Homecare.Controllers.ClientController.Dashboard (Homecare) in 4.5602ms
+2025-10-17 20:16:33.677 +02:00 [INF] Executed endpoint 'Homecare.Controllers.ClientController.Dashboard (Homecare)'
+2025-10-17 20:16:33.677 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Client/Dashboard?clientId=10 - 200 null text/html; charset=utf-8 6.7392ms
+2025-10-17 20:16:33.712 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:16:33.712 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.3321ms
+2025-10-17 20:17:04.266 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Appointment/Details/16?backTo=client&ownerId=10 - null null
+2025-10-17 20:17:04.268 +02:00 [INF] Executing endpoint 'Homecare.Controllers.AppointmentController.Details (Homecare)'
+2025-10-17 20:17:04.268 +02:00 [INF] Route matched with {action = "Details", controller = "Appointment", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Details(Int32) on controller Homecare.Controllers.AppointmentController (Homecare).
+2025-10-17 20:17:04.272 +02:00 [INF] Executing ViewResult, running view Details.
+2025-10-17 20:17:04.276 +02:00 [INF] Executed ViewResult - view Details executed in 3.6224ms.
+2025-10-17 20:17:04.276 +02:00 [INF] Executed action Homecare.Controllers.AppointmentController.Details (Homecare) in 7.3536ms
+2025-10-17 20:17:04.276 +02:00 [INF] Executed endpoint 'Homecare.Controllers.AppointmentController.Details (Homecare)'
+2025-10-17 20:17:04.276 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Appointment/Details/16?backTo=client&ownerId=10 - 200 null text/html; charset=utf-8 10.1833ms
+2025-10-17 20:17:04.321 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:17:04.321 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.3412ms
+2025-10-17 20:21:01.801 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5003/Identity/Account/Logout?returnUrl=%2F - application/x-www-form-urlencoded 225
+2025-10-17 20:21:01.804 +02:00 [INF] Executing endpoint '/Account/Logout'
+2025-10-17 20:21:01.810 +02:00 [INF] Route matched with {page = "/Account/Logout", area = "Identity", action = "", controller = ""}. Executing page /Account/Logout
+2025-10-17 20:21:01.813 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.LogoutModel.OnPost - ModelState is "Valid"
+2025-10-17 20:21:01.815 +02:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2025-10-17 20:21:01.815 +02:00 [INF] AuthenticationScheme: Identity.External signed out.
+2025-10-17 20:21:01.815 +02:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2025-10-17 20:21:01.816 +02:00 [INF] User logged out.
+2025-10-17 20:21:01.816 +02:00 [INF] Executed handler method OnPost, returned result Microsoft.AspNetCore.Mvc.LocalRedirectResult.
+2025-10-17 20:21:01.816 +02:00 [INF] Executing LocalRedirectResult, redirecting to /.
+2025-10-17 20:21:01.816 +02:00 [INF] Executed page /Account/Logout in 5.866ms
+2025-10-17 20:21:01.816 +02:00 [INF] Executed endpoint '/Account/Logout'
+2025-10-17 20:21:01.816 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5003/Identity/Account/Logout?returnUrl=%2F - 302 0 null 14.9419ms
+2025-10-17 20:21:01.822 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-17 20:21:01.822 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-17 20:21:01.823 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-17 20:21:01.824 +02:00 [INF] Executing RedirectToPageResult, redirecting to /Account/Login.
+2025-10-17 20:21:01.824 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 1.1851ms
+2025-10-17 20:21:01.824 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-17 20:21:01.824 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 302 0 null 2.249ms
+2025-10-17 20:21:01.828 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Identity/Account/Login - null null
+2025-10-17 20:21:01.828 +02:00 [INF] Executing endpoint '/Account/Login'
+2025-10-17 20:21:01.829 +02:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-10-17 20:21:01.830 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2025-10-17 20:21:01.831 +02:00 [INF] AuthenticationScheme: Identity.External signed out.
+2025-10-17 20:21:01.831 +02:00 [INF] Executed handler method OnGetAsync, returned result .
+2025-10-17 20:21:01.831 +02:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-10-17 20:21:01.831 +02:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-17 20:21:01.835 +02:00 [INF] Executed page /Account/Login in 5.0858ms
+2025-10-17 20:21:01.835 +02:00 [INF] Executed endpoint '/Account/Login'
+2025-10-17 20:21:01.835 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Identity/Account/Login - 200 null text/html; charset=utf-8 7.5306ms
+2025-10-17 20:21:01.871 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-17 20:21:01.872 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-17 20:21:01.872 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.612ms
+2025-10-17 20:21:01.873 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 1.62ms
+2025-10-17 20:21:01.873 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-17 20:21:01.880 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-17 20:21:01.881 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 0.879ms
+2025-10-17 20:21:01.881 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-17 20:23:51.212 +02:00 [INF] Application is shutting down...

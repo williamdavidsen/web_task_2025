@@ -1,0 +1,30 @@
+2025-10-19 19:53:45.526 +02:00 [INF] User profile is available. Using 'C:\Users\cosku\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-19 19:53:45.734 +02:00 [INF] Now listening on: http://localhost:5003
+2025-10-19 19:53:45.737 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-19 19:53:45.738 +02:00 [INF] Hosting environment: Development
+2025-10-19 19:53:45.738 +02:00 [INF] Content root path: C:\Users\cosku\Desktop\Oslomet Emner\ITPE3200-1 24H Webapplikasjoner\HomeCare\webprogrammering2025\Homecare
+2025-10-19 19:53:51.393 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-19 19:53:51.481 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-19 19:53:51.488 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-19 19:53:51.504 +02:00 [INF] Executing RedirectToPageResult, redirecting to /Account/Login.
+2025-10-19 19:53:51.507 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 16.7674ms
+2025-10-19 19:53:51.507 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-19 19:53:51.511 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 302 0 null 120.3139ms
+2025-10-19 19:53:51.514 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Identity/Account/Login - null null
+2025-10-19 19:53:51.516 +02:00 [INF] Executing endpoint '/Account/Login'
+2025-10-19 19:53:51.531 +02:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-10-19 19:53:51.540 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2025-10-19 19:53:51.543 +02:00 [INF] AuthenticationScheme: Identity.External signed out.
+2025-10-19 19:53:51.544 +02:00 [INF] Executed handler method OnGetAsync, returned result .
+2025-10-19 19:53:51.545 +02:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-10-19 19:53:51.545 +02:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-19 19:53:51.591 +02:00 [INF] Executed page /Account/Login in 59.523ms
+2025-10-19 19:53:51.591 +02:00 [INF] Executed endpoint '/Account/Login'
+2025-10-19 19:53:51.592 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Identity/Account/Login - 200 null text/html; charset=utf-8 78.204ms
+2025-10-19 19:53:51.628 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-19 19:53:51.630 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-19 19:53:51.634 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 4.415ms
+2025-10-19 19:53:51.634 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 6.4743ms
+2025-10-19 19:53:51.635 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-19 19:53:51.635 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-19 19:58:51.280 +02:00 [INF] Application is shutting down...
