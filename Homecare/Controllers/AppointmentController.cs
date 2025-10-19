@@ -125,7 +125,7 @@ namespace Homecare.Controllers
 
         // ================== DETAILS (Admin or owning Client) ==================
 
-        [Authorize(Roles = "Admin,Client")]
+        [Authorize(Roles = "Admin,Client, Personnel")]
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
