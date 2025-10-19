@@ -1,0 +1,19 @@
+2025-10-19 20:33:18.136 +02:00 [INF] User profile is available. Using 'C:\Users\cosku\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-19 20:33:18.318 +02:00 [INF] Now listening on: http://localhost:5003
+2025-10-19 20:33:18.320 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-19 20:33:18.320 +02:00 [INF] Hosting environment: Development
+2025-10-19 20:33:18.320 +02:00 [INF] Content root path: C:\Users\cosku\Desktop\Oslomet Emner\ITPE3200-1 24H Webapplikasjoner\HomeCare\webprogrammering2025\Homecare
+2025-10-19 20:33:18.441 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-19 20:33:18.467 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-19 20:33:18.471 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-19 20:33:18.475 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-19 20:33:18.556 +02:00 [INF] Executed ViewResult - view Index executed in 80.4899ms.
+2025-10-19 20:33:18.557 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 85.5579ms
+2025-10-19 20:33:18.557 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-19 20:33:18.560 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 119.7182ms
+2025-10-19 20:33:18.641 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-19 20:33:18.642 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 13748 application/javascript; charset=utf-8 0.9402ms
+2025-10-19 20:33:18.801 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/heart-pulse.svg?v=PK5MC9xtkiDhEKmZX8Flf5H7f7lf240lyoyShyp7rl8 - null null
+2025-10-19 20:33:18.812 +02:00 [INF] Sending file. Request path: '/images/heart-pulse.svg'. Physical path: 'C:\Users\cosku\Desktop\Oslomet Emner\ITPE3200-1 24H Webapplikasjoner\HomeCare\webprogrammering2025\Homecare\wwwroot\images\heart-pulse.svg'
+2025-10-19 20:33:18.812 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/heart-pulse.svg?v=PK5MC9xtkiDhEKmZX8Flf5H7f7lf240lyoyShyp7rl8 - 200 806 image/svg+xml 10.9413ms
+2025-10-19 20:33:48.255 +02:00 [INF] Application is shutting down...
