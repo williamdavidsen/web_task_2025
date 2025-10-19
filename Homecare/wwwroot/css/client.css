@@ -1,7 +1,11 @@
 :root {
+    /* Shared shadow for cards */
     --cd-shadow: 0 10px 20px rgba(0, 0, 0, .06);
 }
 
+/* =========================
+   CARD + THUMBNAILS
+   ========================= */
 .cd-card {
     border: 1px solid #e9ecef;
     border-radius: 16px;
@@ -27,6 +31,7 @@
     border-radius: 16px;
 }
 
+/* Clickable card hover effect */
 .clickable-card {
     cursor: pointer;
     transition: .15s ease-in-out;
@@ -37,18 +42,113 @@
     box-shadow: 0 .75rem 1.25rem rgba(0, 0, 0, .08);
 }
 
+/* =========================
+   CLIENT — CALENDAR + SLOTS
+   (Create/Edit appointment)
+   ========================= */
+.cal-wrapper {
+    border: 1px solid #e9ecef;
+    border-radius: 1rem;
+}
+
+.cal-header {
+    padding: .75rem 1rem;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: .25rem;
+    padding: .75rem;
+}
+
+.cal-cell {
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5rem;
+    font-weight: 500;
+    cursor: default;
+}
+
+.cal-dow {
+    font-size: .8rem;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+.cal-day {
+    background: #f8f9fa;
+    cursor: pointer;
+}
+
+.cal-day.disabled {
+    background: #fff;
+    color: #adb5bd;
+    cursor: not-allowed;
+    border: 1px dashed #e9ecef;
+}
+
+.cal-day.available {
+    background: #e9f7ef;
+    color: #198754;
+    border: 1px solid #bce3cf;
+}
+
+.cal-day.selected {
+    outline: 3px solid #0d6efd;
+    background: #e7f1ff;
+    color: #0d6efd;
+}
+
+/* Legend dots for calendar hints */
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: .35rem;
+    vertical-align: middle;
+}
+
+.legend-yes {
+    background: #198754;
+}
+
+.legend-no {
+    background: #adb5bd;
+}
+
+/* Slot button state */
+.slot-btn {
+    border-radius: .6rem;
+}
+
+.slot-btn.active {
+    outline: 3px solid #0d6efd;
+    background: #e7f1ff;
+}
+
+/* =========================
+   DASHBOARD BITS
+   ========================= */
 .page-bar {
     background: rgba(248, 250, 252, .9);
     backdrop-filter: blur(6px);
-    border: 1px solid #e9ecef
+    border: 1px solid #e9ecef;
 }
 
 .chip {
     font-size: .75rem;
     letter-spacing: .04em;
-    text-transform: uppercase
+    text-transform: uppercase;
 }
 
 .cd-card .btn {
-    border-radius: .6rem
+    border-radius: .6rem;
 }

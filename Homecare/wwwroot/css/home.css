@@ -1,17 +1,19 @@
 :root {
+    /* Theme tokens */
     --hc-primary: #0d6efd;
     --hc-dark: #0f172a;
     --hc-muted: #64748b;
     --hc-surface: #f8fafc;
     --hc-shadow: 0 10px 20px rgba(0, 0, 0, .08);
 
-    /* Carousel yükseklikleri */
+    /* Carousel heights */
     --c-h-xs: 240px;
     --c-h-sm: 300px;
     --c-h-md: 360px;
     --c-h-lg: 420px;
 }
 
+/* ========== Layout helpers (sticky footer) ========== */
 html,
 body {
     height: 100%;
@@ -31,7 +33,7 @@ footer.mt-auto {
     flex-shrink: 0;
 }
 
-/* HERO */
+/* ========== Hero section ========== */
 .hc-hero {
     padding: 28px 0 24px;
 }
@@ -49,7 +51,7 @@ footer.mt-auto {
     font-size: clamp(.95rem, .6vw + .8rem, 1.05rem);
 }
 
-/* ROLE CARD */
+/* ========== Role cards ========== */
 .hc-role-card {
     background: #fff;
     border-radius: 16px;
@@ -69,11 +71,10 @@ footer.mt-auto {
     margin-right: 12px;
 }
 
-/* FOOTER */
+/* ========== Footer ========== */
 .hc-foot {
     background: var(--hc-dark);
     color: #cbd5e1;
-
     padding: 36px 0 24px;
     font-size: 15px;
 }
@@ -97,7 +98,7 @@ footer.mt-auto {
     color: #fff;
 }
 
-/* CAROUSEL */
+/* ========== Carousel ========== */
 #homeCarousel .carousel-inner {
     border-radius: 16px;
     box-shadow: var(--hc-shadow);
@@ -129,14 +130,14 @@ footer.mt-auto {
     filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .2));
 }
 
-/* REDUCED MOTION (erişilebilirlik) */
+/* Accessibility: reduce motion when requested */
 @media (prefers-reduced-motion: reduce) {
     .carousel-item {
         transition: none !important;
     }
 }
 
-/* BREAKPOINTS */
+/* ========== Breakpoints for carousel/image + spacing ========== */
 @media (max-width: 575.98px) {
 
     /* xs */
@@ -181,7 +182,7 @@ footer.mt-auto {
     }
 }
 
-/* Login card tweaks */
+/* ========== Login card tweaks (Identity pages) ========== */
 .hc-login-card .form-control {
     border-radius: 12px;
 }

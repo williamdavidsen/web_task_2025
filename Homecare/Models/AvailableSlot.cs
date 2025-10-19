@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Homecare.Models
 {
-    // Personel bir gün için somut saat aralığı açar (sabah/öğlen/akşam preset)
     public class AvailableSlot
     {
         public int AvailableSlotId { get; set; }

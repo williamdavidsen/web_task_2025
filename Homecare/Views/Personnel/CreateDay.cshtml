@@ -5,37 +5,8 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/availability.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <style>
-        /* kilitli gün görünümü */
-        .day.locked {
-            background: #ffe5e5;
-            border: 1px solid #f3bcbc;
-            color: #a40000;
-            position: relative;
-        }
-
-        .day.locked::after {
-            content: "\f023";
-            /* lock icon - bootstrap icons yoksa unicode kullanma */
-            font-family: "bootstrap-icons";
-            position: absolute;
-            right: .35rem;
-            bottom: .25rem;
-            font-size: .9rem;
-        }
-
-        .legend-lock {
-            background: #ffe5e5;
-            border: 1px solid #f3bcbc;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: .35rem;
-        }
-    </style>
 }
+
 <partial name="~/Views/Shared/_OwnerBar.cshtml" />
 
 <div class="container py-3">
@@ -82,12 +53,12 @@
 
 @section Scripts {
     <script>
-        // Server’dan gelen ön-seçili ve kilitli günler:
+        // Pre-selected and locked days coming from the controller
         const PRE_SELECTED = new Set(@Html.Raw(ViewBag.SelectedDaysJson ?? "[]"));
         const LOCKED_DAYS = new Set(@Html.Raw(ViewBag.LockedDaysJson ?? "[]"));
 
         const daysInput = document.getElementById('days');
-        const selected = new Set(PRE_SELECTED); // çalışma günleri
+        const selected = new Set(PRE_SELECTED);
 
         const m1Title = document.getElementById('m1Title');
         const m2Title = document.getElementById('m2Title');
@@ -105,7 +76,8 @@
         const pad = n => n < 10 ? '0' + n : '' + n;
         const ymd = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
         const addMonths = (d, n) => new Date(d.getFullYear(), d.getMonth() + n, 1);
-        const monthTitle = d => d.toLocaleDateString(undefined, { month: 'long', year: 'numeric' }).replace(/^./, c => c.toUpperCase());
+        const monthTitle = d => d.toLocaleDateString(undefined, { month: 'long', year: 'numeric' })
+            .replace(/^./, c => c.toUpperCase());
 
         function updateHidden() {
             daysInput.value = Array.from(selected).join(',');
@@ -126,7 +98,7 @@
 
             btn.addEventListener('click', () => {
                 if (LOCKED_DAYS.has(key) && selected.has(key)) {
-                    alert('Bu gün için randevu(lar) var, kaldırılamaz. Lütfen yönetim ile iletişime geçiniz.');
+                    alert('This day has booked appointment(s) and cannot be removed. Please contact admin.');
                     return;
                 }
                 if (selected.has(key)) {
@@ -146,6 +118,7 @@
             rootGrid.innerHTML = '';
             titleEl.textContent = monthTitle(monthDate);
 
+            // Day-of-week header
             DOW.forEach(n => {
                 const div = document.createElement('div');
                 div.className = 'day-name';
@@ -182,8 +155,9 @@
 
         btnPrev.addEventListener('click', () => { base = addMonths(base, -1); render(); });
         btnNext.addEventListener('click', () => { base = addMonths(base, 1); render(); });
+
         document.getElementById('btnClear').addEventListener('click', () => {
-            // kilitli günler seçili kalır; diğerleri temizlenir
+            // Keep locked days selected; clear the rest
             Array.from(selected).forEach(k => { if (!LOCKED_DAYS.has(k)) selected.delete(k); });
             render();
         });

@@ -1,109 +1,22 @@
 @using Homecare.ViewModels
 @using Microsoft.AspNetCore.Mvc.Rendering
 @using System.Text.Json
-
 @model AppointmentCreateViewModel
 
 @{
     ViewData["Title"] = "Book Appointment (Client)";
-
     var clientId = (int)(ViewBag.ClientId ?? 0);
 
-    // Controller: ViewBag.FreeDays => IEnumerable<string> (yyyy-MM-dd)
+    // Controller passes: ViewBag.FreeDays => IEnumerable<string> (yyyy-MM-dd)
     var freeDaysJson = JsonSerializer.Serialize(
-    (IEnumerable<string>)(ViewBag.FreeDays ?? new List<string>())
-    );
+    (IEnumerable<string>)(ViewBag.FreeDays ?? new List<string>()));
 }
 
 @section Styles {
-    <style>
-        .cal-wrapper {
-            border: 1px solid #e9ecef;
-            border-radius: 1rem;
-        }
-
-        .cal-header {
-            padding: .75rem 1rem;
-            border-bottom: 1px solid #e9ecef;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cal-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: .25rem;
-            padding: .75rem;
-        }
-
-        .cal-cell {
-            aspect-ratio: 1/1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: .5rem;
-            font-weight: 500;
-            cursor: default;
-        }
-
-        .cal-dow {
-            font-size: .8rem;
-            color: #6c757d;
-            font-weight: 600;
-        }
-
-        .cal-day {
-            background: #f8f9fa;
-            cursor: pointer;
-        }
-
-        .cal-day.disabled {
-            background: #fff;
-            color: #adb5bd;
-            cursor: not-allowed;
-            border: 1px dashed #e9ecef;
-        }
-
-        .cal-day.available {
-            background: #e9f7ef;
-            color: #198754;
-            border: 1px solid #bce3cf;
-        }
-
-        .cal-day.selected {
-            outline: 3px solid #0d6efd;
-            background: #e7f1ff;
-            color: #0d6efd;
-        }
-
-        .legend-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: .35rem;
-            vertical-align: middle;
-        }
-
-        .legend-yes {
-            background: #198754;
-        }
-
-        .legend-no {
-            background: #adb5bd;
-        }
-
-        .slot-btn {
-            border-radius: .6rem;
-        }
-
-        .slot-btn.active {
-            outline: 3px solid #0d6efd;
-            background: #e7f1ff;
-        }
-    </style>
+    <!-- Use shared client stylesheet; no inline CSS -->
+    <link rel="stylesheet" href="~/css/client.css" asp-append-version="true" />
 }
+
 <partial name="~/Views/Shared/_OwnerBar.cshtml" />
 
 <div class="container py-3">
@@ -117,15 +30,15 @@
 
     <partial name="~/Views/Shared/_Message.cshtml" />
 
-    <!-- Route: POST /Client/Create/{clientId} -->
+    @* Route: POST /Client/Create/{clientId} *@
     <form asp-action="Create" asp-route-clientId="@clientId" method="post" class="row g-4">
         @Html.AntiForgeryToken()
 
-        <!-- ViewModel içindeki Appointment alanlarına bağlan -->
+        @* Bind form fields to the VM.Appointment *@
         <input type="hidden" asp-for="Appointment.ClientId" value="@clientId" />
         <input type="hidden" asp-for="Appointment.AvailableSlotId" id="AvailableSlotId" />
 
-        <!-- Sol: Takvim -->
+        <!-- Left: calendar -->
         <div class="col-lg-7">
             <div class="cal-wrapper rounded-4">
                 <div class="cal-header">
@@ -152,14 +65,14 @@
 
                 <div class="px-3 pb-3">
                     <small class="text-muted">
-                        <span class="legend-dot legend-yes"></span>Selectable (has free slots) &nbsp;·&nbsp;
+                        <span class="legend-dot legend-yes"></span>Selectable (has free slots) ·
                         <span class="legend-dot legend-no"></span>Unavailable (no slots)
                     </small>
                 </div>
             </div>
         </div>
 
-        <!-- Sağ: Slotlar + Task + Not -->
+        <!-- Right: slots + task + notes -->
         <div class="col-lg-5">
             <div class="card mb-3">
                 <div class="card-body">
@@ -171,7 +84,6 @@
                 </div>
             </div>
 
-            <!-- Requested Task: dropdown (tek seçim) -->
             <div class="card mb-3">
                 <div class="card-body">
                     <label class="form-label">Requested Task</label>
@@ -202,12 +114,12 @@
 
 @section Scripts {
     <script>
-        // Controller'dan gelen boş günler (yyyy-MM-dd)
+        // Free days provided by the controller (yyyy-MM-dd)
         const FREE_DAYS = new Set(@Html.Raw(freeDaysJson));
 
-        // Seçili gün & ay bilgisi
+        // Calendar state
         let current = new Date();
-        let selectedDayStr = null;    // yyyy-MM-dd
+        let selectedDayStr = null;   // yyyy-MM-dd
         let selectedSlotId = null;
 
         const calTitle = document.getElementById('calTitle');
@@ -225,15 +137,12 @@
             calTitle.textContent = monthName.charAt(0).toUpperCase() + monthName.slice(1);
 
             calDays.innerHTML = '';
-
             const y = current.getFullYear();
             const m = current.getMonth();
             const first = new Date(y, m, 1);
             const last = new Date(y, m + 1, 0);
-            const daysInMonth = last.getDate();
-
             let startOffset = first.getDay(); // 0=Sun..6=Sat
-            if (startOffset === 0) startOffset = 7; // Sunday -> 7
+            if (startOffset === 0) startOffset = 7; // move Sunday to the end
             const blanks = startOffset - 1;
 
             for (let i = 0; i < blanks; i++) {
@@ -242,7 +151,7 @@
                 calDays.appendChild(div);
             }
 
-            for (let d = 1; d <= daysInMonth; d++) {
+            for (let d = 1; d <= last.getDate(); d++) {
                 const date = new Date(y, m, d);
                 const dayStr = ymd(date);
                 const div = document.createElement('div');
@@ -278,7 +187,7 @@
 
             try {
                 const res = await fetch(`/Client/SlotsForDay?day=${encodeURIComponent(dayStr)}`);
-                const data = await res.json(); // [{id, label}, ...]
+                const data = await res.json(); // [{id,label},...]
 
                 if (!data || data.length === 0) {
                     slotList.innerHTML = '<div class="text-muted">No free slot for this day.</div>';
@@ -295,11 +204,11 @@
                         slotList.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
                         selectedSlotId = s.id;
-                        slotInput.value = s.id; // <-- Important: binds to Appointment.AvailableSlotId
+                        slotInput.value = s.id; // bind to Appointment.AvailableSlotId
                     });
                     slotList.appendChild(btn);
                 });
-            } catch (e) {
+            } catch {
                 slotList.innerHTML = '<div class="text-danger">Error loading slots.</div>';
             }
         }
@@ -309,6 +218,7 @@
 
         renderCalendar();
 
+        // Require a slot before submit
         document.forms[0].addEventListener('submit', (e) => {
             if (!slotInput.value) {
                 e.preventDefault();

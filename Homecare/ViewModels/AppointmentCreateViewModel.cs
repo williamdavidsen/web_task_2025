@@ -5,13 +5,13 @@ namespace Homecare.ViewModels
 {
     public class AppointmentCreateViewModel
     {
-        // Formdaki randevu alanları
+        // The appointment fields bound to the form
         public Appointment Appointment { get; set; } = new Appointment();
 
-        // Tek seçimlik “Requested Task” için
+        // Optional single-select “Requested Task”
         public int? SelectedTaskId { get; set; }
 
-        // Dropdown içeriği
+        // Items for the tasks dropdown
         public IEnumerable<SelectListItem> TaskSelectList { get; set; } = new List<SelectListItem>();
     }
 }

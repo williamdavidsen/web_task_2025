@@ -9,41 +9,35 @@ using Homecare.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// --- MVC ---
+// MVC controllers + views
 builder.Services.AddControllersWithViews();
 
-// --- DbContext (SQLite) ---
+// EF Core (SQLite)
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlite(builder.Configuration["ConnectionStrings:HomecareDbConnection"]);
 });
 
-// --- Identity (Default UI + Roles) ---
+// Identity (Default UI) + Roles, using the same AppDbContext
 builder.Services
-    .AddDefaultIdentity<IdentityUser>(/* default options (dev) */)
+    .AddDefaultIdentity<IdentityUser>()      // dev-friendly defaults
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 
-// Sadece [Authorize] istenen yerler login ister (Home/Index serbest)
+// IMPORTANT: do not force auth globally (only actions with [Authorize] require login)
 builder.Services.AddAuthorization(o => o.FallbackPolicy = null);
 
-// --- Repositories (DI) ---
+// Repositories (DI)
 builder.Services.AddScoped<IAvailableSlotRepository, AvailableSlotRepository>();
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICareTaskRepository, CareTaskRepository>();
 
-// --- Razor Pages (Identity UI) + Session ---
+// Razor Pages (for Identity UI) + Session
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
-// Eğer özel ayar gerekirse (opsiyonel):
-// builder.Services.AddSession(options => {
-//     options.Cookie.Name = ".Homecare.Session";
-//     options.IdleTimeout = TimeSpan.FromMinutes(30);
-//     options.Cookie.IsEssential = true;
-// });
 
-// --- Serilog (hocanın filtresi ile) ---
+// Serilog (filter out EF command noise)
 var loggerConfiguration = new LoggerConfiguration()
     .MinimumLevel.Information()
     .WriteTo.File($"Logs/app_{DateTime.Now:yyyyMMdd_HHmmss}.log");
@@ -54,25 +48,32 @@ loggerConfiguration.Filter.ByExcluding(e =>
     && e.MessageTemplate.Text.Contains("Executed DbCommand"));
 
 var logger = loggerConfiguration.CreateLogger();
+builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
 var app = builder.Build();
 
-// --- Dev seeding ---
+// Dev-time: detailed errors + seed demo data
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     DBInit.Seed(app);
 }
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
 
+app.UseHttpsRedirection(); // safe default (no-op on http in dev)
 app.UseStaticFiles();
 app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-// --- Routes (hocanın gibi) ---
-app.MapDefaultControllerRoute();  // /{controller=Home}/{action=Index}/{id?}
-app.MapRazorPages();              // Identity UI
+// Conventional MVC route + Identity Razor Pages
+app.MapDefaultControllerRoute();   // /{controller=Home}/{action=Index}/{id?}
+app.MapRazorPages();               // /Identity/...
 
 app.Run();

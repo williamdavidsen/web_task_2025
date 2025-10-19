@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 
-
 namespace Homecare.Controllers
 {
     public class ClientController : Controller
@@ -31,7 +30,7 @@ namespace Homecare.Controllers
             _logger = logger;
         }
 
-        // ---- Helper: clientId yoksa ilk müşteriyi bul ----
+        // Resolve a clientId (use given id or fall back to the first client in DB)
         private async Task<int> ResolveClientId(int? clientId)
         {
             if (clientId.HasValue) return clientId.Value;
@@ -40,6 +39,7 @@ namespace Homecare.Controllers
             return first.UserId;
         }
 
+        // Put owner info into the top bar (Shared/_OwnerBar)
         private async Task SetOwnerForClientAsync(int clientId)
         {
             var u = await _userRepo.GetAsync(clientId);
@@ -47,8 +47,8 @@ namespace Homecare.Controllers
             ViewBag.OwnerRole = "Client";
         }
 
-        // ----------------- DASHBOARD -----------------
-        // /Client/Dashboard  veya  /Client/Dashboard/10
+        // ---------- DASHBOARD ----------
+        // Lists upcoming/past appointments for this client.
         [HttpGet]
         [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> Dashboard(int? clientId)
@@ -86,8 +86,8 @@ namespace Homecare.Controllers
             }
         }
 
-        // ----------------- CREATE (GET) -----------------
-        // /Client/Create/10   (day querystring ile gelebilir)
+        // ---------- CREATE (GET) ----------
+        // Shows the booking form. Calendar gets only free days.
         [HttpGet]
         [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> Create(int clientId, string? day = null)
@@ -97,13 +97,13 @@ namespace Homecare.Controllers
                 await SetOwnerForClientAsync(clientId);
                 ViewBag.ClientId = clientId;
 
-                // 1) Takvim için boş (free) günler
-                var freeDays = await _slotRepo.GetFreeDaysAsync(); // List<DateOnly>
+                // 1) Calendar: free days
+                var freeDays = await _slotRepo.GetFreeDaysAsync();
                 ViewBag.FreeDays = freeDays.Select(d => d.ToString("yyyy-MM-dd")).ToList();
                 ViewBag.InitialMonth = (freeDays.Any() ? freeDays.Min() : DateOnly.FromDateTime(DateTime.Today))
                                         .ToString("yyyy-MM-01");
 
-                // (Opsiyonel) Eski dropdown fallback
+                // Simple fallback dropdown for days (disabled if not free)
                 var freeSet = freeDays.ToHashSet();
                 const int rangeDays = 14;
                 var start = DateOnly.FromDateTime(DateTime.Today);
@@ -116,6 +116,7 @@ namespace Homecare.Controllers
                         Disabled = !freeSet.Contains(d)
                     }).ToList();
 
+                // If a day is preselected, preload its free slots
                 if (!string.IsNullOrEmpty(day) && DateOnly.TryParse(day, out var sel))
                 {
                     var slots = await _slotRepo.GetFreeSlotsByDayAsync(sel);
@@ -130,7 +131,7 @@ namespace Homecare.Controllers
                     ViewBag.SlotItems = new List<SelectListItem>();
                 }
 
-                // 2) Dropdown (tek seçim) için görevler
+                // 2) Task dropdown (single optional selection)
                 var tasks = await _taskRepo.GetAllAsync();
                 var vm = new AppointmentCreateViewModel
                 {
@@ -154,8 +155,8 @@ namespace Homecare.Controllers
             }
         }
 
-        // ----------------- CREATE (POST) -----------------
-        // /Client/Create/{clientId}  → POST
+        // ---------- CREATE (POST) ----------
+        // Validates that the selected slot is still free and saves appointment.
         [HttpPost]
         [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> Create(int clientId, AppointmentCreateViewModel vm)
@@ -164,7 +165,7 @@ namespace Homecare.Controllers
             {
                 vm.Appointment.ClientId = clientId;
 
-                // Slot halen uygun mu?
+                // Make sure the chosen slot wasn’t taken meanwhile
                 if (await _apptRepo.SlotIsBookedAsync(vm.Appointment.AvailableSlotId))
                 {
                     ModelState.AddModelError(nameof(vm.Appointment.AvailableSlotId),
@@ -176,7 +177,7 @@ namespace Homecare.Controllers
 
                 await _apptRepo.AddAsync(vm.Appointment);
 
-                // (İsteğe bağlı tek task kaydı)
+                // Optional: attach a single requested task
                 // if (vm.SelectedTaskId.HasValue)
                 //     await _apptRepo.ReplaceTasksAsync(vm.Appointment.AppointmentId, new[] { vm.SelectedTaskId.Value });
 
@@ -191,9 +192,9 @@ namespace Homecare.Controllers
             }
         }
 
+        // Refill the form after validation errors (keeps dropdowns populated)
         private async Task<IActionResult> RefillCreateFormVM(int clientId, AppointmentCreateViewModel vm)
         {
-            // formu yeniden doldur
             ViewBag.ClientId = clientId;
 
             var freeDays = await _slotRepo.GetFreeDaysAsync();
@@ -224,8 +225,8 @@ namespace Homecare.Controllers
             return View("Create", vm);
         }
 
-        // ----------------- AJAX: seçilen günün boş slotlarını getir -----------------
-        // /Client/SlotsForDay?day=2025-10-21
+        // ---------- AJAX ----------
+        // Returns free slots for a given day (used by the calendar UI).
         [HttpGet]
         [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> SlotsForDay(string day)

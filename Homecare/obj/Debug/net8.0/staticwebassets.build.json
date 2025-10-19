@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GYG63QuzDAcDnUiRrArECeJKy2y9Dsd7SyBZiIljaGo=",
+  "Hash": "Re4e3Cpi7KdDf0VomMhiqMTvfjeCkZFKx6Ej+AQfv5s=",
   "Source": "Homecare",
   "BasePath": "_content/Homecare",
   "Mode": "Default",
@@ -1291,8 +1291,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "h64hm0uk8d",
-      "Integrity": "lxrTA6LPvePIIgTQvxY+g1qKaCXTeCjuYKSrm3B6N+c=",
+      "Fingerprint": "jd02u3e6ev",
+      "Integrity": "mWebKHvBs/WWP3snr4ENwSqXl/hADPFPXXJHSISwAeI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\availability.css"
@@ -1312,8 +1312,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "nyk8w16ral",
-      "Integrity": "HwB+gqoYkKhbPGay26VZS5HigR62ki6MhhYpnw+m5JU=",
+      "Fingerprint": "zbmo44qqeb",
+      "Integrity": "8UTpfRSLw/6tN4YV156k5bH95nvn52mHwKk+bwKGrJY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\client.css"
@@ -1333,8 +1333,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "eik14cf7ro",
-      "Integrity": "FgIInssjFMsdm0wfH5DHmYA7UW+XQqmiTsozSmxcBkU=",
+      "Fingerprint": "tgfwzji30d",
+      "Integrity": "s9o/DNLrHTitiAak/8hnsjdZCjlyIi3S83bj3+RSm6Y=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\home.css"
@@ -1604,7 +1604,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2179"
+          "Value": "4779"
         },
         {
           "Name": "Content-Type",
@@ -1612,11 +1612,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"lxrTA6LPvePIIgTQvxY+g1qKaCXTeCjuYKSrm3B6N+c=\""
+          "Value": "\"mWebKHvBs/WWP3snr4ENwSqXl/hADPFPXXJHSISwAeI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Oct 2025 07:44:50 GMT"
+          "Value": "Sun, 19 Oct 2025 18:56:03 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1626,12 +1626,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-lxrTA6LPvePIIgTQvxY+g1qKaCXTeCjuYKSrm3B6N+c="
+          "Value": "sha256-mWebKHvBs/WWP3snr4ENwSqXl/hADPFPXXJHSISwAeI="
         }
       ]
     },
     {
-      "Route": "css/availability.h64hm0uk8d.css",
+      "Route": "css/availability.jd02u3e6ev.css",
       "AssetFile": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\css\\availability.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1641,7 +1641,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2179"
+          "Value": "4779"
         },
         {
           "Name": "Content-Type",
@@ -1649,11 +1649,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"lxrTA6LPvePIIgTQvxY+g1qKaCXTeCjuYKSrm3B6N+c=\""
+          "Value": "\"mWebKHvBs/WWP3snr4ENwSqXl/hADPFPXXJHSISwAeI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Oct 2025 07:44:50 GMT"
+          "Value": "Sun, 19 Oct 2025 18:56:03 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1663,7 +1663,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "h64hm0uk8d"
+          "Value": "jd02u3e6ev"
         },
         {
           "Name": "label",
@@ -1671,7 +1671,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-lxrTA6LPvePIIgTQvxY+g1qKaCXTeCjuYKSrm3B6N+c="
+          "Value": "sha256-mWebKHvBs/WWP3snr4ENwSqXl/hADPFPXXJHSISwAeI="
         }
       ]
     },
@@ -1686,7 +1686,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "936"
+          "Value": "2800"
         },
         {
           "Name": "Content-Type",
@@ -1694,11 +1694,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"HwB+gqoYkKhbPGay26VZS5HigR62ki6MhhYpnw+m5JU=\""
+          "Value": "\"8UTpfRSLw/6tN4YV156k5bH95nvn52mHwKk+bwKGrJY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Oct 2025 09:13:26 GMT"
+          "Value": "Sun, 19 Oct 2025 18:56:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1708,12 +1708,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-HwB+gqoYkKhbPGay26VZS5HigR62ki6MhhYpnw+m5JU="
+          "Value": "sha256-8UTpfRSLw/6tN4YV156k5bH95nvn52mHwKk+bwKGrJY="
         }
       ]
     },
     {
-      "Route": "css/client.nyk8w16ral.css",
+      "Route": "css/client.zbmo44qqeb.css",
       "AssetFile": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\css\\client.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1723,7 +1723,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "936"
+          "Value": "2800"
         },
         {
           "Name": "Content-Type",
@@ -1731,11 +1731,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"HwB+gqoYkKhbPGay26VZS5HigR62ki6MhhYpnw+m5JU=\""
+          "Value": "\"8UTpfRSLw/6tN4YV156k5bH95nvn52mHwKk+bwKGrJY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Oct 2025 09:13:26 GMT"
+          "Value": "Sun, 19 Oct 2025 18:56:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1745,7 +1745,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "nyk8w16ral"
+          "Value": "zbmo44qqeb"
         },
         {
           "Name": "label",
@@ -1753,7 +1753,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-HwB+gqoYkKhbPGay26VZS5HigR62ki6MhhYpnw+m5JU="
+          "Value": "sha256-8UTpfRSLw/6tN4YV156k5bH95nvn52mHwKk+bwKGrJY="
         }
       ]
     },
@@ -1768,7 +1768,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3415"
+          "Value": "3687"
         },
         {
           "Name": "Content-Type",
@@ -1776,11 +1776,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"FgIInssjFMsdm0wfH5DHmYA7UW+XQqmiTsozSmxcBkU=\""
+          "Value": "\"s9o/DNLrHTitiAak/8hnsjdZCjlyIi3S83bj3+RSm6Y=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Oct 2025 09:01:09 GMT"
+          "Value": "Sun, 19 Oct 2025 18:57:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1790,12 +1790,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-FgIInssjFMsdm0wfH5DHmYA7UW+XQqmiTsozSmxcBkU="
+          "Value": "sha256-s9o/DNLrHTitiAak/8hnsjdZCjlyIi3S83bj3+RSm6Y="
         }
       ]
     },
     {
-      "Route": "css/home.eik14cf7ro.css",
+      "Route": "css/home.tgfwzji30d.css",
       "AssetFile": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\css\\home.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1805,7 +1805,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3415"
+          "Value": "3687"
         },
         {
           "Name": "Content-Type",
@@ -1813,11 +1813,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"FgIInssjFMsdm0wfH5DHmYA7UW+XQqmiTsozSmxcBkU=\""
+          "Value": "\"s9o/DNLrHTitiAak/8hnsjdZCjlyIi3S83bj3+RSm6Y=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Oct 2025 09:01:09 GMT"
+          "Value": "Sun, 19 Oct 2025 18:57:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1827,7 +1827,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "eik14cf7ro"
+          "Value": "tgfwzji30d"
         },
         {
           "Name": "label",
@@ -1835,7 +1835,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-FgIInssjFMsdm0wfH5DHmYA7UW+XQqmiTsozSmxcBkU="
+          "Value": "sha256-s9o/DNLrHTitiAak/8hnsjdZCjlyIi3S83bj3+RSm6Y="
         }
       ]
     },

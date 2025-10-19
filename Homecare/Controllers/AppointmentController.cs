@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Homecare.Controllers
 {
-    // Admin: full CRUD
-    // Client: can view/edit/delete ONLY own appointments
+
     public class AppointmentController : Controller
     {
         private readonly IAppointmentRepository _apptRepo;
@@ -95,7 +94,7 @@ namespace Homecare.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> Create(Appointment model)
         {
             try
@@ -202,7 +201,7 @@ namespace Homecare.Controllers
         }
 
         [Authorize(Roles = "Admin,Client")]
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> Edit(AppointmentEditViewModel vm)
         {
             try
@@ -278,7 +277,7 @@ namespace Homecare.Controllers
         }
 
         [Authorize(Roles = "Admin,Client")]
-        [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             try

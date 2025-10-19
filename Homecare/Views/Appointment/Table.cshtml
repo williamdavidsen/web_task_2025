@@ -1,13 +1,13 @@
-@* Views/Appointment/Table.cshtml (örnek konum) *@
-@* Eğer _ViewImports.cshtml içinde @using Homecare.Models varsa: *@
+@* Views/Appointment/Table.cshtml *@
+@* If _ViewImports.cshtml has @using Homecare.Models: *@
 @model IEnumerable<Appointment>
-@* Eğer yoksa bu satırı kullan:
+@* Otherwise use:
 @model IEnumerable<Homecare.Models.Appointment>
 *@
 
 @{
     ViewData["Title"] = "Appointments";
-    // clientId güvenli okuma (Client -> Create linki için)
+    // Safely read clientId (used for the “Create Appointment” link)
     int clientId = ViewBag.ClientId is int v ? v : 0;
 }
 
@@ -16,7 +16,7 @@
 <partial name="~/Views/Shared/_Message.cshtml" />
 
 <div class="d-flex justify-content-end mb-3">
-    <!-- İstediğin gibi: Client controller'ın Create action'ına gider -->
+    <!-- Go to ClientController.Create for the selected client -->
     <a class="btn btn-primary" asp-controller="Client" asp-action="Create" asp-route-clientId="@clientId">
         <i class="bi bi-plus-circle me-1"></i> Create Appointment
     </a>
@@ -53,12 +53,13 @@
                             <td>@a.AvailableSlot?.Personnel?.Name</td>
                             <td><span class="badge text-bg-secondary">@a.Status</span></td>
                             <td class="text-end">
-                                <!-- Details tüm rollere uygun yönlendirilebilir -->
+                                <!-- Everyone can navigate to details (controller enforces auth/ownership) -->
                                 <a class="btn btn-sm btn-outline-primary" asp-controller="Appointment" asp-action="Details"
                                     asp-route-id="@a.AppointmentId">
                                     Details
                                 </a>
-                                <!-- Edit/Delete yetkilerine göre (Admin/Client) -->
+
+                                <!-- Edit/Delete visibility is fine; controller guards with [Authorize] -->
                                 <a class="btn btn-sm btn-outline-secondary" asp-controller="Appointment" asp-action="Edit"
                                     asp-route-id="@a.AppointmentId">
                                     Edit
