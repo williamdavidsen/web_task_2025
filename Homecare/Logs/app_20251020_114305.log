@@ -171,3 +171,24 @@
 2025-10-20 11:45:12.785 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/availability.css?v=mWebKHvBs_WWP3snr4ENwSqXl_hADPFPXXJHSISwAeI - null null
 2025-10-20 11:45:12.786 +02:00 [INF] Sending file. Request path: '/css/availability.css'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare\wwwroot\css\availability.css'
 2025-10-20 11:45:12.786 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/availability.css?v=mWebKHvBs_WWP3snr4ENwSqXl_hADPFPXXJHSISwAeI - 200 4779 text/css 1.0352ms
+2025-10-20 11:49:13.797 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-20 11:49:13.833 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:49:13.833 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-20 11:49:13.833 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-20 11:49:13.837 +02:00 [INF] Executed ViewResult - view Index executed in 3.7961ms.
+2025-10-20 11:49:13.837 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 4.2652ms
+2025-10-20 11:49:13.837 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:49:13.838 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 40.7202ms
+2025-10-20 11:49:13.892 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - null null
+2025-10-20 11:49:13.893 +02:00 [INF] The file /css/home.css was not modified
+2025-10-20 11:49:13.893 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - 304 null text/css 0.6487ms
+2025-10-20 11:49:13.893 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-client.jpg - null null
+2025-10-20 11:49:13.893 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-nurse.jpg - null null
+2025-10-20 11:49:13.894 +02:00 [INF] The file /images/hero-client.jpg was not modified
+2025-10-20 11:49:13.894 +02:00 [INF] The file /images/hero-nurse.jpg was not modified
+2025-10-20 11:49:13.894 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-client.jpg - 304 null image/jpeg 0.3117ms
+2025-10-20 11:49:13.894 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-nurse.jpg - 304 null image/jpeg 0.2018ms
+2025-10-20 11:49:13.895 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-admin.jpg - null null
+2025-10-20 11:49:13.896 +02:00 [INF] The file /images/hero-admin.jpg was not modified
+2025-10-20 11:49:13.896 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-admin.jpg - 304 null image/jpeg 0.4122ms
+2025-10-20 11:52:57.766 +02:00 [INF] Application is shutting down...
