@@ -1,0 +1,173 @@
+2025-10-20 11:43:07.148 +02:00 [INF] User profile is available. Using 'C:\Users\saski\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-20 11:43:07.521 +02:00 [INF] Now listening on: http://localhost:5003
+2025-10-20 11:43:07.522 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-20 11:43:07.523 +02:00 [INF] Hosting environment: Development
+2025-10-20 11:43:07.523 +02:00 [INF] Content root path: C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare
+2025-10-20 11:43:13.390 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-20 11:43:13.420 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-10-20 11:43:13.439 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:43:13.450 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-20 11:43:13.458 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-20 11:43:13.545 +02:00 [INF] Executed ViewResult - view Index executed in 89.5175ms.
+2025-10-20 11:43:13.547 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 96.1059ms
+2025-10-20 11:43:13.547 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:43:13.552 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 163.1551ms
+2025-10-20 11:43:13.584 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-client.jpg - null null
+2025-10-20 11:43:13.584 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - null null
+2025-10-20 11:43:13.584 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-nurse.jpg - null null
+2025-10-20 11:43:13.589 +02:00 [INF] The file /images/hero-nurse.jpg was not modified
+2025-10-20 11:43:13.589 +02:00 [INF] The file /images/hero-client.jpg was not modified
+2025-10-20 11:43:13.589 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-client.jpg - 304 null image/jpeg 5.3438ms
+2025-10-20 11:43:13.589 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-nurse.jpg - 304 null image/jpeg 4.7708ms
+2025-10-20 11:43:13.593 +02:00 [INF] Sending file. Request path: '/css/home.css'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare\wwwroot\css\home.css'
+2025-10-20 11:43:13.593 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - 200 5184 text/css 9.9083ms
+2025-10-20 11:43:13.602 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-admin.jpg - null null
+2025-10-20 11:43:13.603 +02:00 [INF] The file /images/hero-admin.jpg was not modified
+2025-10-20 11:43:13.604 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-admin.jpg - 304 null image/jpeg 1.4893ms
+2025-10-20 11:43:17.368 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Admin/Dashboard - null null
+2025-10-20 11:43:17.376 +02:00 [INF] Executing endpoint 'Homecare.Controllers.AdminController.Dashboard (Homecare)'
+2025-10-20 11:43:17.388 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Admin", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard(Int32, Int32) on controller Homecare.Controllers.AdminController (Homecare).
+2025-10-20 11:43:17.518 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2025-10-20 11:43:17.565 +02:00 [INF] Executed ViewResult - view Dashboard executed in 47.4118ms.
+2025-10-20 11:43:17.565 +02:00 [INF] Executed action Homecare.Controllers.AdminController.Dashboard (Homecare) in 176.7679ms
+2025-10-20 11:43:17.565 +02:00 [INF] Executed endpoint 'Homecare.Controllers.AdminController.Dashboard (Homecare)'
+2025-10-20 11:43:17.568 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Admin/Dashboard - 200 null text/html; charset=utf-8 200.617ms
+2025-10-20 11:43:18.597 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-20 11:43:18.608 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:43:18.609 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-20 11:43:18.611 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-20 11:43:18.614 +02:00 [INF] Executed ViewResult - view Index executed in 3.7545ms.
+2025-10-20 11:43:18.614 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 5.4266ms
+2025-10-20 11:43:18.614 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:43:18.615 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 17.5799ms
+2025-10-20 11:43:19.355 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Admin/Dashboard - null null
+2025-10-20 11:43:19.357 +02:00 [INF] Executing endpoint 'Homecare.Controllers.AdminController.Dashboard (Homecare)'
+2025-10-20 11:43:19.357 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Admin", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard(Int32, Int32) on controller Homecare.Controllers.AdminController (Homecare).
+2025-10-20 11:43:19.411 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2025-10-20 11:43:19.416 +02:00 [INF] Executed ViewResult - view Dashboard executed in 5.3502ms.
+2025-10-20 11:43:19.416 +02:00 [INF] Executed action Homecare.Controllers.AdminController.Dashboard (Homecare) in 58.9914ms
+2025-10-20 11:43:19.416 +02:00 [INF] Executed endpoint 'Homecare.Controllers.AdminController.Dashboard (Homecare)'
+2025-10-20 11:43:19.417 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Admin/Dashboard - 200 null text/html; charset=utf-8 62.0478ms
+2025-10-20 11:43:56.022 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-20 11:43:56.023 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:43:56.023 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-20 11:43:56.023 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-20 11:43:56.024 +02:00 [INF] Executed ViewResult - view Index executed in 1.1246ms.
+2025-10-20 11:43:56.025 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 1.316ms
+2025-10-20 11:43:56.025 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:43:56.025 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 2.381ms
+2025-10-20 11:43:56.060 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - null null
+2025-10-20 11:43:56.060 +02:00 [INF] The file /css/home.css was not modified
+2025-10-20 11:43:56.061 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - 304 null text/css 1.0714ms
+2025-10-20 11:43:58.377 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Admin/Dashboard - null null
+2025-10-20 11:43:58.379 +02:00 [INF] Executing endpoint 'Homecare.Controllers.AdminController.Dashboard (Homecare)'
+2025-10-20 11:43:58.379 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Admin", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard(Int32, Int32) on controller Homecare.Controllers.AdminController (Homecare).
+2025-10-20 11:43:58.385 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2025-10-20 11:43:58.387 +02:00 [INF] Executed ViewResult - view Dashboard executed in 1.9777ms.
+2025-10-20 11:43:58.387 +02:00 [INF] Executed action Homecare.Controllers.AdminController.Dashboard (Homecare) in 7.8504ms
+2025-10-20 11:43:58.387 +02:00 [INF] Executed endpoint 'Homecare.Controllers.AdminController.Dashboard (Homecare)'
+2025-10-20 11:43:58.387 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Admin/Dashboard - 200 null text/html; charset=utf-8 10.3949ms
+2025-10-20 11:43:59.359 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-20 11:43:59.360 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:43:59.360 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-20 11:43:59.360 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-20 11:43:59.361 +02:00 [INF] Executed ViewResult - view Index executed in 0.6813ms.
+2025-10-20 11:43:59.361 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 0.7819ms
+2025-10-20 11:43:59.361 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:43:59.361 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 1.6548ms
+2025-10-20 11:44:51.717 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Admin/Dashboard - null null
+2025-10-20 11:44:51.718 +02:00 [INF] Executing endpoint 'Homecare.Controllers.AdminController.Dashboard (Homecare)'
+2025-10-20 11:44:51.718 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Admin", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard(Int32, Int32) on controller Homecare.Controllers.AdminController (Homecare).
+2025-10-20 11:44:51.723 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2025-10-20 11:44:51.725 +02:00 [INF] Executed ViewResult - view Dashboard executed in 2.6096ms.
+2025-10-20 11:44:51.726 +02:00 [INF] Executed action Homecare.Controllers.AdminController.Dashboard (Homecare) in 7.4142ms
+2025-10-20 11:44:51.726 +02:00 [INF] Executed endpoint 'Homecare.Controllers.AdminController.Dashboard (Homecare)'
+2025-10-20 11:44:51.726 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Admin/Dashboard - 200 null text/html; charset=utf-8 9.0189ms
+2025-10-20 11:44:51.767 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - null null
+2025-10-20 11:44:51.767 +02:00 [INF] The file /css/home.css was not modified
+2025-10-20 11:44:51.767 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - 304 null text/css 0.6362ms
+2025-10-20 11:44:52.703 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-20 11:44:52.703 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:44:52.704 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-20 11:44:52.704 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-20 11:44:52.705 +02:00 [INF] Executed ViewResult - view Index executed in 1.2295ms.
+2025-10-20 11:44:52.705 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 1.4083ms
+2025-10-20 11:44:52.705 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:44:52.705 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 2.766ms
+2025-10-20 11:44:53.438 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Admin/Dashboard - null null
+2025-10-20 11:44:53.439 +02:00 [INF] Executing endpoint 'Homecare.Controllers.AdminController.Dashboard (Homecare)'
+2025-10-20 11:44:53.439 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Admin", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard(Int32, Int32) on controller Homecare.Controllers.AdminController (Homecare).
+2025-10-20 11:44:53.445 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2025-10-20 11:44:53.448 +02:00 [INF] Executed ViewResult - view Dashboard executed in 2.4795ms.
+2025-10-20 11:44:53.448 +02:00 [INF] Executed action Homecare.Controllers.AdminController.Dashboard (Homecare) in 8.571ms
+2025-10-20 11:44:53.448 +02:00 [INF] Executed endpoint 'Homecare.Controllers.AdminController.Dashboard (Homecare)'
+2025-10-20 11:44:53.448 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Admin/Dashboard - 200 null text/html; charset=utf-8 10.3424ms
+2025-10-20 11:44:54.618 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-20 11:44:54.619 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:44:54.619 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-20 11:44:54.619 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-20 11:44:54.621 +02:00 [INF] Executed ViewResult - view Index executed in 1.2495ms.
+2025-10-20 11:44:54.621 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 1.4375ms
+2025-10-20 11:44:54.621 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:44:54.621 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 2.4174ms
+2025-10-20 11:44:57.229 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Identity/Account/Manage - null null
+2025-10-20 11:44:57.230 +02:00 [INF] Executing endpoint '/Account/Manage/Index'
+2025-10-20 11:44:57.238 +02:00 [INF] Route matched with {page = "/Account/Manage/Index", area = "Identity", action = "", controller = ""}. Executing page /Account/Manage/Index
+2025-10-20 11:44:57.245 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.Manage.IndexModel.OnGetAsync - ModelState is "Valid"
+2025-10-20 11:44:57.255 +02:00 [INF] Executed handler method OnGetAsync, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-20 11:44:57.291 +02:00 [INF] Executed page /Account/Manage/Index in 52.9679ms
+2025-10-20 11:44:57.291 +02:00 [INF] Executed endpoint '/Account/Manage/Index'
+2025-10-20 11:44:57.291 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Identity/Account/Manage - 200 null text/html; charset=utf-8 62.7352ms
+2025-10-20 11:44:57.315 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-20 11:44:57.316 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 1.2265ms
+2025-10-20 11:44:57.317 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-20 11:44:57.319 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-20 11:44:57.320 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 1.064ms
+2025-10-20 11:44:57.321 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-20 11:45:00.158 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-20 11:45:00.159 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:45:00.159 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-20 11:45:00.159 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-20 11:45:00.160 +02:00 [INF] Executed ViewResult - view Index executed in 1.0237ms.
+2025-10-20 11:45:00.160 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 1.2166ms
+2025-10-20 11:45:00.160 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-20 11:45:00.160 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 2.3637ms
+2025-10-20 11:45:02.675 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Admin/Dashboard - null null
+2025-10-20 11:45:02.676 +02:00 [INF] Executing endpoint 'Homecare.Controllers.AdminController.Dashboard (Homecare)'
+2025-10-20 11:45:02.676 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Admin", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard(Int32, Int32) on controller Homecare.Controllers.AdminController (Homecare).
+2025-10-20 11:45:02.683 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2025-10-20 11:45:02.686 +02:00 [INF] Executed ViewResult - view Dashboard executed in 3.7518ms.
+2025-10-20 11:45:02.687 +02:00 [INF] Executed action Homecare.Controllers.AdminController.Dashboard (Homecare) in 10.0078ms
+2025-10-20 11:45:02.687 +02:00 [INF] Executed endpoint 'Homecare.Controllers.AdminController.Dashboard (Homecare)'
+2025-10-20 11:45:02.687 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Admin/Dashboard - 200 null text/html; charset=utf-8 12.1604ms
+2025-10-20 11:45:08.405 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Personnel/Dashboard?personnelId=2 - null null
+2025-10-20 11:45:08.405 +02:00 [INF] Executing endpoint 'Homecare.Controllers.PersonnelController.Dashboard (Homecare)'
+2025-10-20 11:45:08.408 +02:00 [INF] Route matched with {action = "Dashboard", controller = "Personnel", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard(System.Nullable`1[System.Int32]) on controller Homecare.Controllers.PersonnelController (Homecare).
+2025-10-20 11:45:08.443 +02:00 [INF] Executing ViewResult, running view Dashboard.
+2025-10-20 11:45:08.454 +02:00 [INF] Executed ViewResult - view Dashboard executed in 11.6877ms.
+2025-10-20 11:45:08.454 +02:00 [INF] Executed action Homecare.Controllers.PersonnelController.Dashboard (Homecare) in 45.3516ms
+2025-10-20 11:45:08.454 +02:00 [INF] Executed endpoint 'Homecare.Controllers.PersonnelController.Dashboard (Homecare)'
+2025-10-20 11:45:08.454 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Personnel/Dashboard?personnelId=2 - 200 null text/html; charset=utf-8 49.3172ms
+2025-10-20 11:45:08.494 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/client.css?v=8UTpfRSLw_6tN4YV156k5bH95nvn52mHwKk-bwKGrJY - null null
+2025-10-20 11:45:08.494 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/dash-upcoming.jpg - null null
+2025-10-20 11:45:08.500 +02:00 [INF] Sending file. Request path: '/images/dash-upcoming.jpg'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare\wwwroot\images\dash-upcoming.jpg'
+2025-10-20 11:45:08.500 +02:00 [INF] Sending file. Request path: '/css/client.css'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare\wwwroot\css\client.css'
+2025-10-20 11:45:08.501 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/dash-upcoming.jpg - 200 43135 image/jpeg 6.175ms
+2025-10-20 11:45:08.501 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/client.css?v=8UTpfRSLw_6tN4YV156k5bH95nvn52mHwKk-bwKGrJY - 200 2800 text/css 6.9525ms
+2025-10-20 11:45:08.519 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/dash-past-2.jpg - null null
+2025-10-20 11:45:08.519 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/dash-past-1.jpg - null null
+2025-10-20 11:45:08.521 +02:00 [INF] Sending file. Request path: '/images/dash-past-1.jpg'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare\wwwroot\images\dash-past-1.jpg'
+2025-10-20 11:45:08.521 +02:00 [INF] Sending file. Request path: '/images/dash-past-2.jpg'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare\wwwroot\images\dash-past-2.jpg'
+2025-10-20 11:45:08.521 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/dash-past-2.jpg - 200 35600 image/jpeg 1.7657ms
+2025-10-20 11:45:08.521 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/dash-past-1.jpg - 200 39385 image/jpeg 1.5831ms
+2025-10-20 11:45:12.691 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Personnel/CreateDay?personnelId=2 - null null
+2025-10-20 11:45:12.693 +02:00 [INF] Executing endpoint 'Homecare.Controllers.PersonnelController.CreateDay (Homecare)'
+2025-10-20 11:45:12.699 +02:00 [INF] Route matched with {action = "CreateDay", controller = "Personnel", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateDay(Int32) on controller Homecare.Controllers.PersonnelController (Homecare).
+2025-10-20 11:45:12.728 +02:00 [INF] Executing ViewResult, running view CreateDay.
+2025-10-20 11:45:12.744 +02:00 [INF] Executed ViewResult - view CreateDay executed in 16.2369ms.
+2025-10-20 11:45:12.744 +02:00 [INF] Executed action Homecare.Controllers.PersonnelController.CreateDay (Homecare) in 44.5219ms
+2025-10-20 11:45:12.744 +02:00 [INF] Executed endpoint 'Homecare.Controllers.PersonnelController.CreateDay (Homecare)'
+2025-10-20 11:45:12.744 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Personnel/CreateDay?personnelId=2 - 200 null text/html; charset=utf-8 53.2776ms
+2025-10-20 11:45:12.785 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/availability.css?v=mWebKHvBs_WWP3snr4ENwSqXl_hADPFPXXJHSISwAeI - null null
+2025-10-20 11:45:12.786 +02:00 [INF] Sending file. Request path: '/css/availability.css'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare\wwwroot\css\availability.css'
+2025-10-20 11:45:12.786 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/availability.css?v=mWebKHvBs_WWP3snr4ENwSqXl_hADPFPXXJHSISwAeI - 200 4779 text/css 1.0352ms

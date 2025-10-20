@@ -1,0 +1,6 @@
+2025-10-20 11:02:30.156 +02:00 [INF] User profile is available. Using 'C:\Users\saski\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-20 11:02:30.392 +02:00 [INF] Now listening on: http://localhost:5003
+2025-10-20 11:02:30.394 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-20 11:02:30.394 +02:00 [INF] Hosting environment: Development
+2025-10-20 11:02:30.394 +02:00 [INF] Content root path: C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare
+2025-10-20 11:02:51.998 +02:00 [INF] Application is shutting down...

@@ -1,87 +1,113 @@
 @* Views/Shared/_Layout.cshtml *@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Homecare</title>
-    <!-- Favicon: your blue heart pulse -->
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="~/images/heart-pulse.svg" asp-append-version="true" />
 
-
-
-    <!-- Bootstrap & Icons (CDN only) -->
+    <!-- Bootstrap & Icons (CDN) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
 
-    <!-- Your bundles -->
+    <!-- Styles -->
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
-    @* add if you also use home.css: <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" /> *@
-
     @await RenderSectionAsync("Styles", required: false)
 </head>
 
 <body class="hc-sticky">
-    <header class="border-bottom">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand fw-semibold" asp-controller="Home" asp-action="Index">
-                    <i class="bi bi-heart-pulse-fill text-primary"></i> Homecare
-                </a>
+<header class="border-bottom">
+    <!-- Skip link (erişilebilirlik) -->
+    <a class="skip-link" href="#main">İçeriğe atla</a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"
-                    aria-controls="nav" aria-expanded="false" aria-label="Toggle nav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    @* Aktif menü belirleyici yardımcı *@
+    @{
+        var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+        var currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+        Func<string, string?, bool> IsActive = (ctrl, act) =>
+            string.Equals(currentController, ctrl, StringComparison.OrdinalIgnoreCase) &&
+            (act is null || string.Equals(currentAction, act, StringComparison.OrdinalIgnoreCase));
+    }
 
-                <div class="collapse navbar-collapse" id="nav">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Primary">
+        <div class="container">
+
+            <!-- Brand -->
+            <a class="navbar-brand fw-semibold d-flex align-items-center gap-2"
+               asp-controller="Home" asp-action="Index">
+                <i class="bi bi-heart-pulse-fill text-primary" aria-hidden="true"></i>
+                <span>Homecare</span>
+            </a>
+
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#primaryNav"
+                    aria-controls="primaryNav" aria-expanded="false" aria-label="Menüyü aç/kapat">
+                <i class="bi bi-list icon-open" aria-hidden="true"></i>
+                <i class="bi bi-x-lg icon-close" aria-hidden="true"></i>
+                <span class="visually-hidden">Toggle navigation</span>
+            </button>
+
+            <!-- Nav links -->
+            <div class="collapse navbar-collapse" id="primaryNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link @(IsActive("Home","Index") ? "active" : null)"
+                           asp-controller="Home" asp-action="Index"
+                           aria-current="@(IsActive("Home","Index") ? "page" : null)">
+                            <i class="bi bi-house" aria-hidden="true"></i> Home
+                        </a>
+                    </li>
+
+                    @* Role-aware shortcuts *@
+                    @if (User.IsInRole("Admin"))
+                    {
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Index">
-                                <i class="bi bi-house"></i> Home
+                            <a class="nav-link @(IsActive("Admin","Dashboard") ? "active" : null)"
+                               asp-controller="Admin" asp-action="Dashboard"
+                               aria-current="@(IsActive("Admin","Dashboard") ? "page" : null)">
+                                <i class="bi bi-speedometer2" aria-hidden="true"></i> Admin
                             </a>
                         </li>
+                    }
+                    else if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link @(IsActive("Home","AfterLogin") ? "active" : null)"
+                               asp-controller="Home" asp-action="AfterLogin"
+                               aria-current="@(IsActive("Home","AfterLogin") ? "page" : null)">
+                                <i class="bi bi-speedometer2" aria-hidden="true"></i> Dashboard
+                            </a>
+                        </li>
+                    }
+                </ul>
 
-                        @* Role-aware shortcuts *@
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Admin" asp-action="Dashboard">
-                                    <i class="bi bi-speedometer2"></i> Admin
-                                </a>
-                            </li>
-                        }
-                        else if (User.Identity?.IsAuthenticated ?? false)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="AfterLogin">
-                                    <i class="bi bi-speedometer2"></i> Dashboard
-                                </a>
-                            </li>
-                        }
-                    </ul>
-
-                    <!-- Auth area -->
+                <!-- Auth / Profile area -->
+                <div class="auth-area d-flex align-items-center gap-3">
                     <partial name="_LoginPartial" />
                 </div>
             </div>
-        </nav>
-    </header>
-
-    <main class="container my-4 flex-fill">
-        @RenderBody()
-    </main>
-
-    <footer class="bg-dark text-white-50 py-3 mt-auto">
-        <div class="container small d-flex justify-content-between">
-            <div>© @DateTime.Now.Year Homecare</div>
-            <div><a class="link-light link-underline-opacity-0" asp-controller="Home" asp-action="Index">Home</a></div>
         </div>
-    </footer>
+    </nav>
+</header>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    @RenderSection("Scripts", required: false)
+<main id="main" tabindex="-1" class="container my-4 flex-fill">
+    @RenderBody()
+</main>
+
+<footer class="bg-dark text-white-50 py-3 mt-auto">
+    <div class="container small d-flex justify-content-between">
+        <div>© @DateTime.Now.Year Homecare</div>
+        <div>
+            <a class="link-light link-underline-opacity-0" asp-controller="Home" asp-action="Index">Home</a>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+@RenderSection("Scripts", required: false)
 </body>
-
 </html>

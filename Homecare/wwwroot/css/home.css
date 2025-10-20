@@ -14,8 +14,7 @@
 }
 
 /* ========== Layout helpers (sticky footer) ========== */
-html,
-body {
+html, body {
     height: 100%;
 }
 
@@ -25,18 +24,11 @@ body.hc-sticky {
     min-height: 100%;
 }
 
-main.flex-fill {
-    flex: 1 0 auto;
-}
-
-footer.mt-auto {
-    flex-shrink: 0;
-}
+main.flex-fill { flex: 1 0 auto; }
+footer.mt-auto { flex-shrink: 0; }
 
 /* ========== Hero section ========== */
-.hc-hero {
-    padding: 28px 0 24px;
-}
+.hc-hero { padding: 28px 0 24px; }
 
 .hc-title {
     font-weight: 700;
@@ -79,24 +71,10 @@ footer.mt-auto {
     font-size: 15px;
 }
 
-.hc-foot.mt-auto {
-    margin-top: auto;
-}
-
-.hc-foot h5 {
-    color: #fff;
-    font-size: 16px;
-    margin-bottom: 12px;
-}
-
-.hc-foot a {
-    color: #cbd5e1;
-    text-decoration: none;
-}
-
-.hc-foot a:hover {
-    color: #fff;
-}
+.hc-foot.mt-auto { margin-top: auto; }
+.hc-foot h5 { color: #fff; font-size: 16px; margin-bottom: 12px; }
+.hc-foot a { color: #cbd5e1; text-decoration: none; }
+.hc-foot a:hover { color: #fff; }
 
 /* ========== Carousel ========== */
 #homeCarousel .carousel-inner {
@@ -132,69 +110,100 @@ footer.mt-auto {
 
 /* Accessibility: reduce motion when requested */
 @media (prefers-reduced-motion: reduce) {
-    .carousel-item {
-        transition: none !important;
-    }
+    .carousel-item { transition: none !important; }
 }
 
 /* ========== Breakpoints for carousel/image + spacing ========== */
 @media (max-width: 575.98px) {
-
-    /* xs */
-    .hc-hero {
-        padding-top: 18px;
-    }
-
-    #homeCarousel img {
-        height: var(--c-h-xs);
-    }
-
-    .hc-role-card {
-        padding: 18px;
-    }
-
-    .hc-foot {
-        margin-top: 36px;
-    }
+    .hc-hero { padding-top: 18px; }
+    #homeCarousel img { height: var(--c-h-xs); }
+    .hc-role-card { padding: 18px; }
+    .hc-foot { margin-top: 36px; }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
-
-    /* sm */
-    #homeCarousel img {
-        height: var(--c-h-sm);
-    }
+    #homeCarousel img { height: var(--c-h-sm); }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-
-    /* md */
-    #homeCarousel img {
-        height: var(--c-h-md);
-    }
+    #homeCarousel img { height: var(--c-h-md); }
 }
 
 @media (min-width: 992px) {
-
-    /* lg+ */
-    #homeCarousel img {
-        height: var(--c-h-lg);
-    }
+    #homeCarousel img { height: var(--c-h-lg); }
 }
 
 /* ========== Login card tweaks (Identity pages) ========== */
-.hc-login-card .form-control {
-    border-radius: 12px;
+.hc-login-card .form-control { border-radius: 12px; }
+.hc-login-card .btn { border-radius: 12px; }
+.hc-login-card .small { color: var(--hc-muted); }
+.hc-login-card .form-floating > label { color: #6b7280; }
+
+/* Skip link görünür odak */
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  padding: .5rem .75rem; background: #0d6efd; color: #fff; border-radius: .5rem;
+}
+.skip-link:focus { left: .75rem; top: .75rem; z-index: 1050; }
+
+/* Toggler: hamburger -> X */
+.navbar-toggler .icon-close { display: none; font-size: 1.25rem; }
+.navbar-toggler[aria-expanded="true"] .icon-open { display: none; }
+.navbar-toggler[aria-expanded="true"] .icon-close { display: inline-block; }
+
+/* Okunaklı focus halkası */
+.nav-link:focus-visible,
+.navbar-brand:focus-visible,
+.navbar-toggler:focus-visible {
+  outline: 3px solid rgba(13,110,253,.7);
+  outline-offset: 2px;
+  border-radius: .5rem;
 }
 
-.hc-login-card .btn {
-    border-radius: 12px;
+/* Aktif linkin belirginliği */
+.nav-link.active {
+  font-weight: 600;
+  color: #0d6efd !important;
 }
 
-.hc-login-card .small {
-    color: var(--hc-muted);
+/* Daha rahat tıklama alanları */
+.navbar .nav-link { padding: .5rem .75rem; }
+.navbar-brand { padding: .25rem 0; }
+
+/* Küçük ekranlarda içerikle çakışmayı azaltan yumuşak gölge */
+.navbar-collapse.collapse.show {
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
 }
 
-.hc-login-card .form-floating>label {
-    color: #6b7280;
+/* --- Genel font büyütme --- */
+.navbar .nav-link,
+.navbar-brand span {
+  font-size: 1.05rem;
+}
+
+/* Eğer _LoginPartial içindeki yazılar küçükse */
+.navbar .auth-area,
+.navbar .auth-area a {
+  font-size: 1.05rem;
+}
+
+/* Sağ tarafı biraz içeri almak için */
+.navbar .navbar-collapse {
+  padding-right: 0.5rem;
+}
+
+/* Büyük ekranlarda sağdaki partial'ı hafifçe sola çek */
+@media (min-width: 992px) {
+  .navbar .auth-area {
+    margin-right: 0.5rem;
+  }
+}
+
+/* Mobilde ekstra breathing space */
+@media (max-width: 991px) {
+  .navbar .nav-link,
+  .navbar .auth-area a {
+    padding: .75rem 1rem;
+    font-size: 1.1rem;
+  }
 }

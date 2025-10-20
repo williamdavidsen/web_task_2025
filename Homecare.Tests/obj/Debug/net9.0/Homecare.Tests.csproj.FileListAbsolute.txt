@@ -369,3 +369,14 @@ C:\Users\ca\Desktop\Oslomet\ITPE3200\Homecare\webprogrammering2025\Homecare.Test
 C:\Users\ca\Desktop\Oslomet\ITPE3200\Homecare\webprogrammering2025\Homecare.Tests\obj\Debug\net9.0\Homecare.Tests.pdb
 C:\Users\ca\Desktop\Oslomet\ITPE3200\Homecare\webprogrammering2025\Homecare.Tests\obj\Debug\net9.0\Homecare.Tests.genruntimeconfig.cache
 C:\Users\ca\Desktop\Oslomet\ITPE3200\Homecare\webprogrammering2025\Homecare.Tests\obj\Debug\net9.0\ref\Homecare.Tests.dll
+C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare.Tests\bin\Debug\net9.0\.msCoverageSourceRootsMapping_Homecare.Tests
+C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare.Tests\bin\Debug\net9.0\CoverletSourceRootsMapping_Homecare.Tests
+C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare.Tests\obj\Debug\net9.0\Homecare.Tests.csproj.AssemblyReference.cache
+C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare.Tests\obj\Debug\net9.0\Homecare.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare.Tests\obj\Debug\net9.0\Homecare.Tests.AssemblyInfoInputs.cache
+C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare.Tests\obj\Debug\net9.0\Homecare.Tests.AssemblyInfo.cs
+C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare.Tests\obj\Debug\net9.0\Homecare.Tests.csproj.CoreCompileInputs.cache
+C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare.Tests\obj\Debug\net9.0\Homecare.Tests.sourcelink.json
+C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare.Tests\obj\Debug\net9.0\Homecare.Tests.dll
+C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare.Tests\obj\Debug\net9.0\refint\Homecare.Tests.dll
+C:\Users\saski\Desktop\WEBProbgrammering_2025\sinasibuseninsonsansin\webprogrammering2025\Homecare.Tests\obj\Debug\net9.0\Homecare.Tests.pdb

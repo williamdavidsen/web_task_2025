@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ca\\Desktop\\Oslomet\\ITPE3200\\Homecare\\webprogrammering2025\\Homecare.Tests\\Homecare.Tests.csproj": {}
+    "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\sinasibuseninsonsansin\\webprogrammering2025\\Homecare.Tests\\Homecare.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ca\\Desktop\\Oslomet\\ITPE3200\\Homecare\\webprogrammering2025\\Homecare.Tests\\Homecare.Tests.csproj": {
+    "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\sinasibuseninsonsansin\\webprogrammering2025\\Homecare.Tests\\Homecare.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ca\\Desktop\\Oslomet\\ITPE3200\\Homecare\\webprogrammering2025\\Homecare.Tests\\Homecare.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\sinasibuseninsonsansin\\webprogrammering2025\\Homecare.Tests\\Homecare.Tests.csproj",
         "projectName": "Homecare.Tests",
-        "projectPath": "C:\\Users\\ca\\Desktop\\Oslomet\\ITPE3200\\Homecare\\webprogrammering2025\\Homecare.Tests\\Homecare.Tests.csproj",
-        "packagesPath": "C:\\Users\\ca\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ca\\Desktop\\Oslomet\\ITPE3200\\Homecare\\webprogrammering2025\\Homecare.Tests\\obj\\",
+        "projectPath": "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\sinasibuseninsonsansin\\webprogrammering2025\\Homecare.Tests\\Homecare.Tests.csproj",
+        "packagesPath": "C:\\Users\\saski\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\sinasibuseninsonsansin\\webprogrammering2025\\Homecare.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ca\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\saski\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -26,8 +26,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\ca\\Desktop\\Oslomet\\ITPE3200\\Homecare\\webprogrammering2025\\Homecare\\Homecare.csproj": {
-                "projectPath": "C:\\Users\\ca\\Desktop\\Oslomet\\ITPE3200\\Homecare\\webprogrammering2025\\Homecare\\Homecare.csproj"
+              "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\sinasibuseninsonsansin\\webprogrammering2025\\Homecare\\Homecare.csproj": {
+                "projectPath": "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\sinasibuseninsonsansin\\webprogrammering2025\\Homecare\\Homecare.csproj"
               }
             }
           }
@@ -42,7 +42,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -84,26 +84,40 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.9, 9.0.9]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.9, 9.0.9]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[9.0.9, 9.0.9]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.1.25451.107/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ca\\Desktop\\Oslomet\\ITPE3200\\Homecare\\webprogrammering2025\\Homecare\\Homecare.csproj": {
+    "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\sinasibuseninsonsansin\\webprogrammering2025\\Homecare\\Homecare.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ca\\Desktop\\Oslomet\\ITPE3200\\Homecare\\webprogrammering2025\\Homecare\\Homecare.csproj",
+        "projectUniqueName": "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\sinasibuseninsonsansin\\webprogrammering2025\\Homecare\\Homecare.csproj",
         "projectName": "Homecare",
-        "projectPath": "C:\\Users\\ca\\Desktop\\Oslomet\\ITPE3200\\Homecare\\webprogrammering2025\\Homecare\\Homecare.csproj",
-        "packagesPath": "C:\\Users\\ca\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ca\\Desktop\\Oslomet\\ITPE3200\\Homecare\\webprogrammering2025\\Homecare\\obj\\",
+        "projectPath": "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\sinasibuseninsonsansin\\webprogrammering2025\\Homecare\\Homecare.csproj",
+        "packagesPath": "C:\\Users\\saski\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\sinasibuseninsonsansin\\webprogrammering2025\\Homecare\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ca\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\saski\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -127,7 +141,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -143,11 +157,11 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[8.*, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[8.*, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -158,6 +172,18 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[8.*, )"
+            },
+            "Serilog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[8.*, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             }
           },
           "imports": [
@@ -171,6 +197,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.20, 8.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.20, 8.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.20, 8.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.20, 8.0.20]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -179,7 +223,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.1.25451.107/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
