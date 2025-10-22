@@ -1,8 +1,9 @@
-@* Kibar kimlik şeridi: isim + rol *@
+@* Polite identity strip: name + role *@
+
 @{
     var name = (string)(ViewBag.OwnerName ?? User?.Identity?.Name ?? "User");
     var role = (string)(ViewBag.OwnerRole ?? "");
-    var extra = (string)(ViewBag.OwnerExtra ?? ""); // istersen ID vb.
+    var extra = (string)(ViewBag.OwnerExtra ?? ""); // if you want to show extra info
 }
 <div class="ownerbar rounded-4 px-3 py-2 d-flex align-items-center gap-2 mb-3">
     <div class="owner-avatar d-inline-flex align-items-center justify-content-center rounded-circle">

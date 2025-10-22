@@ -8491,11 +8491,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\saski\\Desktop\\Webapplikasjoner\\2\\webprogrammering2025\\Homecare\\Homecare.csproj",
+      "projectUniqueName": "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\22-10\\web_task_2025\\Homecare\\Homecare.csproj",
       "projectName": "Homecare",
-      "projectPath": "C:\\Users\\saski\\Desktop\\Webapplikasjoner\\2\\webprogrammering2025\\Homecare\\Homecare.csproj",
+      "projectPath": "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\22-10\\web_task_2025\\Homecare\\Homecare.csproj",
       "packagesPath": "C:\\Users\\saski\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\saski\\Desktop\\Webapplikasjoner\\2\\webprogrammering2025\\Homecare\\obj\\",
+      "outputPath": "C:\\Users\\saski\\Desktop\\WEBProbgrammering_2025\\22-10\\web_task_2025\\Homecare\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\saski\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -8522,7 +8522,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -8581,19 +8581,19 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.21, 8.0.21]"
+            "version": "[8.0.20, 8.0.20]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[8.0.21, 8.0.21]"
+            "version": "[8.0.20, 8.0.20]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.21, 8.0.21]"
+            "version": "[8.0.20, 8.0.20]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[8.0.21, 8.0.21]"
+            "version": "[8.0.20, 8.0.20]"
           }
         ],
         "frameworkReferences": {
@@ -8604,7 +8604,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.1.25451.107/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -20,10 +20,10 @@
 
 <body class="hc-sticky">
 <header class="border-bottom">
-    <!-- Skip link (erişilebilirlik) -->
+    <!-- Skip link (accessibility) -->
     <a class="skip-link" href="#main">İçeriğe atla</a>
 
-    @* Aktif menü belirleyici yardımcı *@
+    @* Active menu indicator helper *@
     @{
         var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
         var currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";

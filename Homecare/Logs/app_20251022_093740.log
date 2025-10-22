@@ -1,0 +1,235 @@
+2025-10-22 09:37:40.550 +02:00 [INF] User profile is available. Using 'C:\Users\saski\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-22 09:37:40.563 +02:00 [INF] DBInit: starting…
+2025-10-22 09:37:41.527 +02:00 [INF] DBInit: done.
+2025-10-22 09:37:41.743 +02:00 [INF] Now listening on: http://localhost:5003
+2025-10-22 09:37:41.744 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-22 09:37:41.744 +02:00 [INF] Hosting environment: Development
+2025-10-22 09:37:41.745 +02:00 [INF] Content root path: C:\Users\saski\Desktop\WEBProbgrammering_2025\22-10\web_task_2025\Homecare
+2025-10-22 09:37:46.251 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-22 09:37:46.258 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-10-22 09:37:46.287 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-22 09:37:46.298 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-22 09:37:46.312 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-22 09:37:46.419 +02:00 [INF] Executed ViewResult - view Index executed in 111.7391ms.
+2025-10-22 09:37:46.422 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 122.8921ms
+2025-10-22 09:37:46.424 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-22 09:37:46.428 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 179.1238ms
+2025-10-22 09:37:46.439 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-client.jpg - null null
+2025-10-22 09:37:46.439 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - null null
+2025-10-22 09:37:46.439 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-nurse.jpg - null null
+2025-10-22 09:37:46.452 +02:00 [INF] Sending file. Request path: '/css/home.css'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\22-10\web_task_2025\Homecare\wwwroot\css\home.css'
+2025-10-22 09:37:46.453 +02:00 [INF] Sending file. Request path: '/images/hero-client.jpg'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\22-10\web_task_2025\Homecare\wwwroot\images\hero-client.jpg'
+2025-10-22 09:37:46.453 +02:00 [INF] Sending file. Request path: '/images/hero-nurse.jpg'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\22-10\web_task_2025\Homecare\wwwroot\images\hero-nurse.jpg'
+2025-10-22 09:37:46.454 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - 200 5184 text/css 14.235ms
+2025-10-22 09:37:46.456 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-client.jpg - 200 59282 image/jpeg 16.801ms
+2025-10-22 09:37:46.456 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-nurse.jpg - 200 51552 image/jpeg 17.0641ms
+2025-10-22 09:37:46.481 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-admin.jpg - null null
+2025-10-22 09:37:46.486 +02:00 [INF] Sending file. Request path: '/images/hero-admin.jpg'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\22-10\web_task_2025\Homecare\wwwroot\images\hero-admin.jpg'
+2025-10-22 09:37:46.488 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-admin.jpg - 200 51919 image/jpeg 6.6533ms
+2025-10-22 09:37:53.444 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Identity/Account/Login - null null
+2025-10-22 09:37:53.449 +02:00 [INF] Executing endpoint '/Account/Login'
+2025-10-22 09:37:53.468 +02:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-10-22 09:37:53.485 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2025-10-22 09:37:53.493 +02:00 [INF] AuthenticationScheme: Identity.External signed out.
+2025-10-22 09:37:53.494 +02:00 [INF] Executed handler method OnGetAsync, returned result .
+2025-10-22 09:37:53.497 +02:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-10-22 09:37:53.500 +02:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-22 09:37:53.545 +02:00 [INF] Executed page /Account/Login in 75.0287ms
+2025-10-22 09:37:53.546 +02:00 [INF] Executed endpoint '/Account/Login'
+2025-10-22 09:37:53.547 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Identity/Account/Login - 200 null text/html; charset=utf-8 102.5632ms
+2025-10-22 09:37:53.563 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - null null
+2025-10-22 09:37:53.563 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-22 09:37:53.564 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-22 09:37:53.566 +02:00 [INF] The file /css/home.css was not modified
+2025-10-22 09:37:53.568 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - 304 null text/css 5.3264ms
+2025-10-22 09:37:53.569 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 5.7388ms
+2025-10-22 09:37:53.569 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 5.4027ms
+2025-10-22 09:37:53.572 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-22 09:37:53.574 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-22 09:38:16.509 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5003/Identity/Account/Login - application/x-www-form-urlencoded 270
+2025-10-22 09:38:16.514 +02:00 [INF] Executing endpoint '/Account/Login'
+2025-10-22 09:38:16.516 +02:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-10-22 09:38:16.543 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.LoginModel.OnPostAsync - ModelState is "Valid"
+2025-10-22 09:38:16.650 +02:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-22 09:38:16.654 +02:00 [INF] Executed page /Account/Login in 137.0498ms
+2025-10-22 09:38:16.655 +02:00 [INF] Executed endpoint '/Account/Login'
+2025-10-22 09:38:16.658 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5003/Identity/Account/Login - 200 null text/html; charset=utf-8 149.2462ms
+2025-10-22 09:38:16.670 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - null null
+2025-10-22 09:38:16.672 +02:00 [INF] The file /css/home.css was not modified
+2025-10-22 09:38:16.673 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - 304 null text/css 2.8006ms
+2025-10-22 09:38:16.675 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-22 09:38:16.675 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-22 09:38:16.678 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 3.1999ms
+2025-10-22 09:38:16.679 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 4.4305ms
+2025-10-22 09:38:16.681 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-22 09:38:16.682 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-22 09:38:26.665 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Identity/Account/Register - null null
+2025-10-22 09:38:26.667 +02:00 [INF] Executing endpoint '/Account/Register'
+2025-10-22 09:38:26.673 +02:00 [INF] Route matched with {page = "/Account/Register", area = "Identity", action = "", controller = ""}. Executing page /Account/Register
+2025-10-22 09:38:26.675 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.RegisterModel.OnGetAsync - ModelState is "Valid"
+2025-10-22 09:38:26.676 +02:00 [INF] Executed handler method OnGetAsync, returned result .
+2025-10-22 09:38:26.677 +02:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-10-22 09:38:26.678 +02:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-22 09:38:26.695 +02:00 [INF] Executed page /Account/Register in 21.6054ms
+2025-10-22 09:38:26.696 +02:00 [INF] Executed endpoint '/Account/Register'
+2025-10-22 09:38:26.697 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Identity/Account/Register - 200 null text/html; charset=utf-8 31.6282ms
+2025-10-22 09:38:26.711 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - null null
+2025-10-22 09:38:26.711 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-22 09:38:26.711 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-22 09:38:26.713 +02:00 [INF] The file /css/home.css was not modified
+2025-10-22 09:38:26.715 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 3.9668ms
+2025-10-22 09:38:26.716 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 4.9928ms
+2025-10-22 09:38:26.717 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - 304 null text/css 5.575ms
+2025-10-22 09:38:26.718 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-22 09:38:26.720 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-22 09:38:31.073 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5003/Identity/Account/Register - application/x-www-form-urlencoded 270
+2025-10-22 09:38:31.075 +02:00 [INF] Executing endpoint '/Account/Register'
+2025-10-22 09:38:31.076 +02:00 [INF] Route matched with {page = "/Account/Register", area = "Identity", action = "", controller = ""}. Executing page /Account/Register
+2025-10-22 09:38:31.080 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.RegisterModel.OnPostAsync - ModelState is "Invalid"
+2025-10-22 09:38:31.083 +02:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-22 09:38:31.086 +02:00 [INF] Executed page /Account/Register in 9.158ms
+2025-10-22 09:38:31.088 +02:00 [INF] Executed endpoint '/Account/Register'
+2025-10-22 09:38:31.089 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5003/Identity/Account/Register - 200 null text/html; charset=utf-8 15.1296ms
+2025-10-22 09:38:31.107 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-22 09:38:31.109 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 2.2369ms
+2025-10-22 09:38:31.109 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-22 09:38:31.111 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-22 09:38:31.114 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 3.9517ms
+2025-10-22 09:38:31.116 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-22 09:39:01.275 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5003/Identity/Account/Register - application/x-www-form-urlencoded 274
+2025-10-22 09:39:01.277 +02:00 [INF] Executing endpoint '/Account/Register'
+2025-10-22 09:39:01.277 +02:00 [INF] Route matched with {page = "/Account/Register", area = "Identity", action = "", controller = ""}. Executing page /Account/Register
+2025-10-22 09:39:01.279 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.RegisterModel.OnPostAsync - ModelState is "Invalid"
+2025-10-22 09:39:01.280 +02:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-22 09:39:01.283 +02:00 [INF] Executed page /Account/Register in 4.7054ms
+2025-10-22 09:39:01.283 +02:00 [INF] Executed endpoint '/Account/Register'
+2025-10-22 09:39:01.284 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5003/Identity/Account/Register - 200 null text/html; charset=utf-8 9.2537ms
+2025-10-22 09:39:01.303 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - null null
+2025-10-22 09:39:01.304 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-22 09:39:01.304 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-22 09:39:01.306 +02:00 [INF] The file /css/home.css was not modified
+2025-10-22 09:39:01.308 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 4.2646ms
+2025-10-22 09:39:01.309 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 5.3366ms
+2025-10-22 09:39:01.309 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - 304 null text/css 5.9504ms
+2025-10-22 09:39:01.311 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-22 09:39:01.313 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-22 09:39:14.460 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5003/Identity/Account/Register - application/x-www-form-urlencoded 277
+2025-10-22 09:39:14.462 +02:00 [INF] Executing endpoint '/Account/Register'
+2025-10-22 09:39:14.462 +02:00 [INF] Route matched with {page = "/Account/Register", area = "Identity", action = "", controller = ""}. Executing page /Account/Register
+2025-10-22 09:39:14.464 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.RegisterModel.OnPostAsync - ModelState is "Valid"
+2025-10-22 09:39:14.564 +02:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-22 09:39:14.567 +02:00 [INF] Executed page /Account/Register in 103.8155ms
+2025-10-22 09:39:14.567 +02:00 [INF] Executed endpoint '/Account/Register'
+2025-10-22 09:39:14.568 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5003/Identity/Account/Register - 200 null text/html; charset=utf-8 108.3245ms
+2025-10-22 09:39:14.582 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - null null
+2025-10-22 09:39:14.583 +02:00 [INF] The file /css/home.css was not modified
+2025-10-22 09:39:14.584 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - 304 null text/css 2.0854ms
+2025-10-22 09:39:14.584 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-22 09:39:14.586 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-22 09:39:14.588 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 3.8895ms
+2025-10-22 09:39:14.590 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 3.1444ms
+2025-10-22 09:39:14.592 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-22 09:39:14.593 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-22 09:39:30.387 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5003/Identity/Account/Register - application/x-www-form-urlencoded 272
+2025-10-22 09:39:30.388 +02:00 [INF] Executing endpoint '/Account/Register'
+2025-10-22 09:39:30.389 +02:00 [INF] Route matched with {page = "/Account/Register", area = "Identity", action = "", controller = ""}. Executing page /Account/Register
+2025-10-22 09:39:30.390 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.RegisterModel.OnPostAsync - ModelState is "Invalid"
+2025-10-22 09:39:30.391 +02:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-22 09:39:30.393 +02:00 [INF] Executed page /Account/Register in 3.632ms
+2025-10-22 09:39:30.394 +02:00 [INF] Executed endpoint '/Account/Register'
+2025-10-22 09:39:30.395 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5003/Identity/Account/Register - 200 null text/html; charset=utf-8 8.004ms
+2025-10-22 09:39:30.413 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - null null
+2025-10-22 09:39:30.413 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-22 09:39:30.413 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-22 09:39:30.416 +02:00 [INF] The file /css/home.css was not modified
+2025-10-22 09:39:30.417 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 3.9616ms
+2025-10-22 09:39:30.419 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - 304 null text/css 6.4279ms
+2025-10-22 09:39:30.419 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 6.1547ms
+2025-10-22 09:39:30.421 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-22 09:39:30.424 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-22 09:39:45.308 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5003/Identity/Account/Register - application/x-www-form-urlencoded 271
+2025-10-22 09:39:45.310 +02:00 [INF] Executing endpoint '/Account/Register'
+2025-10-22 09:39:45.310 +02:00 [INF] Route matched with {page = "/Account/Register", area = "Identity", action = "", controller = ""}. Executing page /Account/Register
+2025-10-22 09:39:45.312 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.RegisterModel.OnPostAsync - ModelState is "Valid"
+2025-10-22 09:39:45.405 +02:00 [INF] User created a new account with password.
+2025-10-22 09:39:45.430 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2025-10-22 09:39:45.431 +02:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.LocalRedirectResult.
+2025-10-22 09:39:45.432 +02:00 [INF] Executing LocalRedirectResult, redirecting to /.
+2025-10-22 09:39:45.432 +02:00 [INF] Executed page /Account/Register in 121.5885ms
+2025-10-22 09:39:45.433 +02:00 [INF] Executed endpoint '/Account/Register'
+2025-10-22 09:39:45.434 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5003/Identity/Account/Register - 302 0 null 125.9542ms
+2025-10-22 09:39:45.439 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-22 09:39:45.443 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-22 09:39:45.444 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-22 09:39:45.445 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-22 09:39:45.450 +02:00 [INF] Executed ViewResult - view Index executed in 4.6184ms.
+2025-10-22 09:39:45.451 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 5.9657ms
+2025-10-22 09:39:45.452 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-22 09:39:45.453 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 13.9668ms
+2025-10-22 09:39:45.467 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - null null
+2025-10-22 09:39:45.469 +02:00 [INF] The file /css/home.css was not modified
+2025-10-22 09:39:45.470 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=imZIJGRfqAAhGxUdOFUSfwbqIAkiF9uJ1BlEZJ23vnA - 304 null text/css 2.703ms
+2025-10-22 09:39:45.471 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-nurse.jpg - null null
+2025-10-22 09:39:45.471 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-client.jpg - null null
+2025-10-22 09:39:45.475 +02:00 [INF] The file /images/hero-nurse.jpg was not modified
+2025-10-22 09:39:45.477 +02:00 [INF] The file /images/hero-client.jpg was not modified
+2025-10-22 09:39:45.477 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-nurse.jpg - 304 null image/jpeg 6.7425ms
+2025-10-22 09:39:45.478 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-client.jpg - 304 null image/jpeg 7.4658ms
+2025-10-22 09:39:45.492 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-admin.jpg - null null
+2025-10-22 09:39:45.494 +02:00 [INF] The file /images/hero-admin.jpg was not modified
+2025-10-22 09:39:45.495 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-admin.jpg - 304 null image/jpeg 2.7357ms
+2025-10-22 09:39:50.382 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Identity/Account/Manage - null null
+2025-10-22 09:39:50.387 +02:00 [INF] Executing endpoint '/Account/Manage/Index'
+2025-10-22 09:39:50.391 +02:00 [INF] Route matched with {page = "/Account/Manage/Index", area = "Identity", action = "", controller = ""}. Executing page /Account/Manage/Index
+2025-10-22 09:39:50.393 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.Manage.IndexModel.OnGetAsync - ModelState is "Valid"
+2025-10-22 09:39:50.401 +02:00 [INF] Executed handler method OnGetAsync, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-22 09:39:50.424 +02:00 [INF] Executed page /Account/Manage/Index in 32.0185ms
+2025-10-22 09:39:50.425 +02:00 [INF] Executed endpoint '/Account/Manage/Index'
+2025-10-22 09:39:50.426 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Identity/Account/Manage - 200 null text/html; charset=utf-8 44.3672ms
+2025-10-22 09:39:50.443 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-22 09:39:50.446 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-22 09:39:50.446 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 3.6726ms
+2025-10-22 09:39:50.448 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 2.5153ms
+2025-10-22 09:39:50.450 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-22 09:39:50.452 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-22 09:39:57.109 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-22 09:39:57.111 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-22 09:39:57.112 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-22 09:39:57.114 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-22 09:39:57.116 +02:00 [INF] Executed ViewResult - view Index executed in 2.2472ms.
+2025-10-22 09:39:57.117 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 4.6094ms
+2025-10-22 09:39:57.118 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-22 09:39:57.119 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 9.8511ms
+2025-10-22 09:39:58.534 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Home/AfterLogin - null null
+2025-10-22 09:39:58.537 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.AfterLogin (Homecare)'
+2025-10-22 09:39:58.540 +02:00 [INF] Route matched with {action = "AfterLogin", controller = "Home", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AfterLogin() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-22 09:39:58.544 +02:00 [INF] Executing RedirectToPageResult, redirecting to /Account/Login.
+2025-10-22 09:39:58.546 +02:00 [INF] Executed action Homecare.Controllers.HomeController.AfterLogin (Homecare) in 4.1299ms
+2025-10-22 09:39:58.547 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.AfterLogin (Homecare)'
+2025-10-22 09:39:58.547 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Home/AfterLogin - 302 0 null 13.7168ms
+2025-10-22 09:39:58.550 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/Identity/Account/Login - null null
+2025-10-22 09:39:58.552 +02:00 [INF] Executing endpoint '/Account/Login'
+2025-10-22 09:39:58.553 +02:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-10-22 09:39:58.556 +02:00 [INF] Executing handler method Homecare.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2025-10-22 09:39:58.557 +02:00 [INF] AuthenticationScheme: Identity.External signed out.
+2025-10-22 09:39:58.558 +02:00 [INF] Executed handler method OnGetAsync, returned result .
+2025-10-22 09:39:58.559 +02:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-10-22 09:39:58.559 +02:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-10-22 09:39:58.562 +02:00 [INF] Executed page /Account/Login in 7.2736ms
+2025-10-22 09:39:58.563 +02:00 [INF] Executed endpoint '/Account/Login'
+2025-10-22 09:39:58.563 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/Identity/Account/Login - 200 null text/html; charset=utf-8 12.9948ms
+2025-10-22 09:39:58.582 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-10-22 09:39:58.585 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 null 2.6618ms
+2025-10-22 09:39:58.587 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+2025-10-22 09:39:58.589 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-10-22 09:39:58.591 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 null 2.0047ms
+2025-10-22 09:39:58.593 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5003/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404
+2025-10-22 09:39:59.201 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-22 09:39:59.203 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-22 09:39:59.204 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-22 09:39:59.205 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-22 09:39:59.206 +02:00 [INF] Executed ViewResult - view Index executed in 1.6485ms.
+2025-10-22 09:39:59.207 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 2.6169ms
+2025-10-22 09:39:59.208 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-22 09:39:59.209 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 8.4867ms
+2025-10-22 09:56:06.746 +02:00 [INF] Application is shutting down...

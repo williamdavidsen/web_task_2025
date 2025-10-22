@@ -7,7 +7,7 @@ namespace Homecare.DAL
 {
     public static class DBInit
     {
-        // ✅ Program.cs'ten await ile çağırılacak ana giriş
+        //  Main entry point to be called from Program.cs with await
         public static async Task SeedAsync(WebApplication app)
         {
             using var scope = app.Services.CreateScope();
@@ -20,17 +20,17 @@ namespace Homecare.DAL
 
             logger.LogInformation("DBInit: starting…");
 
-            // ✅ Veritabanını (ve tabloları) oluştur/migrate
+            // Create or migrate the database (and tables)
             await db.Database.EnsureCreatedAsync();
-            // alternatif: await db.Database.MigrateAsync();
+            // Alternative: await db.Database.MigrateAsync();
 
-            // ---- 1) Domain tablolarını doldur ----
+            // ---- 1) Seed domain tables ----
             await SeedDomainUsersAsync(db);
             await SeedCareTasksAsync(db);
             await SeedSlotsAndAppointmentsAsync(db);
             await db.SaveChangesAsync();
 
-            // ---- 2) Identity (roller + hesaplar) ----
+            // ---- 2) Seed Identity (roles + accounts) ----
             await EnsureIdentityAsync(db, userMgr, roleMgr);
 
             logger.LogInformation("DBInit: done.");
@@ -49,11 +49,11 @@ namespace Homecare.DAL
                 {
                     var rc = await roleMgr.CreateAsync(new IdentityRole(r));
                     if (!rc.Succeeded)
-                        throw new Exception("Role create failed: " + r);
+                        throw new Exception("Role creation failed: " + r);
                 }
             }
 
-            // Domain kullanıcılarına karşılık Identity kullanıcıları
+            // Create Identity users corresponding to domain users
             var domainUsers = await db.DomainUsers.AsNoTracking().ToListAsync();
             foreach (var du in domainUsers)
             {
@@ -71,7 +71,7 @@ namespace Homecare.DAL
                     };
                     var uc = await userMgr.CreateAsync(iu, "1234"); // DEV ONLY
                     if (!uc.Succeeded)
-                        throw new Exception($"User create failed: {email} -> {string.Join(",", uc.Errors.Select(e => e.Description))}");
+                        throw new Exception($"User creation failed: {email} -> {string.Join(",", uc.Errors.Select(e => e.Description))}");
                 }
 
                 var roleName = du.Role switch
@@ -96,7 +96,7 @@ namespace Homecare.DAL
 
         private static async Task SeedSlotsAndAppointmentsAsync(AppDbContext db)
         {
-            // 3 hazır slot (dün + yarın) — her personel için
+            // 3 sample slots (yesterday + tomorrow) — for each personnel
             var yesterday = DateOnly.FromDateTime(DateTime.Today.AddDays(-1));
             var tomorrow = DateOnly.FromDateTime(DateTime.Today.AddDays(1));
 
@@ -115,7 +115,7 @@ namespace Homecare.DAL
                 }
             }
 
-            // Örnek randevular: geçmiş (Completed) + gelecek (Scheduled)
+            // Example appointments: past (Completed) + future (Scheduled)
             await UpsertAppointmentBySlotAsync(db, await SlotAsync(db, 2, yesterday, 9),
                 clientId: 10, status: AppointmentStatus.Completed,
                 description: "Morning check & shopping", taskIds: new[] { 1, 3 });
@@ -246,7 +246,7 @@ namespace Homecare.DAL
                 await db.SaveChangesAsync();
             }
 
-            // görev listesini yeniden yaz
+            // Reset the task list for this appointment
             var existing = await db.TaskLists.Where(t => t.AppointmentId == appt.AppointmentId).ToListAsync();
             if (existing.Count > 0)
             {

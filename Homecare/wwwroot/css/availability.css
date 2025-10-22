@@ -243,20 +243,4 @@
   margin-right: .35rem;
 }
 
-/* Slot buttons on the right panel (Create/Edit) */
-.slot-btn {
-  border-radius: .6rem;
-}
 
-.slot-btn.active {
-  outline: 3px solid #0d6efd;
-  background: #e7f1ff;
-}
-
-/* Read-only summary boxes (Edit page) */
-.readonly-box {
-  background: #f8f9fa;
-  border: 1px solid #e9ecef;
-  border-radius: .75rem;
-  padding: .75rem;
-}
