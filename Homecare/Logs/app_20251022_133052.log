@@ -1,0 +1,30 @@
+2025-10-22 13:30:52.332 +02:00 [INF] User profile is available. Using 'C:\Users\saski\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-22 13:30:52.344 +02:00 [INF] DBInit: starting…
+2025-10-22 13:30:53.576 +02:00 [INF] DBInit: done.
+2025-10-22 13:30:53.852 +02:00 [INF] Now listening on: http://localhost:5003
+2025-10-22 13:30:53.852 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-22 13:30:53.852 +02:00 [INF] Hosting environment: Development
+2025-10-22 13:30:53.852 +02:00 [INF] Content root path: C:\Users\saski\Desktop\WEBProbgrammering_2025\22-10\web_task_2025\Homecare
+2025-10-22 13:30:54.227 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/ - null null
+2025-10-22 13:30:54.236 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-10-22 13:30:54.282 +02:00 [INF] Executing endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-22 13:30:54.292 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Homecare.Controllers.HomeController (Homecare).
+2025-10-22 13:30:54.304 +02:00 [INF] Executing ViewResult, running view Index.
+2025-10-22 13:30:54.409 +02:00 [INF] Executed ViewResult - view Index executed in 108.3281ms.
+2025-10-22 13:30:54.412 +02:00 [INF] Executed action Homecare.Controllers.HomeController.Index (Homecare) in 118.4956ms
+2025-10-22 13:30:54.413 +02:00 [INF] Executed endpoint 'Homecare.Controllers.HomeController.Index (Homecare)'
+2025-10-22 13:30:54.417 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/ - 200 null text/html; charset=utf-8 190.8392ms
+2025-10-22 13:30:54.428 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/css/home.css?v=fzubcUsjgTxPBnlM_limYMc7z_4xt1h_RMqFvK_Z4Uc - null null
+2025-10-22 13:30:54.428 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-client.jpg - null null
+2025-10-22 13:30:54.428 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-nurse.jpg - null null
+2025-10-22 13:30:54.431 +02:00 [INF] The file /css/home.css was not modified
+2025-10-22 13:30:54.432 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/css/home.css?v=fzubcUsjgTxPBnlM_limYMc7z_4xt1h_RMqFvK_Z4Uc - 304 null text/css 3.2931ms
+2025-10-22 13:30:54.437 +02:00 [INF] Sending file. Request path: '/images/hero-client.jpg'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\22-10\web_task_2025\Homecare\wwwroot\images\hero-client.jpg'
+2025-10-22 13:30:54.437 +02:00 [INF] Sending file. Request path: '/images/hero-nurse.jpg'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\22-10\web_task_2025\Homecare\wwwroot\images\hero-nurse.jpg'
+2025-10-22 13:30:54.437 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-client.jpg - 200 5995 image/jpeg 8.8384ms
+2025-10-22 13:30:54.437 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-nurse.jpg - 200 7762 image/jpeg 8.872ms
+2025-10-22 13:30:54.466 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-22 13:30:54.466 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5003/images/hero-admin.jpg - null null
+2025-10-22 13:30:54.467 +02:00 [INF] Sending file. Request path: '/images/hero-admin.jpg'. Physical path: 'C:\Users\saski\Desktop\WEBProbgrammering_2025\22-10\web_task_2025\Homecare\wwwroot\images\hero-admin.jpg'
+2025-10-22 13:30:54.467 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/images/hero-admin.jpg - 200 6581 image/jpeg 1.8254ms
+2025-10-22 13:30:54.468 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5003/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript; charset=utf-8 1.8492ms
