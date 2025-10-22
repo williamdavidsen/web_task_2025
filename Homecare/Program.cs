@@ -9,37 +9,33 @@ using Homecare.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// MVC controllers + views
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<AppDbContext>(o =>
+    o.UseSqlite(builder.Configuration["ConnectionStrings:HomecareDbConnection"]));
 
-// EF Core (SQLite)
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseSqlite(builder.Configuration["ConnectionStrings:HomecareDbConnection"]);
-});
-
-// Identity (Default UI) + Roles, using the same AppDbContext
-builder.Services
-    .AddDefaultIdentity<IdentityUser>()      // dev-friendly defaults
+builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 
-// IMPORTANT: do not force auth globally (only actions with [Authorize] require login)
 builder.Services.AddAuthorization(o => o.FallbackPolicy = null);
 
-// Repositories (DI)
 builder.Services.AddScoped<IAvailableSlotRepository, AvailableSlotRepository>();
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICareTaskRepository, CareTaskRepository>();
 
-// Razor Pages (for Identity UI) + Session
 builder.Services.AddRazorPages();
-builder.Services.AddSession();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(o =>
+{
+    o.Cookie.HttpOnly = true;
+    o.IdleTimeout = TimeSpan.FromMinutes(20);
+});
 
-// Serilog (filter out EF command noise)
+
 var loggerConfiguration = new LoggerConfiguration()
     .MinimumLevel.Information()
+    .WriteTo.Console()
     .WriteTo.File($"Logs/app_{DateTime.Now:yyyyMMdd_HHmmss}.log");
 
 loggerConfiguration.Filter.ByExcluding(e =>
@@ -53,11 +49,10 @@ builder.Logging.AddSerilog(logger);
 
 var app = builder.Build();
 
-// Dev-time: detailed errors + seed demo data
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    DBInit.Seed(app);
+    await DBInit.SeedAsync(app);
 }
 else
 {
@@ -65,15 +60,14 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection(); // safe default (no-op on http in dev)
+app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseSession();
-
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 
-// Conventional MVC route + Identity Razor Pages
-app.MapDefaultControllerRoute();   // /{controller=Home}/{action=Index}/{id?}
-app.MapRazorPages();               // /Identity/...
+app.MapDefaultControllerRoute();
+app.MapRazorPages();
 
-app.Run();
+await app.RunAsync();
