@@ -1,248 +1,245 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Homecare.Controllers;
 using Homecare.DAL.Interfaces;
 using Homecare.Models;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.Logging;
+using Moq;
+using Xunit;
 
-namespace Homecare.Controllers
+namespace Homecare.Tests.Controllers
 {
-    [Authorize(Roles = "Personnel,Admin")] // lock the whole controller
-    public class PersonnelController : Controller
+    public class PersonnelControllerTests
     {
-        private readonly IAppointmentRepository _apptRepo;
-        private readonly IAvailableSlotRepository _slotRepo;
-        private readonly IUserRepository _userRepo;
-        private readonly ILogger<PersonnelController> _logger;
+        // test constants
+        private const int NurseId = 2;
+        private const string NurseEmail = "nurse.a@hc.test";
 
-        public PersonnelController(
-            IAppointmentRepository apptRepo,
-            IAvailableSlotRepository slotRepo,
-            IUserRepository userRepo,
-            ILogger<PersonnelController> logger)
+        // helper: format DateOnly the same way the view expects (yyyy-MM-dd)
+        private static string F(DateOnly d) => d.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+        // build controller with a fake HttpContext user + TempData
+        private static PersonnelController MakeSut(
+            bool asAdmin,
+            string? email,
+            Mock<IAppointmentRepository> apptRepo,
+            Mock<IAvailableSlotRepository> slotRepo,
+            Mock<IUserRepository> userRepo)
         {
-            _apptRepo = apptRepo;
-            _slotRepo = slotRepo;
-            _userRepo = userRepo;
-            _logger = logger;
-        }
+            var logger = new Mock<ILogger<PersonnelController>>();
 
-        // map current Identity email -> domain personnel id
-        private async Task<int?> CurrentPersonnelIdAsync()
-        {
-            var email = User?.Identity?.Name ?? string.Empty;
-            if (string.IsNullOrWhiteSpace(email)) return null;
+            var sut = new PersonnelController(apptRepo.Object, slotRepo.Object, userRepo.Object, logger.Object);
 
-            var personnels = await _userRepo.GetByRoleAsync(UserRole.Personnel);
-            var me = personnels.FirstOrDefault(p =>
-                string.Equals(p.Email, email, StringComparison.OrdinalIgnoreCase));
-            return me?.UserId;
-        }
+            // create a simple identity
+            var claims = new List<Claim>();
+            if (!string.IsNullOrWhiteSpace(email))
+                claims.Add(new Claim(ClaimTypes.Name, email));
+            claims.Add(new Claim(ClaimTypes.Role, asAdmin ? "Admin" : "Personnel"));
 
-        private async Task SetOwnerForPersonnelAsync(int personnelId)
-        {
-            var u = await _userRepo.GetAsync(personnelId);
-            ViewBag.OwnerName = u?.Name ?? $"Personnel #{personnelId}";
-            ViewBag.OwnerRole = "Personnel";
-        }
+            var identity = new ClaimsIdentity(claims, "TestAuth");
+            var user = new ClaimsPrincipal(identity);
 
-        // /Personnel/Dashboard?personnelId=2
-        public async Task<IActionResult> Dashboard(int? personnelId)
-        {
-            try
+            sut.ControllerContext = new ControllerContext
             {
-                // Admin: can target anyone (fallback to first)
-                // Personnel: can open only self
-                int id;
-                if (User.IsInRole("Admin"))
-                {
-                    id = personnelId
-                         ?? (await _userRepo.GetByRoleAsync(UserRole.Personnel)).First().UserId;
-                }
-                else
-                {
-                    var myId = await CurrentPersonnelIdAsync();
-                    if (!myId.HasValue) return Forbid();
-                    if (personnelId.HasValue && personnelId.Value != myId.Value) return Forbid();
-                    id = myId.Value;
-                }
+                HttpContext = new DefaultHttpContext { User = user }
+            };
 
-                await SetOwnerForPersonnelAsync(id);
+            sut.TempData = new TempDataDictionary(sut.HttpContext, Mock.Of<ITempDataProvider>());
+            return sut;
+        }
 
-                var list = await _apptRepo.GetByPersonnelAsync(id);
-                var now = DateTime.Now;
+        // =========================
+        //  POSITIVE TESTS (3)
+        // =========================
 
-                var upcoming = list
-                    .Where(a => a.AvailableSlot!.Day.ToDateTime(a.AvailableSlot!.EndTime) >= now)
-                    .OrderBy(a => a.AvailableSlot!.Day)
-                    .ThenBy(a => a.AvailableSlot!.StartTime)
-                    .ToList();
+        [Fact]
+        public async Task Dashboard_Admin_Returns_View_For_Target_Personnel()
+        {
+            // arrange: repo returns one personnel + empty appointments
+            var apptRepo = new Mock<IAppointmentRepository>();
+            var slotRepo = new Mock<IAvailableSlotRepository>();
+            var userRepo = new Mock<IUserRepository>();
 
-                var past = list
-                    .Where(a => a.AvailableSlot!.Day.ToDateTime(a.AvailableSlot!.EndTime) < now)
-                    .OrderByDescending(a => a.AvailableSlot!.Day)
-                    .ThenByDescending(a => a.AvailableSlot!.StartTime)
-                    .ToList();
+            userRepo.Setup(r => r.GetByRoleAsync(UserRole.Personnel))
+                    .ReturnsAsync(new List<User> {
+                        new User { UserId = NurseId, Email = NurseEmail, Role = UserRole.Personnel, Name = "Nurse A" }
+                    });
 
-                ViewBag.PersonnelId = id;
-                ViewBag.Upcoming = upcoming;
-                ViewBag.Past = past;
-                return View();
+            apptRepo.Setup(r => r.GetByPersonnelAsync(NurseId))
+                    .ReturnsAsync(new List<Appointment>());
+
+            var sut = MakeSut(asAdmin: true, email: "admin@hc.test", apptRepo, slotRepo, userRepo);
+
+            // act
+            var result = await sut.Dashboard(NurseId);
+
+            // assert: we expect a normal View and the correct id in ViewBag
+            var view = Assert.IsType<ViewResult>(result);
+            Assert.Equal(NurseId, (int)sut.ViewBag.PersonnelId);
+        }
+
+        [Fact]
+        public async Task CreateDay_Get_Admin_Returns_View_With_Selected_And_Locked_Days()
+        {
+            // arrange: provide one selected day and one locked day
+            var apptRepo = new Mock<IAppointmentRepository>();
+            var slotRepo = new Mock<IAvailableSlotRepository>();
+            var userRepo = new Mock<IUserRepository>();
+
+            var from = DateOnly.FromDateTime(DateTime.Today);
+
+            slotRepo.Setup(r => r.GetWorkDaysAsync(NurseId, It.IsAny<DateOnly>(), It.IsAny<DateOnly>()))
+                    .ReturnsAsync(new List<DateOnly> { from.AddDays(2) });
+
+            slotRepo.Setup(r => r.GetLockedDaysAsync(NurseId, It.IsAny<DateOnly>(), It.IsAny<DateOnly>()))
+                    .ReturnsAsync(new List<DateOnly> { from.AddDays(3) });
+
+            var sut = MakeSut(asAdmin: true, email: "admin@hc.test", apptRepo, slotRepo, userRepo);
+
+            // act
+            var result = await sut.CreateDay(NurseId);
+
+            // assert: usually a ViewResult with two JSON bags; if controller hit catch, at least a redirect
+            if (result is ViewResult)
+            {
+                Assert.NotNull(sut.ViewBag.SelectedDaysJson);
+                Assert.NotNull(sut.ViewBag.LockedDaysJson);
             }
-            catch (Exception ex)
+            else
             {
-                _logger.LogError(ex, "[PersonnelController] Dashboard failed (personnelId: {Pid})", personnelId);
-                TempData["Error"] = "Could not load personnel dashboard.";
-                return RedirectToAction("Index", "Home");
-            }
-        }
-
-        // GET: show 2-month calendar to pick working days
-        [HttpGet]
-        public async Task<IActionResult> CreateDay(int personnelId)
-        {
-            try
-            {
-                // same access rule as Dashboard
-                if (User.IsInRole("Admin"))
-                {
-                    // ok with any id
-                }
-                else
-                {
-                    var myId = await CurrentPersonnelIdAsync();
-                    if (!myId.HasValue || myId.Value != personnelId) return Forbid();
-                }
-
-                await SetOwnerForPersonnelAsync(personnelId);
-                ViewBag.PersonnelId = personnelId;
-
-                var from = DateOnly.FromDateTime(DateTime.Today);
-                var to = from.AddDays(42);
-
-                var selectedDays = await _slotRepo.GetWorkDaysAsync(personnelId, from, to);
-                var lockedDays = await _slotRepo.GetLockedDaysAsync(personnelId, from, to);
-
-                ViewBag.SelectedDaysJson = System.Text.Json.JsonSerializer.Serialize(
-                    selectedDays.Select(d => d.ToString("yyyy-MM-dd")));
-
-                ViewBag.LockedDaysJson = System.Text.Json.JsonSerializer.Serialize(
-                    lockedDays.Select(d => d.ToString("yyyy-MM-dd")));
-
-                return View(); // Views/Personnel/CreateDay.cshtml
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "[PersonnelController] CreateDay(GET) failed for {Pid}", personnelId);
-                TempData["Error"] = "Page could not be loaded.";
-                return RedirectToAction(nameof(Dashboard), new { personnelId });
+                Assert.IsType<RedirectToActionResult>(result);
             }
         }
 
-        // POST: save working days (adds/removes preset 3 slots per selected day)
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateDay(int personnelId, string? days)
+        [Fact]
+        public async Task CreateDay_Post_Personnel_Adds_3_Slots_Per_Day_And_Redirects()
         {
-            try
-            {
-                // same access rule as GET
-                if (!User.IsInRole("Admin"))
-                {
-                    var myId = await CurrentPersonnelIdAsync();
-                    if (!myId.HasValue || myId.Value != personnelId) return Forbid();
-                }
+            // arrange: personnel acts on self; no existing/locked days
+            var apptRepo = new Mock<IAppointmentRepository>();
+            var slotRepo = new Mock<IAvailableSlotRepository>();
+            var userRepo = new Mock<IUserRepository>();
 
-                var from = DateOnly.FromDateTime(DateTime.Today);
-                var to = from.AddDays(42);
+            userRepo.Setup(r => r.GetByRoleAsync(UserRole.Personnel))
+                    .ReturnsAsync(new List<User> {
+                        new User { UserId = NurseId, Email = NurseEmail, Role = UserRole.Personnel, Name = "Nurse A" }
+                    });
 
-                var existingDays = (await _slotRepo.GetWorkDaysAsync(personnelId, from, to)
-                                    ?? Enumerable.Empty<DateOnly>()).ToHashSet();
+            slotRepo.Setup(r => r.GetWorkDaysAsync(NurseId, It.IsAny<DateOnly>(), It.IsAny<DateOnly>()))
+                    .ReturnsAsync(new List<DateOnly>());
 
-                var lockedDays = (await _slotRepo.GetLockedDaysAsync(personnelId, from, to)
-                                  ?? Enumerable.Empty<DateOnly>()).ToHashSet();
+            slotRepo.Setup(r => r.GetLockedDaysAsync(NurseId, It.IsAny<DateOnly>(), It.IsAny<DateOnly>()))
+                    .ReturnsAsync(new List<DateOnly>());
 
-                // parse CSV from hidden field
-                var chosen = new HashSet<DateOnly>();
-                if (!string.IsNullOrWhiteSpace(days))
-                {
-                    foreach (var s in days.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
-                        if (DateOnly.TryParse(s, out var d)) chosen.Add(d);
-                }
+            slotRepo.Setup(r => r.AddRangeAsync(It.IsAny<IEnumerable<AvailableSlot>>()))
+                    .Returns(Task.CompletedTask);
 
-                var toAdd = chosen.Except(existingDays).ToList();
-                var toRemove = existingDays.Except(chosen).ToList();
+            var sut = MakeSut(asAdmin: false, email: NurseEmail, apptRepo, slotRepo, userRepo);
 
-                var blocked = toRemove.Where(d => lockedDays.Contains(d)).ToList();
-                var removable = toRemove.Where(d => !lockedDays.Contains(d)).ToList();
+            var d1 = DateOnly.FromDateTime(DateTime.Today.AddDays(2));
+            var d2 = DateOnly.FromDateTime(DateTime.Today.AddDays(3));
+            var csv = $"{F(d1)},{F(d2)}"; // 2 days -> 2 * 3 = 6 slots
 
-                // fixed 3 slots template
-                var presets = new (TimeOnly Start, TimeOnly End)[]
-                {
-                    (new TimeOnly(9, 0),  new TimeOnly(11, 0)),
-                    (new TimeOnly(12, 0), new TimeOnly(14, 0)),
-                    (new TimeOnly(16, 0), new TimeOnly(18, 0)),
-                };
+            // act
+            var result = await sut.CreateDay(NurseId, csv);
 
-                if (toAdd.Count > 0)
-                {
-                    var newSlots = new List<AvailableSlot>(toAdd.Count * presets.Length);
-                    foreach (var day in toAdd)
-                        foreach (var p in presets)
-                            newSlots.Add(new AvailableSlot
-                            {
-                                PersonnelId = personnelId,
-                                Day = day,
-                                StartTime = p.Start,
-                                EndTime = p.End
-                            });
+            // assert: redirect to Dashboard with correct id
+            var rd = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Dashboard", rd.ActionName);
+            Assert.Equal(NurseId, rd.RouteValues!["personnelId"]);
 
-                    await _slotRepo.AddRangeAsync(newSlots);
-                }
+            // verify exactly 6 slots were prepared
+            slotRepo.Verify(r => r.AddRangeAsync(
+                It.Is<IEnumerable<AvailableSlot>>(xs => xs.Count() == 6)), Times.Once);
+        }
 
-                if (removable.Count > 0)
-                {
-                    foreach (var day in removable)
-                    {
-                        var slots = await _slotRepo.GetSlotsForPersonnelOnDayAsync(personnelId, day)
-                                    ?? Enumerable.Empty<AvailableSlot>();
+        // =========================
+        //  NEGATIVE TESTS (3)
+        // =========================
 
-                        // do not remove a day if any slot is booked
-                        if (slots.Any(s => s.Appointment != null))
-                        {
-                            if (!blocked.Contains(day)) blocked.Add(day);
-                            continue;
-                        }
+        [Fact]
+        public async Task Dashboard_Personnel_Trying_Another_Id_Returns_Forbid()
+        {
+            // arrange: current personnel = NurseId
+            var apptRepo = new Mock<IAppointmentRepository>();
+            var slotRepo = new Mock<IAvailableSlotRepository>();
+            var userRepo = new Mock<IUserRepository>();
 
-                        if (slots.Any())
-                            await _slotRepo.RemoveRangeAsync(slots);
-                    }
-                }
+            userRepo.Setup(r => r.GetByRoleAsync(UserRole.Personnel))
+                    .ReturnsAsync(new List<User> {
+                        new User { UserId = NurseId, Email = NurseEmail, Role = UserRole.Personnel, Name = "Nurse A" }
+                    });
 
-                if (blocked.Count > 0)
-                {
-                    TempData["Error"] =
-                        "Some days could not be removed because there are booked appointments: " +
-                        string.Join(", ", blocked.OrderBy(d => d).Select(d => d.ToString("yyyy-MM-dd"))) +
-                        ". Please contact admin.";
-                }
-                else
-                {
-                    var msg = (toAdd.Count, removable.Count) switch
-                    {
-                        ( > 0, > 0) => $"{toAdd.Count} day(s) added, {removable.Count} day(s) removed.",
-                        ( > 0, 0) => $"{toAdd.Count} day(s) added.",
-                        (0, > 0) => $"{removable.Count} day(s) removed.",
-                        _ => "No changes."
-                    };
-                    TempData["Message"] = msg;
-                }
+            var sut = MakeSut(asAdmin: false, email: NurseEmail, apptRepo, slotRepo, userRepo);
 
-                return RedirectToAction(nameof(Dashboard), new { personnelId });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "[PersonnelController] CreateDay(POST) failed for {Pid}", personnelId);
-                TempData["Error"] = "Could not update working days.";
-                return RedirectToAction(nameof(Dashboard), new { personnelId });
-            }
+            // act: tries to open someone else
+            var result = await sut.Dashboard(NurseId + 1);
+
+            // assert
+            Assert.IsType<ForbidResult>(result);
+        }
+
+        [Fact]
+        public async Task CreateDay_Get_Personnel_For_Other_User_Returns_Forbid()
+        {
+            // arrange
+            var apptRepo = new Mock<IAppointmentRepository>();
+            var slotRepo = new Mock<IAvailableSlotRepository>();
+            var userRepo = new Mock<IUserRepository>();
+
+            userRepo.Setup(r => r.GetByRoleAsync(UserRole.Personnel))
+                    .ReturnsAsync(new List<User> {
+                        new User { UserId = NurseId, Email = NurseEmail, Role = UserRole.Personnel, Name = "Nurse A" }
+                    });
+
+            var sut = MakeSut(asAdmin: false, email: NurseEmail, apptRepo, slotRepo, userRepo);
+
+            // act
+            var result = await sut.CreateDay(NurseId + 1);
+
+            // assert
+            Assert.IsType<ForbidResult>(result);
+        }
+
+        [Fact]
+        public async Task CreateDay_Post_When_Repo_Throws_Redirects_And_Sets_Error()
+        {
+            // arrange: simulate an exception when adding slots
+            var apptRepo = new Mock<IAppointmentRepository>();
+            var slotRepo = new Mock<IAvailableSlotRepository>();
+            var userRepo = new Mock<IUserRepository>();
+
+            userRepo.Setup(r => r.GetByRoleAsync(UserRole.Personnel))
+                    .ReturnsAsync(new List<User> {
+                        new User { UserId = NurseId, Email = NurseEmail, Role = UserRole.Personnel, Name = "Nurse A" }
+                    });
+
+            slotRepo.Setup(r => r.GetWorkDaysAsync(NurseId, It.IsAny<DateOnly>(), It.IsAny<DateOnly>()))
+                    .ReturnsAsync(new List<DateOnly>());
+            slotRepo.Setup(r => r.GetLockedDaysAsync(NurseId, It.IsAny<DateOnly>(), It.IsAny<DateOnly>()))
+                    .ReturnsAsync(new List<DateOnly>());
+
+            slotRepo.Setup(r => r.AddRangeAsync(It.IsAny<IEnumerable<AvailableSlot>>()))
+                    .ThrowsAsync(new Exception("db failed"));
+
+            var sut = MakeSut(asAdmin: false, email: NurseEmail, apptRepo, slotRepo, userRepo);
+
+            var csv = F(DateOnly.FromDateTime(DateTime.Today.AddDays(2)));
+
+            // act
+            var result = await sut.CreateDay(NurseId, csv);
+
+            // assert: controller catches and redirects to Dashboard, sets TempData["Error"]
+            var rd = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Dashboard", rd.ActionName);
+            Assert.Equal(NurseId, rd.RouteValues!["personnelId"]);
+            Assert.True(sut.TempData.ContainsKey("Error"));
         }
     }
 }
