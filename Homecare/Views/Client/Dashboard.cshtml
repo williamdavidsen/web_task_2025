@@ -75,15 +75,14 @@
                                 asp-action="Edit" asp-route-id="@a.AppointmentId">
                                 <i class="bi bi-pencil-square me-1"></i> Update
                             </a>
-
-                            <form class="d-inline prevent-card-nav" asp-controller="Appointment" asp-action="Delete"
-                                asp-route-id="@a.AppointmentId" method="post"
-                                onsubmit="return confirm('Delete this appointment?');">
-                                @Html.AntiForgeryToken()
+                            <form class="d-inline prevent-card-nav" asp-controller="Appointment" asp-action="DeleteConfirmed"
+                                asp-route-id="@a.AppointmentId" asp-route-backTo="client" asp-route-ownerId="@clientId"
+                                method="post" onsubmit="return confirm('Delete this appointment?');">
                                 <button class="btn btn-outline-danger btn-sm" type="submit">
                                     <i class="bi bi-trash me-1"></i> Delete
                                 </button>
                             </form>
+
                         </div>
                     </div>
                     <div class="col-md-4">

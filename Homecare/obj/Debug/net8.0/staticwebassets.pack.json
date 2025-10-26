@@ -1,63 +1,63 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\css\\availability.css",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\css\\availability.css",
       "PackagePath": "staticwebassets\\css\\availability.css"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\css\\client.css",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\css\\client.css",
       "PackagePath": "staticwebassets\\css\\client.css"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\css\\home.css",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\css\\home.css",
       "PackagePath": "staticwebassets\\css\\home.css"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\care1.jpg",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\images\\care1.jpg",
       "PackagePath": "staticwebassets\\images\\care1.jpg"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\care2.jpg",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\images\\care2.jpg",
       "PackagePath": "staticwebassets\\images\\care2.jpg"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\care3.jpg",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\images\\care3.jpg",
       "PackagePath": "staticwebassets\\images\\care3.jpg"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\dash-past-1.jpg",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\images\\dash-past-1.jpg",
       "PackagePath": "staticwebassets\\images\\dash-past-1.jpg"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\dash-past-2.jpg",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\images\\dash-past-2.jpg",
       "PackagePath": "staticwebassets\\images\\dash-past-2.jpg"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\dash-upcoming.jpg",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\images\\dash-upcoming.jpg",
       "PackagePath": "staticwebassets\\images\\dash-upcoming.jpg"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\heart-pulse.svg",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\images\\heart-pulse.svg",
       "PackagePath": "staticwebassets\\images\\heart-pulse.svg"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\hero-admin.jpg",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\images\\hero-admin.jpg",
       "PackagePath": "staticwebassets\\images\\hero-admin.jpg"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\hero-client.jpg",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\images\\hero-client.jpg",
       "PackagePath": "staticwebassets\\images\\hero-client.jpg"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\images\\hero-nurse.jpg",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\images\\hero-nurse.jpg",
       "PackagePath": "staticwebassets\\images\\hero-nurse.jpg"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\js\\bootstrap.js",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\js\\bootstrap.js"
     },
     {
-      "Id": "C:\\Users\\cosku\\Desktop\\Oslomet Emner\\ITPE3200-1 24H Webapplikasjoner\\HomeCare\\webprogrammering2025\\Homecare\\wwwroot\\js\\jquery.min.js",
+      "Id": "C:\\Users\\cosku\\Desktop\\deneme\\web_task_2025\\Homecare\\wwwroot\\js\\jquery.min.js",
       "PackagePath": "staticwebassets\\js\\jquery.min.js"
     },
     {

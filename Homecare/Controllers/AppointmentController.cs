@@ -278,12 +278,13 @@ namespace Homecare.Controllers
 
         [Authorize(Roles = "Admin,Client")]
         [HttpPost]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string? backTo, int? ownerId)
         {
             try
             {
                 var a = await _apptRepo.GetAsync(id);
                 if (a == null) return NotFound();
+
 
                 if (User.IsInRole("Client"))
                 {
@@ -294,8 +295,19 @@ namespace Homecare.Controllers
                 await _apptRepo.DeleteAsync(a);
                 TempData["Message"] = "Appointment deleted.";
 
+                // backTo=client => Client/Dashboard
+                if (string.Equals(backTo, "client", StringComparison.OrdinalIgnoreCase))
+                    return RedirectToAction("Dashboard", "Client", new { clientId = ownerId ?? a.ClientId });
+
+                // backTo=personnel => Personnel/Dashboard
+                if (string.Equals(backTo, "personnel", StringComparison.OrdinalIgnoreCase))
+                    return RedirectToAction("Dashboard", "Personnel",
+                                            new { personnelId = ownerId ?? a.AvailableSlot?.PersonnelId });
+
+
                 if (User.IsInRole("Client"))
                     return RedirectToAction("Dashboard", "Client", new { clientId = a.ClientId });
+
 
                 return RedirectToAction(nameof(Table));
             }
